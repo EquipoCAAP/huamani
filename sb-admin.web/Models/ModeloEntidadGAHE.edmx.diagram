@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6fc848a11d4841de857d6d3e85afdac7" Name="Diagram1">
+        <EntityTypeShape EntityType="GAHEModel.avance" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.caso" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.documento" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.evento" Width="1.5" PointX="10.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.expediente" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.juzgado" Width="1.5" PointX="10.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.juzgado_evento" Width="1.5" PointX="12.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.Navbar" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.parte_caso" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.persona" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.Roles" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.servicio" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.tarea" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.telefono" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.telefono_persona" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.tipo_evento" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.tipo_juzgado" Width="1.5" PointX="8.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.tipo_persona" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.ubicacion" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.User" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="GAHEModel.FK_caso_avance" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_expediente_caso" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_parte_caso_caso" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_tarea_caso" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_documento_expediente" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_evento_expediente" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_evento_servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_evento_tipo_evento1" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_juzgado_evento_evento" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_expediente_ubicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_juzgado_evento_juzgado" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_juzgado_tipo_juzgado" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_Roles_Navbar" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_parte_caso_persona" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_persona_tipo_persona" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_persona_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_tarea_persona" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_telefono_persona_persona" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_Roles_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GAHEModel.FK_telefono_persona_telefonos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
