@@ -1,3 +1,5 @@
+![dbyll-screenshot](sb-admin.web/Content/images/huamanilaborista.png)
+
 sb-admin Bootstrap template for ASP MVC
 =====
 
