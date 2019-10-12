@@ -22,7 +22,7 @@ namespace sb_admin.web.Domain
             menu.Add(new Navbar { id = 9, nameOption = "Juzgado", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o", estatus = true });
             menu.Add(new Navbar { id = 10, nameOption = "Mantenimiento Ubicaciones", controller = "Home", action = "Tables", imageClass = "fa fa-fw fa-table", estatus = true });
             menu.Add(new Navbar { id = 11, nameOption = "Mantenimiento Tipo de Evento", controller = "Home", action = "Forms", imageClass = "fa fa-fw fa-edit", estatus = true });
-            menu.Add(new Navbar { id = 12, nameOption = "Mantenimiento Tipo Juzgado", controller = "Home", action = "BootstrapElements", imageClass = "fa fa-fw fa-desktop", estatus = true });
+            menu.Add(new Navbar { id = 12, nameOption = "Mantenimiento Tipo Juzgado", controller = "tipo_juzgado", action = "Index", imageClass = "fa fa-fw fa-desktop", estatus = true });
             menu.Add(new Navbar { id = 13, nameOption = "Mantenimiento Tipo Persona", controller = "Home", action = "BootstrapGrid", imageClass = "fa fa-fw fa-wrench", estatus = true });
             menu.Add(new Navbar { id = 14, nameOption = "Mantenimiento Menu", controller = "Home", action = "BlankPage", imageClass = "fa fa-fw fa-file", estatus = true });
             menu.Add(new Navbar { id = 15, nameOption = "Seguridad Roles", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard", estatus = true });
@@ -39,17 +39,17 @@ namespace sb_admin.web.Domain
             return menu.ToList();
         }
 
-        public IEnumerable<User> users()
+        public IEnumerable<User> Users()
         {
             var users = new List<User>();
-            users.Add(new User { Id = 1, user1 = "admin", Password = "12345", status = false, RememberMe = true });
+            users.Add(new User { Id = 1, user1 = "admin", Password = "12345", status = false, RememberMe = false });
             users.Add(new User { Id = 2, user1 = "abogado", Password = "12345", status = false, RememberMe = false });
             users.Add(new User { Id = 3, user1 = "practicante", Password = "12345", status = false, RememberMe = false });
 
             return users.ToList();
         }
 
-        public IEnumerable<Roles> roles()
+        public IEnumerable<Roles> Roles()
         {
             var roles = new List<Roles>();
             roles.Add(new Roles { id = 1, userId = 1, MenuId = 1, status = true });
@@ -86,17 +86,17 @@ namespace sb_admin.web.Domain
             roles.Add(new Roles { id = 31, userId = 3, MenuId = 1, status = true });
             roles.Add(new Roles { id = 32, userId = 3, MenuId = 3, status = true });
             roles.Add(new Roles { id = 33, userId = 3, MenuId = 7, status = true });
-
+            roles.Add(new Roles { id = 34, userId = 3, MenuId = 12, status = true });
 
             return roles.ToList();
         }
 
-        public IEnumerable<Navbar> itemsPerUser(string controller, string action, string userName)
+        public IEnumerable<Navbar> ItemsPerUser(string controller, string action, string userName)
         {
             
             IEnumerable<Navbar> items = navbarItems();
-            IEnumerable<Roles> rolesNav = roles();
-            IEnumerable<User> usersNav = users();
+            IEnumerable<Roles> rolesNav = Roles();
+            IEnumerable<User> usersNav = Users();
 
             var navbar =  items.Where(p => p.controller == controller && p.action == action).Select(c => { c.activeli = true; return c; }).ToList();
 

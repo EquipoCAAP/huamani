@@ -40,7 +40,7 @@ namespace sb_admin.web.Controllers
                 return View(model);
             }
             var data = new Data();
-            var users = data.users();
+            var users = data.Users();
 
             if (users.Any(p => p.user1 == model.UserName && p.Password == model.Password))
             {

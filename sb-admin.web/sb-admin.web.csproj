@@ -149,6 +149,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
+    <Compile Include="Controllers\tipo_juzgadoController.cs" />
     <Compile Include="Domain\Domain.cs" />
     <Compile Include="Filters\AuthActionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -342,6 +343,11 @@
     <Content Include="Views\Home\BootstrapGrid.cshtml" />
     <Content Include="Views\Home\BlankPage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\tipo_juzgado\Create.cshtml" />
+    <Content Include="Views\tipo_juzgado\Delete.cshtml" />
+    <Content Include="Views\tipo_juzgado\Details.cshtml" />
+    <Content Include="Views\tipo_juzgado\Edit.cshtml" />
+    <Content Include="Views\tipo_juzgado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

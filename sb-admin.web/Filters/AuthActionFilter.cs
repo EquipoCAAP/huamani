@@ -55,8 +55,8 @@ namespace sb_admin.web.Filters
             
            var data = new Data();
            var items = data.navbarItems();
-           var rolesNav = data.roles();
-           var usersNav = data.users();
+           var rolesNav = data.Roles();
+           var usersNav = data.Users();
 
            var getAccess = (from nav in items
                             join rol in rolesNav on nav.id equals rol.MenuId

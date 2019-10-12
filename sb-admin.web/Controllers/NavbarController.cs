@@ -15,7 +15,7 @@ namespace sb_admin.web.Controllers
         {
             var data = new Data();
 
-            var navbar = data.itemsPerUser(controller, action, User.Identity.Name);
+            var navbar = data.ItemsPerUser(controller, action, User.Identity.Name);
 
             return PartialView("_navbar", navbar);
         }
