@@ -40,9 +40,14 @@ namespace sb_admin.web.Filters
                     filterContext.Result = new HttpUnauthorizedResult();
 
                 base.OnActionExecuting(filterContext);
+
             }
-            catch
+            catch (Exception e)
             {
+               
+
+            
+                Console.Write(e);
                 filterContext.Result = new HttpUnauthorizedResult();
             }
 
@@ -63,7 +68,7 @@ namespace sb_admin.web.Filters
                             join user in usersNav on rol.userId equals user.Id
                             where user.user1 == userName && nav.controller == controllerName && nav.action == actionName
                             select user.Id).Single();
-
+            Console.WriteLine(getAccess);
            var context = new ActionExecutingContext();
 
            if (getAccess != 0)

@@ -149,6 +149,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
+    <Compile Include="Controllers\tipo_eventoController.cs" />
     <Compile Include="Controllers\tipo_juzgadoController.cs" />
     <Compile Include="Domain\Domain.cs" />
     <Compile Include="Filters\AuthActionFilter.cs" />
@@ -348,6 +349,11 @@
     <Content Include="Views\tipo_juzgado\Details.cshtml" />
     <Content Include="Views\tipo_juzgado\Edit.cshtml" />
     <Content Include="Views\tipo_juzgado\Index.cshtml" />
+    <Content Include="Views\tipo_evento\Create.cshtml" />
+    <Content Include="Views\tipo_evento\Delete.cshtml" />
+    <Content Include="Views\tipo_evento\Details.cshtml" />
+    <Content Include="Views\tipo_evento\Edit.cshtml" />
+    <Content Include="Views\tipo_evento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
