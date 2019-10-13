@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GAHEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GAHEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="avance">
           <Key>
             <PropertyRef Name="id" />
@@ -77,7 +77,6 @@
           <Property Name="nombre_juez" Type="varchar" MaxLength="50" />
           <Property Name="apellido_juez" Type="varchar" MaxLength="50" />
           <Property Name="descripcion" Type="text" />
-          <Property Name="juzgadoId" Type="int" Nullable="false" />
           <Property Name="tipoId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="juzgado_evento">
@@ -87,7 +86,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="juzgado_evento" Type="int" />
           <Property Name="eventoId" Type="int" Nullable="false" />
-          <Property Name="juzgadoId" Type="int" />
+          <Property Name="juzgadoId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Navbar">
           <Key>
@@ -178,7 +177,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo_juzgado" Type="varchar" MaxLength="50" />
+          <Property Name="tipo_j" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tipo_persona">
           <Key>
@@ -199,10 +198,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar(max)" />
-          <Property Name="status" Type="bit" />
-          <Property Name="RememberMe" Type="bit" />
+          <Property Name="user" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="RememberMe" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_caso_avance">
           <End Role="avance" Type="Self.avance" Multiplicity="1">
@@ -309,7 +308,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_juzgado_evento_juzgado">
-          <End Role="juzgado" Type="Self.juzgado" Multiplicity="0..1" />
+          <End Role="juzgado" Type="Self.juzgado" Multiplicity="1" />
           <End Role="juzgado_evento" Type="Self.juzgado_evento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="juzgado">
@@ -568,8 +567,7 @@
             <End Role="telefono_persona" EntitySet="telefono_persona" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GAHEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -647,23 +645,6 @@
           <NavigationProperty Name="evento" Relationship="Self.FK_evento_expediente" FromRole="expediente" ToRole="evento" />
           <NavigationProperty Name="ubicacion" Relationship="Self.FK_expediente_ubicacion" FromRole="expediente" ToRole="ubicacion" />
         </EntityType>
-        <EntityType Name="juzgado">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="piso" Type="Int16" />
-          <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nombre_juez" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="apellido_juez" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="juzgadoId" Type="Int32" Nullable="false" />
-          <Property Name="tipoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="juzgado_evento" Relationship="Self.FK_juzgado_evento_juzgado" FromRole="juzgado" ToRole="juzgado_evento" />
-          <NavigationProperty Name="tipo_juzgado" Relationship="Self.FK_juzgado_tipo_juzgado" FromRole="juzgado" ToRole="tipo_juzgado" />
-        </EntityType>
         <EntityType Name="juzgado_evento">
           <Key>
             <PropertyRef Name="id" />
@@ -671,9 +652,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="juzgado_evento1" Type="Int32" />
           <Property Name="eventoId" Type="Int32" Nullable="false" />
-          <Property Name="juzgadoId" Type="Int32" />
+          <Property Name="juzgadoId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="evento" Relationship="Self.FK_juzgado_evento_evento" FromRole="juzgado_evento" ToRole="evento" />
-          <NavigationProperty Name="juzgado" Relationship="Self.FK_juzgado_evento_juzgado" FromRole="juzgado_evento" ToRole="juzgado" />
+          <NavigationProperty Name="juzgado" Relationship="GAHEModel.FK_juzgado_evento_juzgado" FromRole="juzgado_evento" ToRole="juzgado" />
         </EntityType>
         <EntityType Name="Navbar">
           <Key>
@@ -776,14 +757,6 @@
           <Property Name="tipo_evento1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="evento" Relationship="Self.FK_evento_tipo_evento1" FromRole="tipo_evento" ToRole="evento" />
         </EntityType>
-        <EntityType Name="tipo_juzgado">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo_juzgado1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="juzgado" Relationship="Self.FK_juzgado_tipo_juzgado" FromRole="tipo_juzgado" ToRole="juzgado" />
-        </EntityType>
         <EntityType Name="tipo_persona">
           <Key>
             <PropertyRef Name="id" />
@@ -805,10 +778,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="RememberMe" Type="Boolean" />
+          <Property Name="user1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="RememberMe" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="persona" Relationship="Self.FK_persona_Users" FromRole="User" ToRole="persona" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Users" FromRole="User" ToRole="Roles" />
         </EntityType>
@@ -944,30 +917,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_juzgado_evento_juzgado">
-          <End Role="juzgado" Type="Self.juzgado" Multiplicity="0..1" />
-          <End Role="juzgado_evento" Type="Self.juzgado_evento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="juzgado">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="juzgado_evento">
-              <PropertyRef Name="juzgadoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_juzgado_tipo_juzgado">
-          <End Role="tipo_juzgado" Type="Self.tipo_juzgado" Multiplicity="1" />
-          <End Role="juzgado" Type="Self.juzgado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tipo_juzgado">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="juzgado">
-              <PropertyRef Name="tipoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Roles_Navbar">
           <End Role="Navbar" Type="Self.Navbar" Multiplicity="1" />
           <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
@@ -1080,7 +1029,6 @@
           <EntitySet Name="documento" EntityType="Self.documento" />
           <EntitySet Name="evento" EntityType="Self.evento" />
           <EntitySet Name="expediente" EntityType="Self.expediente" />
-          <EntitySet Name="juzgado" EntityType="Self.juzgado" />
           <EntitySet Name="juzgado_evento" EntityType="Self.juzgado_evento" />
           <EntitySet Name="Navbar" EntityType="Self.Navbar" />
           <EntitySet Name="parte_caso" EntityType="Self.parte_caso" />
@@ -1091,7 +1039,6 @@
           <EntitySet Name="telefono" EntityType="Self.telefono" />
           <EntitySet Name="telefono_persona" EntityType="Self.telefono_persona" />
           <EntitySet Name="tipo_evento" EntityType="Self.tipo_evento" />
-          <EntitySet Name="tipo_juzgado" EntityType="Self.tipo_juzgado" />
           <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" />
           <EntitySet Name="ubicacion" EntityType="Self.ubicacion" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -1135,14 +1082,6 @@
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
-          <AssociationSet Name="FK_juzgado_evento_juzgado" Association="Self.FK_juzgado_evento_juzgado">
-            <End Role="juzgado" EntitySet="juzgado" />
-            <End Role="juzgado_evento" EntitySet="juzgado_evento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_juzgado_tipo_juzgado" Association="Self.FK_juzgado_tipo_juzgado">
-            <End Role="tipo_juzgado" EntitySet="tipo_juzgado" />
-            <End Role="juzgado" EntitySet="juzgado" />
-          </AssociationSet>
           <AssociationSet Name="FK_Roles_Navbar" Association="Self.FK_Roles_Navbar">
             <End Role="Navbar" EntitySet="Navbar" />
             <End Role="Roles" EntitySet="Roles" />
@@ -1175,7 +1114,65 @@
             <End Role="telefono" EntitySet="telefono" />
             <End Role="telefono_persona" EntitySet="telefono_persona" />
           </AssociationSet>
+          <EntitySet Name="juzgado" EntityType="GAHEModel.juzgado" />
+          <AssociationSet Name="FK_juzgado_evento_juzgado" Association="GAHEModel.FK_juzgado_evento_juzgado">
+            <End Role="juzgado" EntitySet="juzgado" />
+            <End Role="juzgado_evento" EntitySet="juzgado_evento" />
+          </AssociationSet>
+          <EntitySet Name="tipo_juzgado" EntityType="GAHEModel.tipo_juzgado" />
+          <AssociationSet Name="FK_juzgado_tipo_juzgado" Association="GAHEModel.FK_juzgado_tipo_juzgado">
+            <End Role="tipo_juzgado" EntitySet="tipo_juzgado" />
+            <End Role="juzgado" EntitySet="juzgado" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="juzgado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="piso" Type="Int16" />
+          <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_juez" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido_juez" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tipoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="juzgado_evento" Relationship="GAHEModel.FK_juzgado_evento_juzgado" FromRole="juzgado" ToRole="juzgado_evento" />
+          <NavigationProperty Name="tipo_juzgado" Relationship="GAHEModel.FK_juzgado_tipo_juzgado" FromRole="juzgado" ToRole="tipo_juzgado" />
+        </EntityType>
+        <Association Name="FK_juzgado_evento_juzgado">
+          <End Type="GAHEModel.juzgado" Role="juzgado" Multiplicity="1" />
+          <End Type="GAHEModel.juzgado_evento" Role="juzgado_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juzgado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="juzgado_evento">
+              <PropertyRef Name="juzgadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tipo_juzgado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_j" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="juzgado" Relationship="GAHEModel.FK_juzgado_tipo_juzgado" FromRole="tipo_juzgado" ToRole="juzgado" />
+        </EntityType>
+        <Association Name="FK_juzgado_tipo_juzgado">
+          <End Type="GAHEModel.tipo_juzgado" Role="tipo_juzgado" Multiplicity="1" />
+          <End Type="GAHEModel.juzgado" Role="juzgado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_juzgado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="juzgado">
+              <PropertyRef Name="tipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1244,22 +1241,6 @@
                 <ScalarProperty Name="responsableId" ColumnName="responsableId" />
                 <ScalarProperty Name="ubicacionId" ColumnName="ubicacionId" />
                 <ScalarProperty Name="casoId" ColumnName="casoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="juzgado">
-            <EntityTypeMapping TypeName="GAHEModel.juzgado">
-              <MappingFragment StoreEntitySet="juzgado">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="lugar" ColumnName="lugar" />
-                <ScalarProperty Name="piso" ColumnName="piso" />
-                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
-                <ScalarProperty Name="nombre_juez" ColumnName="nombre_juez" />
-                <ScalarProperty Name="apellido_juez" ColumnName="apellido_juez" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="juzgadoId" ColumnName="juzgadoId" />
-                <ScalarProperty Name="tipoId" ColumnName="tipoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1366,14 +1347,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tipo_juzgado">
-            <EntityTypeMapping TypeName="GAHEModel.tipo_juzgado">
-              <MappingFragment StoreEntitySet="tipo_juzgado">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tipo_juzgado1" ColumnName="tipo_juzgado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tipo_persona">
             <EntityTypeMapping TypeName="GAHEModel.tipo_persona">
               <MappingFragment StoreEntitySet="tipo_persona">
@@ -1398,6 +1371,29 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="juzgado">
+            <EntityTypeMapping TypeName="GAHEModel.juzgado">
+              <MappingFragment StoreEntitySet="juzgado">
+                <ScalarProperty Name="tipoId" ColumnName="tipoId" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="apellido_juez" ColumnName="apellido_juez" />
+                <ScalarProperty Name="nombre_juez" ColumnName="nombre_juez" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_juzgado">
+            <EntityTypeMapping TypeName="GAHEModel.tipo_juzgado">
+              <MappingFragment StoreEntitySet="tipo_juzgado">
+                <ScalarProperty Name="tipo_j" ColumnName="tipo_j" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

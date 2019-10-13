@@ -148,6 +148,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\juzgadosController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
     <Compile Include="Controllers\tipo_juzgadoController.cs" />
@@ -243,6 +244,7 @@
     <Content Include="Content\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\plugins\morris.css" />
+    <Content Include="Content\imagesperson\rect2283.png" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -344,20 +346,24 @@
     <Content Include="Views\Home\BootstrapGrid.cshtml" />
     <Content Include="Views\Home\BlankPage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\tipo_juzgado\Create.cshtml" />
-    <Content Include="Views\tipo_juzgado\Delete.cshtml" />
-    <Content Include="Views\tipo_juzgado\Details.cshtml" />
-    <Content Include="Views\tipo_juzgado\Edit.cshtml" />
-    <Content Include="Views\tipo_juzgado\Index.cshtml" />
     <Content Include="Views\tipo_evento\Create.cshtml" />
     <Content Include="Views\tipo_evento\Delete.cshtml" />
     <Content Include="Views\tipo_evento\Details.cshtml" />
     <Content Include="Views\tipo_evento\Edit.cshtml" />
     <Content Include="Views\tipo_evento\Index.cshtml" />
+    <Content Include="Views\tipo_juzgado\Create.cshtml" />
+    <Content Include="Views\tipo_juzgado\Delete.cshtml" />
+    <Content Include="Views\tipo_juzgado\Details.cshtml" />
+    <Content Include="Views\tipo_juzgado\Edit.cshtml" />
+    <Content Include="Views\tipo_juzgado\Index.cshtml" />
+    <Content Include="Views\juzgados\Create.cshtml" />
+    <Content Include="Views\juzgados\Delete.cshtml" />
+    <Content Include="Views\juzgados\Details.cshtml" />
+    <Content Include="Views\juzgados\Edit.cshtml" />
+    <Content Include="Views\juzgados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\imagesperson\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

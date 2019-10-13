@@ -35,9 +35,9 @@ public partial class User
 
     public string Password { get; set; }
 
-    public Nullable<bool> status { get; set; }
+    public bool status { get; set; }
 
-    public Nullable<bool> RememberMe { get; set; }
+    public bool RememberMe { get; set; }
 
 
 

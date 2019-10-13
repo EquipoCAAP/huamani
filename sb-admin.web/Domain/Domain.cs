@@ -20,7 +20,7 @@ namespace sb_admin.web.Domain
               menu.Add(new Navbar { id = 7, nameOption = "Tareas", controller = "Home", action = "Forms", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 8, nameOption = "Clientes", controller = "Home", action = "BlankPage", imageClass = "fa fa-fw fa-file",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 9, nameOption = "Servicios", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 10, nameOption = "Juzgado", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 10, nameOption = "Juzgado", controller = "juzgados", action = "Index", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 11, nameOption = "Mantenimiento Ubicaciones", controller = "Home", action = "Tables", imageClass = "fa fa-fw fa-table",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 12, nameOption = "Mantenimiento Tipo de Evento", controller = "tipo_evento", action = "Index", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 13, nameOption = "Mantenimiento Tipo Juzgado", controller = "tipo_juzgado", action = "Index", imageClass = "fa fa-fw fa-desktop",estatus = true, activeli=true });

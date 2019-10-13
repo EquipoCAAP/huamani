@@ -11,107 +11,112 @@ using sb_admin.web.Models;
 
 namespace sb_admin.web.Controllers
 {
-    public class tipo_juzgadoController : Controller
+    public class juzgadosController : Controller
     {
         private GAHEContext db = new GAHEContext();
 
-        // GET: tipo_juzgado
+        // GET: juzgados
         public async Task<ActionResult> Index()
         {
-            return View(await db.tipo_juzgado.ToListAsync());
+            var juzgado = db.juzgado.Include(j => j.tipo_juzgado);
+            return View(await juzgado.ToListAsync());
         }
 
-        // GET: tipo_juzgado/Details/5
+        // GET: juzgados/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tipo_juzgado tipo_juzgado = await db.tipo_juzgado.FindAsync(id);
-            if (tipo_juzgado == null)
+            juzgado juzgado = await db.juzgado.FindAsync(id);
+            if (juzgado == null)
             {
                 return HttpNotFound();
             }
-            return View(tipo_juzgado);
+            return View(juzgado);
         }
 
-        // GET: tipo_juzgado/Create
+        // GET: juzgados/Create
         public ActionResult Create()
         {
+            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j");
             return View();
         }
 
-        // POST: tipo_juzgado/Create
+        // POST: juzgados/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,tipo_j")] tipo_juzgado tipo_juzgado)
+        public async Task<ActionResult> Create([Bind(Include = "id,nombre,lugar,piso,ciudad,nombre_juez,apellido_juez,descripcion,tipoId")] juzgado juzgado)
         {
             if (ModelState.IsValid)
             {
-                db.tipo_juzgado.Add(tipo_juzgado);
+                db.juzgado.Add(juzgado);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(tipo_juzgado);
+            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+            return View(juzgado);
         }
 
-        // GET: tipo_juzgado/Edit/5
+        // GET: juzgados/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tipo_juzgado tipo_juzgado = await db.tipo_juzgado.FindAsync(id);
-            if (tipo_juzgado == null)
+            juzgado juzgado = await db.juzgado.FindAsync(id);
+            if (juzgado == null)
             {
                 return HttpNotFound();
             }
-            return View(tipo_juzgado);
+            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+            return View(juzgado);
         }
 
-        // POST: tipo_juzgado/Edit/5
+        // POST: juzgados/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,tipo_j")] tipo_juzgado tipo_juzgado)
+        public async Task<ActionResult> Edit([Bind(Include = "id,nombre,lugar,piso,ciudad,nombre_juez,apellido_juez,descripcion,tipoId")] juzgado juzgado)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tipo_juzgado).State = EntityState.Modified;
+                db.Entry(juzgado).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(tipo_juzgado);
+            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+            return View(juzgado);
         }
 
-        // GET: tipo_juzgado/Delete/5
+        // GET: juzgados/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tipo_juzgado tipo_juzgado = await db.tipo_juzgado.FindAsync(id);
-            if (tipo_juzgado == null)
+            juzgado juzgado = await db.juzgado.FindAsync(id);
+            if (juzgado == null)
             {
                 return HttpNotFound();
             }
-            return View(tipo_juzgado);
+            return View(juzgado);
         }
 
-        // POST: tipo_juzgado/Delete/5
+        // POST: juzgados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            tipo_juzgado tipo_juzgado = await db.tipo_juzgado.FindAsync(id);
-            db.tipo_juzgado.Remove(tipo_juzgado);
+            juzgado juzgado = await db.juzgado.FindAsync(id);
+            db.juzgado.Remove(juzgado);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

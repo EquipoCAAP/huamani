@@ -29,7 +29,7 @@ public partial class tipo_juzgado
 
     public int id { get; set; }
 
-    public string tipo_juzgado1 { get; set; }
+    public string tipo_j { get; set; }
 
 
 

@@ -42,8 +42,6 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<expediente> expediente { get; set; }
 
-    public virtual DbSet<juzgado> juzgado { get; set; }
-
     public virtual DbSet<juzgado_evento> juzgado_evento { get; set; }
 
     public virtual DbSet<Navbar> Navbar { get; set; }
@@ -64,13 +62,15 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<tipo_evento> tipo_evento { get; set; }
 
-    public virtual DbSet<tipo_juzgado> tipo_juzgado { get; set; }
-
     public virtual DbSet<tipo_persona> tipo_persona { get; set; }
 
     public virtual DbSet<ubicacion> ubicacion { get; set; }
 
     public virtual DbSet<User> User { get; set; }
+
+    public virtual DbSet<juzgado> juzgado { get; set; }
+
+    public virtual DbSet<tipo_juzgado> tipo_juzgado { get; set; }
 
 }
 

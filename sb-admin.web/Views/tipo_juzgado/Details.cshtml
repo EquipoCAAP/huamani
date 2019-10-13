@@ -1,27 +1,27 @@
 ﻿@model sb_admin.web.Models.tipo_juzgado
 
 @{
-    ViewBag.Title = "Detalle";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalle</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Tipo Juzgado</h4>
+    <h4>tipo_juzgado</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.tipo_juzgado1)
+            @Html.DisplayNameFor(model => model.tipo_j)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tipo_juzgado1)
+            @Html.DisplayFor(model => model.tipo_j)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Regresar a la Lista", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

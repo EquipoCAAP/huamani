@@ -43,8 +43,6 @@ public partial class juzgado
 
     public string descripcion { get; set; }
 
-    public int juzgadoId { get; set; }
-
     public int tipoId { get; set; }
 
 
