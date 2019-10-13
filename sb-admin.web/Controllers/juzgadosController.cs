@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using sb_admin.web.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace sb_admin.web.Controllers
 {
@@ -40,7 +41,7 @@ namespace sb_admin.web.Controllers
         // GET: juzgados/Create
         public ActionResult Create()
         {
-            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j");
+            LlenarTipoJuzgadoDropDownList();
             return View();
         }
 
@@ -51,14 +52,22 @@ namespace sb_admin.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,nombre,lugar,piso,ciudad,nombre_juez,apellido_juez,descripcion,tipoId")] juzgado juzgado)
         {
+
+            try {
             if (ModelState.IsValid)
             {
                 db.juzgado.Add(juzgado);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            }
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "No se pudo grabar los cambios. Trate de nuevo, y si persiste el problema comunicarse con el administrador.");
 
-            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+            }
+
+            LlenarTipoJuzgadoDropDownList(juzgado.tipoId);
             return View(juzgado);
         }
 
@@ -74,7 +83,7 @@ namespace sb_admin.web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+            LlenarTipoJuzgadoDropDownList(juzgado.tipoId);
             return View(juzgado);
         }
 
@@ -91,7 +100,7 @@ namespace sb_admin.web.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.tipoId = new SelectList(db.tipo_juzgado, "id", "tipo_j", juzgado.tipoId);
+           LlenarTipoJuzgadoDropDownList(juzgado.tipoId);
             return View(juzgado);
         }
 
@@ -129,5 +138,14 @@ namespace sb_admin.web.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void LlenarTipoJuzgadoDropDownList (object selectedTipo = null)
+        {
+            var tipoQuery = from tj in db.tipo_juzgado
+                            orderby tj.tipo_j
+                            select tj;
+            ViewBag.tipoId = new SelectList(tipoQuery, "id", "tipo_j");
+        }
+
     }
 }
