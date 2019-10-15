@@ -147,9 +147,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\avancesController.cs" />
+    <Compile Include="Controllers\documentosController.cs" />
+    <Compile Include="Controllers\eventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\juzgadosController.cs" />
+    <Compile Include="Controllers\juzgado_eventoController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
+    <Compile Include="Controllers\personasController.cs" />
+    <Compile Include="Controllers\serviciosController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
     <Compile Include="Controllers\tipo_juzgadoController.cs" />
     <Compile Include="Domain\Domain.cs" />
@@ -161,6 +167,9 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\caso.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComplexType1.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\documento.cs">
@@ -361,6 +370,36 @@
     <Content Include="Views\juzgados\Details.cshtml" />
     <Content Include="Views\juzgados\Edit.cshtml" />
     <Content Include="Views\juzgados\Index.cshtml" />
+    <Content Include="Views\juzgado_evento\Create.cshtml" />
+    <Content Include="Views\juzgado_evento\Delete.cshtml" />
+    <Content Include="Views\juzgado_evento\Details.cshtml" />
+    <Content Include="Views\juzgado_evento\Edit.cshtml" />
+    <Content Include="Views\juzgado_evento\Index.cshtml" />
+    <Content Include="Views\servicios\Create.cshtml" />
+    <Content Include="Views\servicios\Delete.cshtml" />
+    <Content Include="Views\servicios\Details.cshtml" />
+    <Content Include="Views\servicios\Edit.cshtml" />
+    <Content Include="Views\servicios\Index.cshtml" />
+    <Content Include="Views\documentos\Create.cshtml" />
+    <Content Include="Views\documentos\Delete.cshtml" />
+    <Content Include="Views\documentos\Details.cshtml" />
+    <Content Include="Views\documentos\Edit.cshtml" />
+    <Content Include="Views\documentos\Index.cshtml" />
+    <Content Include="Views\avances\Create.cshtml" />
+    <Content Include="Views\avances\Delete.cshtml" />
+    <Content Include="Views\avances\Details.cshtml" />
+    <Content Include="Views\avances\Edit.cshtml" />
+    <Content Include="Views\avances\Index.cshtml" />
+    <Content Include="Views\personas\Create.cshtml" />
+    <Content Include="Views\personas\Delete.cshtml" />
+    <Content Include="Views\personas\Details.cshtml" />
+    <Content Include="Views\personas\Edit.cshtml" />
+    <Content Include="Views\personas\Index.cshtml" />
+    <Content Include="Views\eventos\Create.cshtml" />
+    <Content Include="Views\eventos\Delete.cshtml" />
+    <Content Include="Views\eventos\Details.cshtml" />
+    <Content Include="Views\eventos\Edit.cshtml" />
+    <Content Include="Views\eventos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

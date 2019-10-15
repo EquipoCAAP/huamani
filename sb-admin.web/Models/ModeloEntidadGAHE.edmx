@@ -47,7 +47,6 @@
           <Property Name="fecha_inicio" Type="date" Nullable="false" />
           <Property Name="servicioId" Type="int" />
           <Property Name="expedienteId" Type="int" />
-          <Property Name="tipo_eventoId" Type="int" />
         </EntityType>
         <EntityType Name="expediente">
           <Key>
@@ -619,7 +618,6 @@
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="servicioId" Type="Int32" />
           <Property Name="expedienteId" Type="Int32" />
-          <Property Name="tipo_eventoId" Type="Int32" />
           <NavigationProperty Name="expediente" Relationship="Self.FK_evento_expediente" FromRole="evento" ToRole="expediente" />
           <NavigationProperty Name="servicio" Relationship="Self.FK_evento_servicio" FromRole="evento" ToRole="servicio" />
           <NavigationProperty Name="tipo_evento1" Relationship="Self.FK_evento_tipo_evento1" FromRole="evento" ToRole="tipo_evento" />
@@ -1173,6 +1171,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ComplexType1">
+          <Property Type="Int32" Name="tipo_eventoId" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1223,7 +1224,6 @@
                 <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
                 <ScalarProperty Name="servicioId" ColumnName="servicioId" />
                 <ScalarProperty Name="expedienteId" ColumnName="expedienteId" />
-                <ScalarProperty Name="tipo_eventoId" ColumnName="tipo_eventoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

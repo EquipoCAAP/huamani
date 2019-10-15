@@ -39,8 +39,6 @@ public partial class evento
 
     public Nullable<int> expedienteId { get; set; }
 
-    public Nullable<int> tipo_eventoId { get; set; }
-
 
 
     public virtual expediente expediente { get; set; }

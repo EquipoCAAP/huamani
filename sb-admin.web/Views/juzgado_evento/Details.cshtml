@@ -1,0 +1,43 @@
+﻿@model sb_admin.web.Models.juzgado_evento
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>juzgado_evento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.juzgado_evento1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.juzgado_evento1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.evento.descripcion_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.evento.descripcion_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.juzgado.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.juzgado.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

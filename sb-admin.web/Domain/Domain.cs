@@ -13,22 +13,23 @@ namespace sb_admin.web.Domain
             var menu = new List<Navbar>();
           
             menu.Add(new Navbar { id = 1, nameOption = "Inicio", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard", estatus = true, activeli = true });
-            menu.Add(new Navbar { id = 2, nameOption = "Casos", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o", estatus = true, activeli = true });
-             menu.Add(new Navbar { id = 3, nameOption = "Expedientes", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 5, nameOption = "Documentos", controller = "Home", action = "Forms", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
-             menu.Add(new Navbar { id = 6, nameOption = "Eventos", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
-              menu.Add(new Navbar { id = 7, nameOption = "Tareas", controller = "Home", action = "Forms", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 8, nameOption = "Clientes", controller = "Home", action = "BlankPage", imageClass = "fa fa-fw fa-file",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 9, nameOption = "Servicios", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 10, nameOption = "Juzgado", controller = "juzgados", action = "Index", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 11, nameOption = "Mantenimiento Ubicaciones", controller = "Home", action = "Tables", imageClass = "fa fa-fw fa-table",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 12, nameOption = "Mantenimiento Tipo de Evento", controller = "tipo_evento", action = "Index", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 13, nameOption = "Mantenimiento Tipo Juzgado", controller = "tipo_juzgado", action = "Index", imageClass = "fa fa-fw fa-desktop",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 14, nameOption = "Mantenimiento Tipo Persona", controller = "tipo_persona", action = "Index", imageClass = "fa fa-fw fa-person",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 2, nameOption = "Casos", controller = "casos", action = "Index", imageClass = "fa fa-fw fa-bar-chart-o", estatus = true, activeli = true });
+             menu.Add(new Navbar { id = 3, nameOption = "Expedientes", controller = "expedientes", action = "Index", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 4, nameOption = "Documentos", controller = "documentos", action = "Index", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
+             menu.Add(new Navbar { id = 5, nameOption = "Eventos", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
+              menu.Add(new Navbar { id = 6, nameOption = "Tareas", controller = "Home", action = "Forms", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 7, nameOption = "Clientes", controller = "Home", action = "BlankPage", imageClass = "fa fa-fw fa-file",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 8, nameOption = "Servicios", controller = "servicios", action = "Index", imageClass = "fa fa-fw fa-dashboard",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 9, nameOption = "Juzgado", controller = "juzgados", action = "Index", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 10, nameOption = "Mantenimiento Ubicaciones", controller = "Home", action = "Tables", imageClass = "fa fa-fw fa-table",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 11, nameOption = "Mantenimiento Tipo de Evento", controller = "tipo_evento", action = "Index", imageClass = "fa fa-fw fa-edit",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 12, nameOption = "Mantenimiento Tipo Juzgado", controller = "tipo_juzgado", action = "Index", imageClass = "fa fa-fw fa-desktop",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 13, nameOption = "Mantenimiento Tipo Persona", controller = "tipo_persona", action = "Index", imageClass = "fa fa-fw fa-person",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 14, nameOption = "Mantenimiento Tipo Avances", controller = "avances", action = "Index", imageClass = "fa fa-fw fa-person", estatus = true, activeli = true });
             menu.Add(new Navbar { id = 15, nameOption = "Mantenimiento Menu", controller = "Home", action = "BlankPage", imageClass = "fa fa-fw fa-file",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 16, nameOption = "Seguridad Roles", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard",estatus = true, activeli=true });
             menu.Add(new Navbar { id = 17, nameOption = "Seguridad Menu Roles", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
-            menu.Add(new Navbar { id = 18, nameOption = "Seguridad Personas", controller = "Home", action = "Tables", imageClass = "fa fa-fw fa-table",estatus = true, activeli=true });
+            menu.Add(new Navbar { id = 18, nameOption = "Seguridad Personas", controller = "personas", action = "Index", imageClass = "fa fa-fw fa-table",estatus = true, activeli=true });
 
             //nu.Add(new Navbar { id = 18, nameOption = "Dashboard", controller = "Home", action = "Index", imageClass = "fa fa-fw fa-dashboard",estatus = true, activeli=true });
             //menu.Add(new Navbar { id = 19, nameOption = "Charts", controller = "Home", action = "Charts", imageClass = "fa fa-fw fa-bar-chart-o",estatus = true, activeli=true });
@@ -43,10 +44,10 @@ namespace sb_admin.web.Domain
         public IEnumerable<User> Users()
         {
             var users = new List<User>();
-            users.Add(new User { Id = 1, user1 = "admin", Password = "12345", status = false, RememberMe = false });
-            users.Add(new User { Id = 2, user1 = "abogado", Password = "12345", status = false, RememberMe = false });
-            users.Add(new User { Id = 3, user1 = "practicante", Password = "12345", status = false, RememberMe = false });
-           
+            users.Add(new User { Id = 1, user1 = "admin", Password = "12345", status = true, RememberMe = false });
+            users.Add(new User { Id = 2, user1 = "abogado", Password = "12345", status = true, RememberMe = false });
+            users.Add(new User { Id = 3, user1 = "practicante", Password = "12345", status = true, RememberMe = false });
+            users.Add(new User { Id = 4, user1 = "persona", Password = "1", status = true, RememberMe = false });
             return users.ToList();
         }
 
@@ -104,7 +105,7 @@ namespace sb_admin.web.Domain
             navbar = (from nav in items
                       join rol in rolesNav on nav.id equals rol.MenuId
                       join user in usersNav on rol.userId equals user.Id
-                      where user.user1 == userName
+                      where user.user1 == userName & user.status == true
                       
 
                       select new Navbar
