@@ -36,7 +36,8 @@
             @Html.DisplayFor(modelItem => item.descripcion_evento)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.fecha_inicio)
+            @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
+            @item.fecha_inicio.ToString("dd/MM/yyyy")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.expediente.titulo)

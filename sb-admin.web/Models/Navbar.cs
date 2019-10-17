@@ -22,6 +22,8 @@ public partial class Navbar
     public Navbar()
     {
 
+        this.Navbar1 = new HashSet<Navbar>();
+
         this.Roles = new HashSet<Roles>();
 
     }
@@ -43,7 +45,15 @@ public partial class Navbar
 
     public Nullable<bool> activeli { get; set; }
 
+    public Nullable<int> parentId { get; set; }
 
+
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Navbar> Navbar1 { get; set; }
+
+    public virtual Navbar Navbar2 { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

@@ -154,10 +154,14 @@
     <Compile Include="Controllers\juzgadosController.cs" />
     <Compile Include="Controllers\juzgado_eventoController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
+    <Compile Include="Controllers\NavbarsController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\serviciosController.cs" />
+    <Compile Include="Controllers\telefono_personaController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
     <Compile Include="Controllers\tipo_juzgadoController.cs" />
+    <Compile Include="Controllers\ubicacionesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Domain\Domain.cs" />
     <Compile Include="Filters\AuthActionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,6 +192,7 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\ModeloEntidadGAHE.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +214,7 @@
     <Compile Include="Models\parte_caso.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\persona.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
@@ -400,6 +406,26 @@
     <Content Include="Views\eventos\Details.cshtml" />
     <Content Include="Views\eventos\Edit.cshtml" />
     <Content Include="Views\eventos\Index.cshtml" />
+    <Content Include="Views\ubicaciones\Create.cshtml" />
+    <Content Include="Views\ubicaciones\Delete.cshtml" />
+    <Content Include="Views\ubicaciones\Details.cshtml" />
+    <Content Include="Views\ubicaciones\Edit.cshtml" />
+    <Content Include="Views\ubicaciones\Index.cshtml" />
+    <Content Include="Views\Navbars\Create.cshtml" />
+    <Content Include="Views\Navbars\Delete.cshtml" />
+    <Content Include="Views\Navbars\Details.cshtml" />
+    <Content Include="Views\Navbars\Edit.cshtml" />
+    <Content Include="Views\Navbars\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\telefono_persona\Create.cshtml" />
+    <Content Include="Views\telefono_persona\Delete.cshtml" />
+    <Content Include="Views\telefono_persona\Details.cshtml" />
+    <Content Include="Views\telefono_persona\Edit.cshtml" />
+    <Content Include="Views\telefono_persona\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

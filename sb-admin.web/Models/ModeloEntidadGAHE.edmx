@@ -99,6 +99,7 @@
           <Property Name="imageClass" Type="nvarchar" MaxLength="50" />
           <Property Name="estatus" Type="bit" />
           <Property Name="activeli" Type="bit" />
+          <Property Name="parentId" Type="int" />
         </EntityType>
         <EntityType Name="parte_caso">
           <Key>
@@ -330,6 +331,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Navbar_Navbar">
+          <End Role="Navbar" Type="Self.Navbar" Multiplicity="0..1" />
+          <End Role="Navbar1" Type="Self.Navbar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navbar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Navbar1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_parte_caso_caso">
           <End Role="caso" Type="Self.caso" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -525,6 +538,10 @@
             <End Role="tipo_juzgado" EntitySet="tipo_juzgado" />
             <End Role="juzgado" EntitySet="juzgado" />
           </AssociationSet>
+          <AssociationSet Name="FK_Navbar_Navbar" Association="Self.FK_Navbar_Navbar">
+            <End Role="Navbar" EntitySet="Navbar" />
+            <End Role="Navbar1" EntitySet="Navbar" />
+          </AssociationSet>
           <AssociationSet Name="FK_parte_caso_caso" Association="Self.FK_parte_caso_caso">
             <End Role="caso" EntitySet="caso" />
             <End Role="parte_caso" EntitySet="parte_caso" />
@@ -654,20 +671,6 @@
           <NavigationProperty Name="evento" Relationship="Self.FK_juzgado_evento_evento" FromRole="juzgado_evento" ToRole="evento" />
           <NavigationProperty Name="juzgado" Relationship="GAHEModel.FK_juzgado_evento_juzgado" FromRole="juzgado_evento" ToRole="juzgado" />
         </EntityType>
-        <EntityType Name="Navbar">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nameOption" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="imageClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="estatus" Type="Boolean" />
-          <Property Name="activeli" Type="Boolean" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Navbar" FromRole="Navbar" ToRole="Roles" />
-        </EntityType>
         <EntityType Name="parte_caso">
           <Key>
             <PropertyRef Name="id" />
@@ -703,8 +706,8 @@
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="MenuId" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Boolean" />
-          <NavigationProperty Name="Navbar" Relationship="Self.FK_Roles_Navbar" FromRole="Roles" ToRole="Navbar" />
           <NavigationProperty Name="User" Relationship="Self.FK_Roles_Users" FromRole="Roles" ToRole="User" />
+          <NavigationProperty Name="Navbar" Relationship="GAHEModel.FK_Roles_Navbar" FromRole="Roles" ToRole="Navbar" />
         </EntityType>
         <EntityType Name="servicio">
           <Key>
@@ -915,18 +918,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Roles_Navbar">
-          <End Role="Navbar" Type="Self.Navbar" Multiplicity="1" />
-          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Navbar">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Roles">
-              <PropertyRef Name="MenuId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_parte_caso_persona">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1028,7 +1019,6 @@
           <EntitySet Name="evento" EntityType="Self.evento" />
           <EntitySet Name="expediente" EntityType="Self.expediente" />
           <EntitySet Name="juzgado_evento" EntityType="Self.juzgado_evento" />
-          <EntitySet Name="Navbar" EntityType="Self.Navbar" />
           <EntitySet Name="parte_caso" EntityType="Self.parte_caso" />
           <EntitySet Name="persona" EntityType="Self.persona" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -1080,10 +1070,6 @@
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_Navbar" Association="Self.FK_Roles_Navbar">
-            <End Role="Navbar" EntitySet="Navbar" />
-            <End Role="Roles" EntitySet="Roles" />
-          </AssociationSet>
           <AssociationSet Name="FK_parte_caso_persona" Association="Self.FK_parte_caso_persona">
             <End Role="persona" EntitySet="persona" />
             <End Role="parte_caso" EntitySet="parte_caso" />
@@ -1121,6 +1107,15 @@
           <AssociationSet Name="FK_juzgado_tipo_juzgado" Association="GAHEModel.FK_juzgado_tipo_juzgado">
             <End Role="tipo_juzgado" EntitySet="tipo_juzgado" />
             <End Role="juzgado" EntitySet="juzgado" />
+          </AssociationSet>
+          <EntitySet Name="Navbar" EntityType="GAHEModel.Navbar" />
+          <AssociationSet Name="FK_Navbar_Navbar" Association="GAHEModel.FK_Navbar_Navbar">
+            <End Role="Navbar" EntitySet="Navbar" />
+            <End Role="Navbar1" EntitySet="Navbar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Navbar" Association="GAHEModel.FK_Roles_Navbar">
+            <End Role="Navbar" EntitySet="Navbar" />
+            <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="juzgado">
@@ -1174,6 +1169,47 @@
         <ComplexType Name="ComplexType1">
           <Property Type="Int32" Name="tipo_eventoId" />
         </ComplexType>
+        <EntityType Name="Navbar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameOption" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="imageClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estatus" Type="Boolean" />
+          <Property Name="activeli" Type="Boolean" />
+          <Property Name="parentId" Type="Int32" />
+          <NavigationProperty Name="Navbar1" Relationship="GAHEModel.FK_Navbar_Navbar" FromRole="Navbar" ToRole="Navbar1" />
+          <NavigationProperty Name="Navbar2" Relationship="GAHEModel.FK_Navbar_Navbar" FromRole="Navbar1" ToRole="Navbar" />
+          <NavigationProperty Name="Roles" Relationship="GAHEModel.FK_Roles_Navbar" FromRole="Navbar" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_Navbar_Navbar">
+          <End Type="GAHEModel.Navbar" Role="Navbar" Multiplicity="0..1" />
+          <End Type="GAHEModel.Navbar" Role="Navbar1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navbar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Navbar1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Navbar">
+          <End Type="GAHEModel.Navbar" Role="Navbar" Multiplicity="1" />
+          <End Type="GAHEModel.Roles" Role="Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navbar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1251,20 +1287,6 @@
                 <ScalarProperty Name="juzgado_evento1" ColumnName="juzgado_evento" />
                 <ScalarProperty Name="eventoId" ColumnName="eventoId" />
                 <ScalarProperty Name="juzgadoId" ColumnName="juzgadoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Navbar">
-            <EntityTypeMapping TypeName="GAHEModel.Navbar">
-              <MappingFragment StoreEntitySet="Navbar">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nameOption" ColumnName="nameOption" />
-                <ScalarProperty Name="controller" ColumnName="controller" />
-                <ScalarProperty Name="action" ColumnName="action" />
-                <ScalarProperty Name="area" ColumnName="area" />
-                <ScalarProperty Name="imageClass" ColumnName="imageClass" />
-                <ScalarProperty Name="estatus" ColumnName="estatus" />
-                <ScalarProperty Name="activeli" ColumnName="activeli" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1393,6 +1415,21 @@
             <EntityTypeMapping TypeName="GAHEModel.tipo_juzgado">
               <MappingFragment StoreEntitySet="tipo_juzgado">
                 <ScalarProperty Name="tipo_j" ColumnName="tipo_j" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Navbar">
+            <EntityTypeMapping TypeName="GAHEModel.Navbar">
+              <MappingFragment StoreEntitySet="Navbar">
+                <ScalarProperty Name="parentId" ColumnName="parentId" />
+                <ScalarProperty Name="activeli" ColumnName="activeli" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="imageClass" ColumnName="imageClass" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="controller" ColumnName="controller" />
+                <ScalarProperty Name="nameOption" ColumnName="nameOption" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -155,6 +155,18 @@
             {
                 <li class="@item.activeli">
                     <a href="@Url.Action(item.action, item.controller)"><i class="@item.imageClass"></i> @item.nameOption</a>
+                @if(item.Navbar1.Count > 0)
+                {
+                    <ul>
+                        @foreach(var sub in item.Navbar1)
+                        {
+                        <li>
+                            <a href="@Url.Action(item.action, item.controller)"><i class="@item.imageClass"></i> @item.nameOption</a>
+                        </li>
+                        }
+                    </ul>
+                }
+
                 </li>
             }
         </ul>

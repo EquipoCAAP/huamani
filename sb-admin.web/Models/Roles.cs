@@ -28,9 +28,9 @@ public partial class Roles
 
 
 
-    public virtual Navbar Navbar { get; set; }
-
     public virtual User User { get; set; }
+
+    public virtual Navbar Navbar { get; set; }
 
 }
 
