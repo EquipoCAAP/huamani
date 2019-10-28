@@ -1,0 +1,105 @@
+﻿@model sb_admin.web.Models.expediente
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>expediente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechacreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechacreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estadoid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estadoid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caso.referencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caso.referencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ubicacion.ubicacion1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ubicacion.ubicacion1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.claseExpediente.Clase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.claseExpediente.Clase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.dni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoExpediente.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoExpediente.tipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

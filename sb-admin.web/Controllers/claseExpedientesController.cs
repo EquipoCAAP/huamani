@@ -11,116 +11,107 @@ using sb_admin.web.Models;
 
 namespace sb_admin.web.Controllers
 {
-    public class personasController : Controller
+    public class claseExpedientesController : Controller
     {
         private GAHEContext db = new GAHEContext();
 
-        // GET: personas
+        // GET: claseExpedientes
         public async Task<ActionResult> Index()
         {
-            var persona = db.persona.Include(p => p.tipo_persona).Include(p => p.User);
-            return View(await persona.ToListAsync());
+            return View(await db.claseExpediente.ToListAsync());
         }
 
-        // GET: personas/Details/5
+        // GET: claseExpedientes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            claseExpediente claseExpediente = await db.claseExpediente.FindAsync(id);
+            if (claseExpediente == null)
             {
                 return HttpNotFound();
             }
-            return View(persona);
+            return View(claseExpediente);
         }
 
-        // GET: personas/Create
+        // GET: claseExpedientes/Create
         public ActionResult Create()
         {
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1");
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1");
             return View();
         }
 
-        // POST: personas/Create
+        // POST: claseExpedientes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Clase")] claseExpediente claseExpediente)
         {
             if (ModelState.IsValid)
             {
-                db.persona.Add(persona);
+                db.claseExpediente.Add(claseExpediente);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            return View(claseExpediente);
         }
 
-        // GET: personas/Edit/5
+        // GET: claseExpedientes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            claseExpediente claseExpediente = await db.claseExpediente.FindAsync(id);
+            if (claseExpediente == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            return View(claseExpediente);
         }
 
-        // POST: personas/Edit/5
+        // POST: claseExpedientes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Clase")] claseExpediente claseExpediente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(persona).State = EntityState.Modified;
+                db.Entry(claseExpediente).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            return View(claseExpediente);
         }
 
-        // GET: personas/Delete/5
+        // GET: claseExpedientes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            claseExpediente claseExpediente = await db.claseExpediente.FindAsync(id);
+            if (claseExpediente == null)
             {
                 return HttpNotFound();
             }
-            return View(persona);
+            return View(claseExpediente);
         }
 
-        // POST: personas/Delete/5
+        // POST: claseExpedientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            persona persona = await db.persona.FindAsync(id);
-            db.persona.Remove(persona);
+            claseExpediente claseExpediente = await db.claseExpediente.FindAsync(id);
+            db.claseExpediente.Remove(claseExpediente);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

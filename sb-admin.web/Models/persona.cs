@@ -28,6 +28,8 @@ public partial class persona
 
         this.telefono_persona = new HashSet<telefono_persona>();
 
+        this.expediente = new HashSet<expediente>();
+
     }
 
 
@@ -62,6 +64,10 @@ public partial class persona
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<telefono_persona> telefono_persona { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<expediente> expediente { get; set; }
 
 }
 

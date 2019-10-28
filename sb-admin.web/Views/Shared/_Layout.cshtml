@@ -18,12 +18,11 @@
 
 <body>
     <div id="wrapper">
-        @Html.Action("Navbar",
-       "Navbar",
+        @Html.Action("Navbar","Navbar",
        new
             {
                 controller = ViewContext.RouteData.Values["Controller"].ToString(),
-           action = ViewContext.RouteData.Values["Action"].ToString()
+                action = ViewContext.RouteData.Values["Action"].ToString()
             })
 
         <div id="page-wrapper">

@@ -63,7 +63,13 @@ public partial class expediente
 
     public virtual ICollection<evento> evento { get; set; }
 
+    public virtual persona persona { get; set; }
+
+    public virtual tipoExpediente tipoExpediente { get; set; }
+
     public virtual ubicacion ubicacion { get; set; }
+
+    public virtual claseExpediente claseExpediente { get; set; }
 
 }
 

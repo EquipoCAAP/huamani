@@ -1,0 +1,72 @@
+﻿@model sb_admin.web.Models.casoViewModel
+
+@{
+    ViewBag.Title = "Casos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Casos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Caso", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            referencia
+        </th>
+        <th>
+            Fecha Creación
+        </th>
+        <th>
+            Responsable
+        </th>
+        <th>
+            Persona realizada
+        </th>
+        <th>
+            Avance
+        </th>
+        <th>partes del caso</th>
+    </tr>
+
+    @foreach (var item in Model.casos)
+    {
+            string selectedRow = "";
+            if (item.id == ViewBag.casoId)
+            {
+            selectedRow = "success";
+            }
+<tr class="@selectedRow">
+    <td>
+        @Html.DisplayFor(modelItem => item.referencia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha_creacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.responsableId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.aperturaPersonaId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.avance.tipo_avance)
+    </td>
+    <td>
+    @if (item.parte_caso != null)
+    {
+        @item.parte_caso.ToList();
+    }
+    </td>
+
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
+        }
+
+    </table>

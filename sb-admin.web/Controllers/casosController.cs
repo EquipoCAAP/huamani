@@ -11,116 +11,143 @@ using sb_admin.web.Models;
 
 namespace sb_admin.web.Controllers
 {
-    public class personasController : Controller
+    public class casosController : Controller
     {
         private GAHEContext db = new GAHEContext();
 
-        // GET: personas
-        public async Task<ActionResult> Index()
+        // GET: casos
+        public ActionResult Index(int? id, int? casoId)
         {
-            var persona = db.persona.Include(p => p.tipo_persona).Include(p => p.User);
-            return View(await persona.ToListAsync());
+            var casoviewModel = new casoViewModel();
+            casoviewModel.casos = db.caso
+                .Include(c => c.avance)
+                .Include(c => c.parte_caso)
+                .Include(c => c.expediente)
+                .Include(c => c.tarea);
+
+
+
+
+            if (id != null)
+            {
+                ViewBag.casoId = id.Value;
+                casoviewModel.partes = casoviewModel.casos.Where(
+                    c => c.id == id.Value).Single().parte_caso;
+            }
+
+            if (casoId != null)
+            {
+                ViewBag.casoId = id.Value;
+                casoviewModel.partes = casoviewModel.partes.Where(
+                    x => x.casoId == casoId).ToList();
+            }
+
+
+
+
+            return View(casoviewModel);
+
+
+
+
+
         }
 
-        // GET: personas/Details/5
+        // GET: casos/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            caso caso = await db.caso.FindAsync(id);
+            if (caso == null)
             {
                 return HttpNotFound();
             }
-            return View(persona);
+            return View(caso);
         }
 
-        // GET: personas/Create
+        // GET: casos/Create
         public ActionResult Create()
         {
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1");
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1");
+            ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance");
             return View();
         }
 
-        // POST: personas/Create
+        // POST: casos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
+        public async Task<ActionResult> Create([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
         {
             if (ModelState.IsValid)
             {
-                db.persona.Add(persona);
+                db.caso.Add(caso);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
+            return View(caso);
         }
 
-        // GET: personas/Edit/5
+        // GET: casos/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            caso caso = await db.caso.FindAsync(id);
+            if (caso == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
+            return View(caso);
         }
 
-        // POST: personas/Edit/5
+        // POST: casos/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
+        public async Task<ActionResult> Edit([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(persona).State = EntityState.Modified;
+                db.Entry(caso).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
-            return View(persona);
+            ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
+            return View(caso);
         }
 
-        // GET: personas/Delete/5
+        // GET: casos/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = await db.persona.FindAsync(id);
-            if (persona == null)
+            caso caso = await db.caso.FindAsync(id);
+            if (caso == null)
             {
                 return HttpNotFound();
             }
-            return View(persona);
+            return View(caso);
         }
 
-        // POST: personas/Delete/5
+        // POST: casos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            persona persona = await db.persona.FindAsync(id);
-            db.persona.Remove(persona);
+            caso caso = await db.caso.FindAsync(id);
+            db.caso.Remove(caso);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

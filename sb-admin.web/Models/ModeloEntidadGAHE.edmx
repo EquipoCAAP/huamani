@@ -23,6 +23,13 @@
           <Property Name="avanceId" Type="int" Nullable="false" />
           <Property Name="aperturaPersonaId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="claseExpediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clase" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="documento">
           <Key>
             <PropertyRef Name="id" />
@@ -186,11 +193,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_persona" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tipoExpediente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ubicacion">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ubicacion" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="User">
@@ -278,6 +292,42 @@
             </Principal>
             <Dependent Role="expediente">
               <PropertyRef Name="casoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expediente_claseExpediente">
+          <End Role="claseExpediente" Type="Self.claseExpediente" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="claseExpediente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="claseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expediente_persona">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="responsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expediente_tipoExpediente">
+          <End Role="tipoExpediente" Type="Self.tipoExpediente" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoExpediente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="tipoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -480,6 +530,7 @@
         <EntityContainer Name="GAHEModelStoreContainer">
           <EntitySet Name="avance" EntityType="Self.avance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="caso" EntityType="Self.caso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="claseExpediente" EntityType="Self.claseExpediente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documento" EntityType="Self.documento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="evento" EntityType="Self.evento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="expediente" EntityType="Self.expediente" Schema="dbo" store:Type="Tables" />
@@ -496,6 +547,7 @@
           <EntitySet Name="tipo_evento" EntityType="Self.tipo_evento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipo_juzgado" EntityType="Self.tipo_juzgado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoExpediente" EntityType="Self.tipoExpediente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ubicacion" EntityType="Self.ubicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_caso_avance" Association="Self.FK_caso_avance">
@@ -520,6 +572,18 @@
           </AssociationSet>
           <AssociationSet Name="FK_expediente_caso" Association="Self.FK_expediente_caso">
             <End Role="caso" EntitySet="caso" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expediente_claseExpediente" Association="Self.FK_expediente_claseExpediente">
+            <End Role="claseExpediente" EntitySet="claseExpediente" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expediente_persona" Association="Self.FK_expediente_persona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expediente_tipoExpediente" Association="Self.FK_expediente_tipoExpediente">
+            <End Role="tipoExpediente" EntitySet="tipoExpediente" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="FK_expediente_ubicacion" Association="Self.FK_expediente_ubicacion">
@@ -658,7 +722,10 @@
           <NavigationProperty Name="caso" Relationship="Self.FK_expediente_caso" FromRole="expediente" ToRole="caso" />
           <NavigationProperty Name="documento" Relationship="Self.FK_documento_expediente" FromRole="expediente" ToRole="documento" />
           <NavigationProperty Name="evento" Relationship="Self.FK_evento_expediente" FromRole="expediente" ToRole="evento" />
-          <NavigationProperty Name="ubicacion" Relationship="Self.FK_expediente_ubicacion" FromRole="expediente" ToRole="ubicacion" />
+          <NavigationProperty Name="persona" Relationship="GAHEModel.FK_expediente_persona" FromRole="expediente" ToRole="persona" />
+          <NavigationProperty Name="tipoExpediente" Relationship="GAHEModel.FK_expediente_tipoExpediente" FromRole="expediente" ToRole="tipoExpediente" />
+          <NavigationProperty Name="ubicacion" Relationship="GAHEModel.FK_expediente_ubicacion" FromRole="expediente" ToRole="ubicacion" />
+          <NavigationProperty Name="claseExpediente" Relationship="GAHEModel.FK_expediente_claseExpediente" FromRole="expediente" ToRole="claseExpediente" />
         </EntityType>
         <EntityType Name="juzgado_evento">
           <Key>
@@ -697,6 +764,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_persona_Users" FromRole="persona" ToRole="User" />
           <NavigationProperty Name="tarea" Relationship="Self.FK_tarea_persona" FromRole="persona" ToRole="tarea" />
           <NavigationProperty Name="telefono_persona" Relationship="Self.FK_telefono_persona_persona" FromRole="persona" ToRole="telefono_persona" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_persona" FromRole="persona" ToRole="expediente" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -765,14 +833,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_persona1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="persona" Relationship="Self.FK_persona_tipo_persona" FromRole="tipo_persona" ToRole="persona" />
-        </EntityType>
-        <EntityType Name="ubicacion">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="ubicacion1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="expediente" Relationship="Self.FK_expediente_ubicacion" FromRole="ubicacion" ToRole="expediente" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -906,18 +966,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_expediente_ubicacion">
-          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="0..1" />
-          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ubicacion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="ubicacionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_parte_caso_persona">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1028,7 +1076,6 @@
           <EntitySet Name="telefono_persona" EntityType="Self.telefono_persona" />
           <EntitySet Name="tipo_evento" EntityType="Self.tipo_evento" />
           <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" />
-          <EntitySet Name="ubicacion" EntityType="Self.ubicacion" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_caso_avance" Association="Self.FK_caso_avance">
             <End Role="avance" EntitySet="avance" />
@@ -1065,10 +1112,6 @@
           <AssociationSet Name="FK_juzgado_evento_evento" Association="Self.FK_juzgado_evento_evento">
             <End Role="evento" EntitySet="evento" />
             <End Role="juzgado_evento" EntitySet="juzgado_evento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_expediente_ubicacion" Association="Self.FK_expediente_ubicacion">
-            <End Role="ubicacion" EntitySet="ubicacion" />
-            <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="FK_parte_caso_persona" Association="Self.FK_parte_caso_persona">
             <End Role="persona" EntitySet="persona" />
@@ -1116,6 +1159,25 @@
           <AssociationSet Name="FK_Roles_Navbar" Association="GAHEModel.FK_Roles_Navbar">
             <End Role="Navbar" EntitySet="Navbar" />
             <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="tipoExpediente" EntityType="GAHEModel.tipoExpediente" />
+          <AssociationSet Name="FK_expediente_persona" Association="GAHEModel.FK_expediente_persona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expediente_tipoExpediente" Association="GAHEModel.FK_expediente_tipoExpediente">
+            <End Role="tipoExpediente" EntitySet="tipoExpediente" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <EntitySet Name="ubicacion" EntityType="GAHEModel.ubicacion" />
+          <AssociationSet Name="FK_expediente_ubicacion" Association="GAHEModel.FK_expediente_ubicacion">
+            <End Role="ubicacion" EntitySet="ubicacion" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <EntitySet Name="claseExpediente" EntityType="GAHEModel.claseExpediente" />
+          <AssociationSet Name="FK_expediente_claseExpediente" Association="GAHEModel.FK_expediente_claseExpediente">
+            <End Role="claseExpediente" EntitySet="claseExpediente" />
+            <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="juzgado">
@@ -1207,6 +1269,78 @@
             </Principal>
             <Dependent Role="Roles">
               <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tipoExpediente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_tipoExpediente" FromRole="tipoExpediente" ToRole="expediente" />
+        </EntityType>
+        <Association Name="FK_expediente_persona">
+          <End Type="GAHEModel.persona" Role="persona" Multiplicity="0..1" />
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="responsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expediente_tipoExpediente">
+          <End Type="GAHEModel.tipoExpediente" Role="tipoExpediente" Multiplicity="0..1" />
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoExpediente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="tipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ubicacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ubicacion1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_ubicacion" FromRole="ubicacion" ToRole="expediente" />
+        </EntityType>
+        <Association Name="FK_expediente_ubicacion">
+          <End Type="GAHEModel.ubicacion" Role="ubicacion" Multiplicity="0..1" />
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ubicacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="ubicacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="claseExpediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clase" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_claseExpediente" FromRole="claseExpediente" ToRole="expediente" />
+        </EntityType>
+        <Association Name="FK_expediente_claseExpediente">
+          <End Type="GAHEModel.claseExpediente" Role="claseExpediente" Multiplicity="0..1" />
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="claseExpediente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="claseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1377,14 +1511,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ubicacion">
-            <EntityTypeMapping TypeName="GAHEModel.ubicacion">
-              <MappingFragment StoreEntitySet="ubicacion">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="ubicacion1" ColumnName="ubicacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="GAHEModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -1431,6 +1557,30 @@
                 <ScalarProperty Name="controller" ColumnName="controller" />
                 <ScalarProperty Name="nameOption" ColumnName="nameOption" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoExpediente">
+            <EntityTypeMapping TypeName="GAHEModel.tipoExpediente">
+              <MappingFragment StoreEntitySet="tipoExpediente">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ubicacion">
+            <EntityTypeMapping TypeName="GAHEModel.ubicacion">
+              <MappingFragment StoreEntitySet="ubicacion">
+                <ScalarProperty Name="ubicacion1" ColumnName="ubicacion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="claseExpediente">
+            <EntityTypeMapping TypeName="GAHEModel.claseExpediente">
+              <MappingFragment StoreEntitySet="claseExpediente">
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
