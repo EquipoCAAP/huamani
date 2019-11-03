@@ -151,6 +151,7 @@
     <Compile Include="Controllers\casosController.cs" />
     <Compile Include="Controllers\claseExpedientesController.cs" />
     <Compile Include="Controllers\documentosController.cs" />
+    <Compile Include="Controllers\estadoExpedientesController.cs" />
     <Compile Include="Controllers\eventosController.cs" />
     <Compile Include="Controllers\expedientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Controllers\juzgado_eventoController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\NavbarsController.cs" />
+    <Compile Include="Controllers\parte_casoController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\serviciosController.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Controllers\tipoExpedientesController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
     <Compile Include="Controllers\tipo_juzgadoController.cs" />
+    <Compile Include="Controllers\tipo_personaController.cs" />
     <Compile Include="Controllers\ubicacionesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Domain\Domain.cs" />
@@ -186,6 +189,9 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\documento.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\estadoExpediente.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\evento.cs">
@@ -463,6 +469,21 @@
     <Content Include="Views\claseExpedientes\Details.cshtml" />
     <Content Include="Views\claseExpedientes\Edit.cshtml" />
     <Content Include="Views\claseExpedientes\Index.cshtml" />
+    <Content Include="Views\parte_caso\Create.cshtml" />
+    <Content Include="Views\parte_caso\Delete.cshtml" />
+    <Content Include="Views\parte_caso\Details.cshtml" />
+    <Content Include="Views\parte_caso\Edit.cshtml" />
+    <Content Include="Views\parte_caso\Index.cshtml" />
+    <Content Include="Views\tipo_persona\Create.cshtml" />
+    <Content Include="Views\tipo_persona\Delete.cshtml" />
+    <Content Include="Views\tipo_persona\Details.cshtml" />
+    <Content Include="Views\tipo_persona\Edit.cshtml" />
+    <Content Include="Views\tipo_persona\Index.cshtml" />
+    <Content Include="Views\estadoExpedientes\Create.cshtml" />
+    <Content Include="Views\estadoExpedientes\Delete.cshtml" />
+    <Content Include="Views\estadoExpedientes\Details.cshtml" />
+    <Content Include="Views\estadoExpedientes\Edit.cshtml" />
+    <Content Include="Views\estadoExpedientes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

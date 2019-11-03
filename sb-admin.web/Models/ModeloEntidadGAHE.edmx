@@ -44,6 +44,13 @@
           <Property Name="creado" Type="int" />
           <Property Name="expedienteIid" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="estadoExpediente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="evento">
           <Key>
             <PropertyRef Name="id" />
@@ -307,6 +314,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_expediente_estadoExpediente">
+          <End Role="estadoExpediente" Type="Self.estadoExpediente" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadoExpediente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="estadoid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_expediente_persona">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
           <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
@@ -532,6 +551,7 @@
           <EntitySet Name="caso" EntityType="Self.caso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="claseExpediente" EntityType="Self.claseExpediente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documento" EntityType="Self.documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estadoExpediente" EntityType="Self.estadoExpediente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="evento" EntityType="Self.evento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="expediente" EntityType="Self.expediente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="juzgado" EntityType="Self.juzgado" Schema="dbo" store:Type="Tables" />
@@ -576,6 +596,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_expediente_claseExpediente" Association="Self.FK_expediente_claseExpediente">
             <End Role="claseExpediente" EntitySet="claseExpediente" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expediente_estadoExpediente" Association="Self.FK_expediente_estadoExpediente">
+            <End Role="estadoExpediente" EntitySet="estadoExpediente" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="FK_expediente_persona" Association="Self.FK_expediente_persona">
@@ -726,6 +750,7 @@
           <NavigationProperty Name="tipoExpediente" Relationship="GAHEModel.FK_expediente_tipoExpediente" FromRole="expediente" ToRole="tipoExpediente" />
           <NavigationProperty Name="ubicacion" Relationship="GAHEModel.FK_expediente_ubicacion" FromRole="expediente" ToRole="ubicacion" />
           <NavigationProperty Name="claseExpediente" Relationship="GAHEModel.FK_expediente_claseExpediente" FromRole="expediente" ToRole="claseExpediente" />
+          <NavigationProperty Name="estadoExpediente" Relationship="GAHEModel.FK_expediente_estadoExpediente" FromRole="expediente" ToRole="estadoExpediente" />
         </EntityType>
         <EntityType Name="juzgado_evento">
           <Key>
@@ -1179,6 +1204,11 @@
             <End Role="claseExpediente" EntitySet="claseExpediente" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
+          <EntitySet Name="estadoExpediente" EntityType="GAHEModel.estadoExpediente" />
+          <AssociationSet Name="FK_expediente_estadoExpediente" Association="GAHEModel.FK_expediente_estadoExpediente">
+            <End Role="estadoExpediente" EntitySet="estadoExpediente" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="juzgado">
           <Key>
@@ -1341,6 +1371,26 @@
             </Principal>
             <Dependent Role="expediente">
               <PropertyRef Name="claseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="estadoExpediente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_estadoExpediente" FromRole="estadoExpediente" ToRole="expediente" />
+        </EntityType>
+        <Association Name="FK_expediente_estadoExpediente">
+          <End Type="GAHEModel.estadoExpediente" Role="estadoExpediente" Multiplicity="0..1" />
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadoExpediente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="estadoid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1581,6 +1631,14 @@
               <MappingFragment StoreEntitySet="claseExpediente">
                 <ScalarProperty Name="Clase" ColumnName="Clase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estadoExpediente">
+            <EntityTypeMapping TypeName="GAHEModel.estadoExpediente">
+              <MappingFragment StoreEntitySet="estadoExpediente">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

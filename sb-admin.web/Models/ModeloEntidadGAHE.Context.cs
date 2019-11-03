@@ -76,6 +76,8 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<claseExpediente> claseExpediente { get; set; }
 
+    public virtual DbSet<estadoExpediente> estadoExpediente { get; set; }
+
 }
 
 }

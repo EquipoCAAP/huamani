@@ -11,7 +11,7 @@ namespace sb_admin.web.Models
 
         public IEnumerable<caso> casos { get; set; }
         public IEnumerable<parte_caso> partes { get; set; }
-        public IEnumerable<evento> eventos { get; set; }
+        public IEnumerable<expediente> expediente { get; set; }
 
 
     }

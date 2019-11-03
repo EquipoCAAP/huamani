@@ -28,45 +28,92 @@
             Avance
         </th>
         <th>partes del caso</th>
+    
     </tr>
 
     @foreach (var item in Model.casos)
     {
-            string selectedRow = "";
-            if (item.id == ViewBag.casoId)
+        string selectedRow = "";
+        if (item.id == ViewBag.casoId)
+        {
+            selectedRow = "selected";
+        }
+        <tr class="@selectedRow" valign="top">
+            <td>
+                @Html.DisplayFor(modelItem => item.referencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_creacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.responsableId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aperturaPersonaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.avance.tipo_avance)
+            </td>
+            <td>
+                @if (item.parte_caso != null)
+                {
+       
+            foreach (var per in item.parte_caso)
             {
-            selectedRow = "success";
+                <div>
+                    <span class="text-info">  @per.persona.nombreCompleto</span>
+
+                    <span class="text-danger">  @per.persona.tipo_persona.tipo_persona1</span>
+                </div>
             }
-<tr class="@selectedRow">
-    <td>
-        @Html.DisplayFor(modelItem => item.referencia)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fecha_creacion)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.responsableId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.aperturaPersonaId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.avance.tipo_avance)
-    </td>
-    <td>
-    @if (item.parte_caso != null)
-    {
-        @item.parte_caso.ToList();
+       
+                }
+            </td>
+            
+
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
     }
-    </td>
 
+</table>
 
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })
-    </td>
-</tr>
+@if (Model.partes != null)
+{
+    <h3>Personas </h3>
+    <table>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            
+        </tr>
+
+        @foreach (var item in Model.partes)
+        {
+            string selectedRow = "";
+            if (item.personaId == ViewBag.casosId)
+            {
+                selectedRow = "selectedrow";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { personId = item.personaId })
+                </td>
+                <td>
+                    @item.persona.nombreCompleto
+                </td>
+                <td>
+                    @item.persona.tipo_persona.tipo_persona1
+                </td>
+                
+            </tr>
+
         }
 
     </table>
+}

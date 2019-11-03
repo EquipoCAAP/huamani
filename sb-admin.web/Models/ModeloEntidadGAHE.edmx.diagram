@@ -51,6 +51,8 @@
         <AssociationConnector Association="GAHEModel.FK_expediente_ubicacion" />
         <EntityTypeShape EntityType="GAHEModel.claseExpediente" Width="1.5" PointX="4.125" PointY="10.75" />
         <AssociationConnector Association="GAHEModel.FK_expediente_claseExpediente" />
+        <EntityTypeShape EntityType="GAHEModel.estadoExpediente" Width="1.5" PointX="9.375" PointY="14.125" />
+        <AssociationConnector Association="GAHEModel.FK_expediente_estadoExpediente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -71,6 +71,8 @@ public partial class expediente
 
     public virtual claseExpediente claseExpediente { get; set; }
 
+    public virtual estadoExpediente estadoExpediente { get; set; }
+
 }
 
 }

@@ -18,7 +18,7 @@ namespace sb_admin.web.Controllers
         // GET: expedientes
         public async Task<ActionResult> Index()
         {
-            var expediente = db.expediente.Include(e => e.caso).Include(e => e.ubicacion).Include(e => e.claseExpediente).Include(e => e.persona).Include(e => e.tipoExpediente);
+            var expediente = db.expediente.Include(e =>e.estadoExpediente).Include(e => e.caso).Include(e => e.ubicacion).Include(e => e.claseExpediente).Include(e => e.persona).Include(e => e.tipoExpediente);
             return View(await expediente.ToListAsync());
         }
 
@@ -45,6 +45,7 @@ namespace sb_admin.web.Controllers
             ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase");
             ViewBag.responsableId = new SelectList(db.persona, "id", "nombre");
             ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo");
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado");
             return View();
         }
 
@@ -67,6 +68,7 @@ namespace sb_admin.web.Controllers
             ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
             ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.tipoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
             return View(expediente);
         }
 
@@ -87,6 +89,7 @@ namespace sb_admin.web.Controllers
             ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
             ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
             return View(expediente);
         }
 
@@ -108,6 +111,7 @@ namespace sb_admin.web.Controllers
             ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
             ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
             return View(expediente);
         }
 
