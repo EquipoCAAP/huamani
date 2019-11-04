@@ -6,6 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace sb_admin.web.Models
 {
+    public class avanceMetadata
+    {
+        [Display(Name ="Tipo de avance")]
+        public string tipo_avance;
+    }
     public class personaMetadata
     {
         [StringLength(10)]
@@ -28,11 +33,20 @@ namespace sb_admin.web.Models
 
     }
 
-    public class telefonoMetadata
+    public class TelefonoMetadata
     {
         [Display(Name = "Tipo de telefono")]
         public string tipo_telefono;
-        [Display(Name = "Tipo de Persona")]
+        [Display(Name = "Teléfono")]
         public string telefono1;
+    }
+
+    public class casoMetadata
+    {
+        [Required]
+        public string referencia;
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}",ApplyFormatInEditMode =true)]
+        public DateTime fecha_creacion;
     }
 }

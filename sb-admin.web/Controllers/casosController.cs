@@ -13,6 +13,7 @@ namespace sb_admin.web.Controllers
 {
     public class casosController : Controller
     {
+        
         private GAHEContext db = new GAHEContext();
 
         // GET: casos
@@ -24,8 +25,12 @@ namespace sb_admin.web.Controllers
                 .Include(c => c.parte_caso)
                 .Include(c => c.expediente)
                 .Include(c => c.tarea)
+                
                 .Select(c=>c).ToList();
+            List<persona> personas = db.persona.ToList();
 
+
+            ViewBag.personas = personas;
   
             if (id != null)
             {
@@ -66,8 +71,8 @@ namespace sb_admin.web.Controllers
         {
             
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance");
-            ViewBag.responsableId = new SelectList(db.persona,"id", "nombre");
-            ViewBag.aperturaId = new SelectList(db.persona, "id", "nombre");
+            ViewBag.responsableId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
+            ViewBag.aperturaPersonaId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
             return View();
         }
 
@@ -86,7 +91,8 @@ namespace sb_admin.web.Controllers
 
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "nombre",caso.responsableId);
-            ViewBag.aperturaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
+            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
+            
             return View(caso);
         }
 

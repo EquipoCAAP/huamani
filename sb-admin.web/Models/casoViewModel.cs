@@ -13,6 +13,6 @@ namespace sb_admin.web.Models
         public IEnumerable<parte_caso> partes { get; set; }
         public IEnumerable<expediente> expediente { get; set; }
 
-
+        public IEnumerable<persona> personas { get; set; }
     }
 }

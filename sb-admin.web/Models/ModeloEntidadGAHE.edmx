@@ -992,7 +992,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_parte_caso_persona">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1">
+          <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="parte_caso" Type="Self.parte_caso" Multiplicity="*" />
@@ -1007,7 +1007,7 @@
         </Association>
         <Association Name="FK_persona_tipo_persona">
           <End Role="tipo_persona" Type="Self.tipo_persona" Multiplicity="0..1" />
-          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <End Role="persona" Type="GAHEModel.persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipo_persona">
               <PropertyRef Name="id" />
@@ -1019,7 +1019,7 @@
         </Association>
         <Association Name="FK_persona_Users">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <End Role="persona" Type="GAHEModel.persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -1030,7 +1030,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tarea_persona">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1">
+          <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
@@ -1044,7 +1044,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_telefono_persona_persona">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1">
+          <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="telefono_persona" Type="Self.telefono_persona" Multiplicity="*" />
@@ -1093,7 +1093,7 @@
           <EntitySet Name="expediente" EntityType="Self.expediente" />
           <EntitySet Name="juzgado_evento" EntityType="Self.juzgado_evento" />
           <EntitySet Name="parte_caso" EntityType="Self.parte_caso" />
-          <EntitySet Name="persona" EntityType="Self.persona" />
+          <EntitySet Name="persona" EntityType="GAHEModel.persona" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="servicio" EntityType="Self.servicio" />
           <EntitySet Name="tarea" EntityType="Self.tarea" />

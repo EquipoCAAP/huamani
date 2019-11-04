@@ -137,7 +137,7 @@
     </ul>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            @foreach (var item in Model.Where(c => c.parentId == null))
+            @foreach (var item in Model.Where(c => c.parentId == null && c.Navbar2==null ))
             {
                 var activo = item.activeli == true ? "'active'" : "";
                 var enlace = item.Navbar1.Count() == 0 ? @Url.Action(item.action, item.controller) : "#";

@@ -8,7 +8,7 @@
 <h2>Casos</h2>
 
 <p>
-    @Html.ActionLink("Nuevo Caso", "Create")
+    @Html.ActionLink("Nuevo Caso", "Create",null,new { @class="btn btn-primary"})
 </p>
 <table class="table">
     <tr>
@@ -61,7 +61,7 @@
             foreach (var per in item.parte_caso)
             {
                 <div>
-                    <span class="text-info">  @per.persona.nombreCompleto</span>
+                    <p class="text-info">  @per.persona.NombreCompleto</p>
 
                     <span class="text-danger">  @per.persona.tipo_persona.tipo_persona1</span>
                 </div>
@@ -71,11 +71,11 @@
             </td>
             
 
-            <td>
-                @Html.ActionLink("Select", "Index", new { id = item.id })
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            <td >
+                @Html.ActionLink("Select", "Index", new { id = item.id },new{@class="btn btn-default btn-sm" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.id },new{@class="btn btn-warning btn-sm" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.id },new{@class="btn btn-info btn-sm" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.id },new{@class="btn btn-danger btn-sm" })
             </td>
         </tr>
     }
@@ -105,7 +105,7 @@
                     @Html.ActionLink("Select", "Index", new { personId = item.personaId })
                 </td>
                 <td>
-                    @item.persona.nombreCompleto
+                    @item.persona.NombreCompleto
                 </td>
                 <td>
                     @item.persona.tipo_persona.tipo_persona1
