@@ -50,7 +50,7 @@ namespace sb_admin.web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
+        public async Task<ActionResult> Create([Bind(Include = "dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
         {
             if (ModelState.IsValid)
             {

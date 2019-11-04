@@ -60,6 +60,28 @@
         </dd>
 
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                Teléfonos
+            </th>
+            
+      </tr>
+       
+        @foreach (var item in Model.telefono_persona)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono.telefono1)
+                </td>
+               
+            </tr>
+        }
+    </table>
+
+
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<sb_admin.web.Models.Navbar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nameOption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.controller)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.action)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activeli)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.parentId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nameOption)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.controller)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.action)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.area)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.imageClass)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.estatus)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.activeli)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.parentId)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
+}
+
+</table>
