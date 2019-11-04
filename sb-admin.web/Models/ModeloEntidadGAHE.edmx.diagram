@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="GAHEModel.Navbar" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.parte_caso" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.persona" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" FillColor="255, 128, 0" />
-        <EntityTypeShape EntityType="GAHEModel.Roles" Width="1.5" PointX="6.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.Roles" Width="1.5" PointX="6.5" PointY="5.375" IsExpanded="true" FillColor="Red" />
         <EntityTypeShape EntityType="GAHEModel.servicio" Width="1.5" PointX="12.125" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.tarea" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.telefono" Width="1.5" PointX="1" PointY="12.75" IsExpanded="true" />
