@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Expedientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Expediente", "Create", null, new {@class="btn btn-primary"})
 </p>
 <table class="table">
     <tr>
@@ -72,7 +72,7 @@
         @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.persona.nombreCompleto)
+        @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
     </td>
 
     
