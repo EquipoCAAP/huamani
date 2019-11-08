@@ -133,9 +133,23 @@ namespace sb_admin.web.Controllers
             var parentQuery = from p in db.Navbar
                             orderby p.nameOption
                             select p;
+            
 
-          
-            ViewBag.parentId = new SelectList(parentQuery, "id", "nameOption");
+            List<SelectListItem> items = new SelectList(
+                                      parentQuery,
+                                      "id", "nameOption"
+                                       ).ToList();
+
+            items.Insert(0, (new SelectListItem
+            {
+           Text = "Padre",
+                Value = "",
+                Selected = true
+            }));
+
+           
+
+            ViewBag.parentId = items;
         }
     }
     }

@@ -137,38 +137,52 @@
     </ul>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            @foreach (var item in Model.Where(c => c.parentId == null && c.Navbar2==null ))
+            @foreach (var item in Model.Where(c => c.parentId == null && c.Navbar2 == null).Distinct())
             {
                 var activo = item.activeli == true ? "'active'" : "";
-                var enlace = item.Navbar1.Count() == 0 ? @Url.Action(item.action, item.controller) : "#";
+                var enlace = @Url.Action(item.action, item.controller);
                 <li>
-                    <a href="@enlace">
+                      ------
+                    </li>
+               
+               
+                if (@item.Navbar1.Count() > 0)
+                {
+                <li @activo>
+                    <link class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@enlace">
                         <i class="@item.imageClass"></i> @item.nameOption
+                        <span class="label label-danger pull-right">
+                            @item.Navbar1.Count()
+                        </span>
+                        <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        @foreach (var sub in item.Navbar1)
+                        {
+                            <li class="nav-item dropdown @activo">
+                                <a href="@Url.Action(sub.action, sub.controller)">
+                                    <i class="@sub.imageClass dropdown-item" role="button"></i> @sub.nameOption
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </li>
-
-                if (item.Navbar1.Count() > 0)
+                }
+                else
                 {
                     <li @activo>
-                        <link class="dropdown">
-
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@enlace">
-                            <i class="@item.imageClass"></i> @item.nameOption<span class="label label-danger pull-right"> @item.Navbar1.Count()</span>
-                            <span class="caret"></span>
+                        <a href="@enlace">
+                            <i class="@item.imageClass"></i>
+                            @item.nameOption
                         </a>
-                        <ul class="dropdown-menu">
-                            @foreach (var sub in item.Navbar1)
-                            {
-                                <li class="nav-item dropdown @activo">
-                                    <a href="@Url.Action(sub.action, sub.controller)"><i class="@sub.imageClass dropdown-item" role="button"></i> @sub.nameOption</a>
-                                </li>
-                            }
-                        </ul>
                     </li>
                 }
             }
 
-        </ul>
+
+
+            </ul>
     </div>
     <!-- /.navbar-collapse -->
 </nav>
