@@ -189,10 +189,12 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\abogadosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\avancesController.cs" />
     <Compile Include="Controllers\casosController.cs" />
     <Compile Include="Controllers\claseExpedientesController.cs" />
+    <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\documentosController.cs" />
     <Compile Include="Controllers\estadoExpedientesController.cs" />
     <Compile Include="Controllers\eventosController.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AbogadoViewModel.cs" />
     <Compile Include="Models\avance.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
@@ -528,6 +531,16 @@
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\abogados\Create.cshtml" />
+    <Content Include="Views\abogados\Delete.cshtml" />
+    <Content Include="Views\abogados\Details.cshtml" />
+    <Content Include="Views\abogados\Edit.cshtml" />
+    <Content Include="Views\abogados\Index.cshtml" />
+    <Content Include="Views\clientes\Create.cshtml" />
+    <Content Include="Views\clientes\Delete.cshtml" />
+    <Content Include="Views\clientes\Details.cshtml" />
+    <Content Include="Views\clientes\Edit.cshtml" />
+    <Content Include="Views\clientes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

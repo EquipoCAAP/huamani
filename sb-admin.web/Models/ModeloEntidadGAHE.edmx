@@ -778,10 +778,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dni" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="celular" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="tipo" Type="Int32" />
           <Property Name="usuarioId" Type="Int32" />
           <NavigationProperty Name="parte_caso" Relationship="Self.FK_parte_caso_persona" FromRole="persona" ToRole="parte_caso" />
@@ -1044,10 +1044,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_telefono_persona_persona">
-          <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
+          <End Type="GAHEModel.persona" Multiplicity="0..1" Role="persona">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="telefono_persona" Type="Self.telefono_persona" Multiplicity="*" />
+          <End Type="Self.telefono_persona" Multiplicity="*" Role="telefono_persona" />
           <ReferentialConstraint>
             <Principal Role="persona">
               <PropertyRef Name="id" />
@@ -1155,8 +1155,8 @@
             <End Role="tarea" EntitySet="tarea" />
           </AssociationSet>
           <AssociationSet Name="FK_telefono_persona_persona" Association="Self.FK_telefono_persona_persona">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="telefono_persona" EntitySet="telefono_persona" />
+            <End EntitySet="persona" Role="persona" />
+            <End EntitySet="telefono_persona" Role="telefono_persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Roles_Users" Association="Self.FK_Roles_Users">
             <End Role="User" EntitySet="User" />
