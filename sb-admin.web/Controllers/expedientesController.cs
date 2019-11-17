@@ -68,7 +68,7 @@ namespace sb_admin.web.Controllers
             ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
             ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
-            ViewBag.tipoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
             return View(expediente);
         }
 

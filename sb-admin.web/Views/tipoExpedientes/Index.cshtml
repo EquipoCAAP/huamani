@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Tipos de Expediente</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+     @Html.ActionLink("Nuevo Tipo expediente", "Create", null, new { @class = "btn btn-sm btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -24,9 +24,9 @@
             @Html.DisplayFor(modelItem => item.tipo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink(" Editar", "Edit", new { id=item.id },new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+            @Html.ActionLink(" detalles", "Details", new { id=item.id },new { @class = "btn btn-info btn-sm fa fa-eye" })
+            @Html.ActionLink(" Borrar", "Delete", new { id=item.id },new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
         </td>
     </tr>
 }

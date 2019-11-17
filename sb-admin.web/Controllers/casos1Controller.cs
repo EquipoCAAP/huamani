@@ -1,60 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using sb_admin.web.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using sb_admin.web.Models;
 
 namespace sb_admin.web.Controllers
 {
-    public class casosController : Controller
+    public class casos1Controller : Controller
     {
-        
         private GAHEContext db = new GAHEContext();
 
-        // GET: casos
-        public ActionResult Index(int? id, int? casoId)
+        // GET: casos1
+        public async Task<ActionResult> Index()
         {
-            var casoviewModel = new casoViewModel();
-            casoviewModel.casos = db.caso
-                .Include(c => c.avance)
-                .Include(c => c.parte_caso)
-                .Include(c => c.expediente)
-                .Include(c => c.tarea)
-                .Select(c=>c).ToList();
-
-            List<persona> personas = db.persona.ToList();
-            List<expediente> expedientes = db.expediente.ToList();
-
-            ViewBag.personas = personas;
-            ViewBag.expedientes = expedientes;
-
-            if (id != null)
-            {
-                ViewBag.casoId = id.Value;
-                casoviewModel.partes = casoviewModel.casos.Where(
-                    c => c.id == id.Value).Single().parte_caso.ToList();
-                casoviewModel.Expediente = casoviewModel.casos.Where(
-                    c => c.id == id.Value).Single().expediente.ToList();
-            }
-
-            if (casoId != null)
-            {
-                ViewBag.casoId = casoId.Value;
-                casoviewModel.partes = casoviewModel.partes.Where(
-                    x => x.casoId == casoId).ToList();
-            }
-
-            return View(casoviewModel);
-
-
+            var caso = db.caso.Include(c => c.avance);
+            return View(await caso.ToListAsync());
         }
 
-        // GET: casos/Details/5
+        // GET: casos1/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -69,18 +32,16 @@ namespace sb_admin.web.Controllers
             return View(caso);
         }
 
-        // GET: casos/Create
+        // GET: casos1/Create
         public ActionResult Create()
         {
-            
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance");
-            ViewBag.responsableId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
-            ViewBag.aperturaPersonaId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
             return View();
         }
 
-        // POST: casos/Create
-     
+        // POST: casos1/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
@@ -93,13 +54,10 @@ namespace sb_admin.web.Controllers
             }
 
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
-            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre",caso.responsableId);
-            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
-            
             return View(caso);
         }
 
-        // GET: casos/Edit/5
+        // GET: casos1/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,13 +70,12 @@ namespace sb_admin.web.Controllers
                 return HttpNotFound();
             }
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
-            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre", caso.responsableId);
-            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
             return View(caso);
         }
 
-        // POST: casos/Edit/5
-       
+        // POST: casos1/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
@@ -130,12 +87,10 @@ namespace sb_admin.web.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
-            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre",caso.responsableId);
-            ViewBag.aperturaId = new SelectList(db.persona, "id","nombre", caso.aperturaPersonaId);
             return View(caso);
         }
 
-        // GET: casos/Delete/5
+        // GET: casos1/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,7 +105,7 @@ namespace sb_admin.web.Controllers
             return View(caso);
         }
 
-        // POST: casos/Delete/5
+        // POST: casos1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

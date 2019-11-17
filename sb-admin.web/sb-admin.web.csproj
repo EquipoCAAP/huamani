@@ -99,6 +99,9 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Mirosoft.Utilities.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mirosoft.Utilities.Mvc.1.0.2\lib\net45\Mirosoft.Utilities.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -192,6 +195,7 @@
     <Compile Include="Controllers\abogadosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\avancesController.cs" />
+    <Compile Include="Controllers\casos1Controller.cs" />
     <Compile Include="Controllers\casosController.cs" />
     <Compile Include="Controllers\claseExpedientesController.cs" />
     <Compile Include="Controllers\clientesController.cs" />
@@ -208,6 +212,7 @@
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\serviciosController.cs" />
+    <Compile Include="Controllers\tareasController.cs" />
     <Compile Include="Controllers\telefono_personaController.cs" />
     <Compile Include="Controllers\tipoExpedientesController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
@@ -541,6 +546,16 @@
     <Content Include="Views\clientes\Details.cshtml" />
     <Content Include="Views\clientes\Edit.cshtml" />
     <Content Include="Views\clientes\Index.cshtml" />
+    <Content Include="Views\casos1\Create.cshtml" />
+    <Content Include="Views\casos1\Delete.cshtml" />
+    <Content Include="Views\casos1\Details.cshtml" />
+    <Content Include="Views\casos1\Edit.cshtml" />
+    <Content Include="Views\casos1\Index.cshtml" />
+    <Content Include="Views\tareas\Create.cshtml" />
+    <Content Include="Views\tareas\Delete.cshtml" />
+    <Content Include="Views\tareas\Details.cshtml" />
+    <Content Include="Views\tareas\Edit.cshtml" />
+    <Content Include="Views\tareas\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

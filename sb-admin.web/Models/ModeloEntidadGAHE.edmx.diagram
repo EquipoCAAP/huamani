@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6fc848a11d4841de857d6d3e85afdac7" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="GAHEModel.avance" Width="1.5" PointX="4.625" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GAHEModel.caso" Width="1.5" PointX="7" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GAHEModel.caso" Width="1.875" PointX="7" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.documento" Width="1.5" PointX="4.125" PointY="12.5" IsExpanded="true" FillColor="Maroon" />
         <EntityTypeShape EntityType="GAHEModel.evento" Width="1.5" PointX="9.375" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.expediente" Width="1.5" PointX="7" PointY="9.25" IsExpanded="true" FillColor="Red" />

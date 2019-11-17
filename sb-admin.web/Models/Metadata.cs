@@ -14,7 +14,7 @@ namespace sb_admin.web.Models
     public class personaMetadata
     {
         [StringLength(10)]
-        [Display(Name = "identificación")]
+        [Display(Name = "Identificación")]
         public string dni;
 
         [StringLength(50)]
