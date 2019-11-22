@@ -1,14 +1,14 @@
 ﻿@model sb_admin.web.Models.persona
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>persona</h4>
+    <h4>Clientes</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,25 +43,51 @@
             @Html.DisplayFor(model => model.celular)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipo_persona.tipo_persona1)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipo_persona.tipo_persona1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.user1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.user1)
-        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-    @Html.ActionLink("Regresar a lista", "Index", null,new { @class = "btn btn-warning btn-sm fa fa-pencil " })
+    @Html.ActionLink(" Editar Cliente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+    @Html.ActionLink(" Agregar Teléfono ", "CreateTelefono", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
+    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-pencil" })
 </p>
+<h4>Teléfonos</h4>
+@if (Model.telefono_persona.Count == 0)
+{
+    <h5>No tiene teléfonos adicionales registrados</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono_persona.FirstOrDefault().telefono.telefono1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono_persona.FirstOrDefault().telefono.tipo_telefono)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.telefono_persona)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono.telefono1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono.tipo_telefono)
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "EditTelefono", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+                    @Html.ActionLink(" Detalle", "DetailsTelefono", new { id = item.id }, new { @class = "btn btn-primary btn-sm fa fa-eye" }) |
+                    @Html.ActionLink(" Borrar", "DeleteTelefono", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+}

@@ -15,6 +15,48 @@ namespace sb_admin.web.Controllers
     {
         private GAHEContext db = new GAHEContext();
 
+        // GET: telefonos/Create
+        public async Task<ActionResult> CreateTelefono(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            persona persona = await db.persona.FindAsync(id);
+            if (persona == null)
+            {
+                return HttpNotFound();
+            }
+
+            var telefono_personaId = new telefono_persona { personaId = persona.id };
+
+            return View(telefono_personaId);
+        }
+
+        // POST: telefonos/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateTelefono( telefono telefono,int id)
+        {
+            if (ModelState.IsValid)
+            {
+                db.telefono.Add(telefono);
+                var telefono_Persona = new telefono_persona { personaId = id, telefonosId = telefono.id };
+
+                db.telefono_persona.Add(telefono_Persona);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}",telefono_Persona.personaId));
+            }
+
+            return View();
+        }
+
+
+
+
+
+
         // GET: clientes
         public async Task<ActionResult> Index()
         {
@@ -40,14 +82,13 @@ namespace sb_admin.web.Controllers
         // GET: clientes/Create
         public ActionResult Create()
         {
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1");
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1");
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 2), "id", "tipo_persona1");
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 2), "Id", "user1");
             return View();
         }
 
         // POST: clientes/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
@@ -59,8 +100,8 @@ namespace sb_admin.web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 2), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 2), "Id", "user1", persona.usuarioId);
             return View(persona);
         }
 
@@ -76,14 +117,13 @@ namespace sb_admin.web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 2), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 2), "Id", "user1", persona.usuarioId);
             return View(persona);
         }
 
         // POST: clientes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,dni,nombre,apellido,celular,tipo,usuarioId")] persona persona)
@@ -94,8 +134,8 @@ namespace sb_admin.web.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 2), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 2), "Id", "user1", persona.usuarioId);
             return View(persona);
         }
 

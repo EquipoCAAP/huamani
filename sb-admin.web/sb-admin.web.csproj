@@ -213,6 +213,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\serviciosController.cs" />
     <Compile Include="Controllers\tareasController.cs" />
+    <Compile Include="Controllers\telefonosController.cs" />
     <Compile Include="Controllers\telefono_personaController.cs" />
     <Compile Include="Controllers\tipoExpedientesController.cs" />
     <Compile Include="Controllers\tipo_eventoController.cs" />
@@ -300,6 +301,9 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipoExpediente.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipotelefono.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipo_evento.cs">
@@ -556,6 +560,12 @@
     <Content Include="Views\tareas\Details.cshtml" />
     <Content Include="Views\tareas\Edit.cshtml" />
     <Content Include="Views\tareas\Index.cshtml" />
+    <Content Include="Views\telefonos\Create.cshtml" />
+    <Content Include="Views\telefonos\Delete.cshtml" />
+    <Content Include="Views\telefonos\Details.cshtml" />
+    <Content Include="Views\telefonos\Edit.cshtml" />
+    <Content Include="Views\telefonos\Index.cshtml" />
+    <Content Include="Views\clientes\CreateTelefono.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

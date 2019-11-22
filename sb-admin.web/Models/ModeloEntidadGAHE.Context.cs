@@ -54,8 +54,6 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<tarea> tarea { get; set; }
 
-    public virtual DbSet<telefono> telefono { get; set; }
-
     public virtual DbSet<telefono_persona> telefono_persona { get; set; }
 
     public virtual DbSet<tipo_evento> tipo_evento { get; set; }
@@ -77,6 +75,8 @@ public partial class GAHEContext : DbContext
     public virtual DbSet<claseExpediente> claseExpediente { get; set; }
 
     public virtual DbSet<estadoExpediente> estadoExpediente { get; set; }
+
+    public virtual DbSet<telefono> telefono { get; set; }
 
 }
 

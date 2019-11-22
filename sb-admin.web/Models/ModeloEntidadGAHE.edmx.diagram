@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="GAHEModel.Roles" Width="1.5" PointX="0.5" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.servicio" Width="1.5" PointX="12" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.tarea" Width="1.5" PointX="7.875" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GAHEModel.telefono" Width="1.5" PointX="0.5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.telefono_persona" Width="1.5" PointX="0.875" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.tipo_evento" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GAHEModel.tipo_persona" PointX="1" PointY="0.625" Width="1.5" IsExpanded="true" />
@@ -36,7 +35,6 @@
         <AssociationConnector Association="GAHEModel.FK_tarea_persona" ManuallyRouted="false" />
         <AssociationConnector ManuallyRouted="false" Association="GAHEModel.FK_telefono_persona_persona" />
         <AssociationConnector Association="GAHEModel.FK_Roles_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="GAHEModel.FK_telefono_persona_telefonos" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GAHEModel.juzgado" Width="1.5" PointX="12" PointY="9.25" />
         <AssociationConnector Association="GAHEModel.FK_juzgado_evento_juzgado" />
         <EntityTypeShape EntityType="GAHEModel.tipo_juzgado" Width="1.5" PointX="12" PointY="12.875" FillColor="255, 255, 192" />
@@ -53,6 +51,8 @@
         <AssociationConnector Association="GAHEModel.FK_expediente_claseExpediente" />
         <EntityTypeShape EntityType="GAHEModel.estadoExpediente" Width="1.5" PointX="9.375" PointY="14.125" />
         <AssociationConnector Association="GAHEModel.FK_expediente_estadoExpediente" />
+        <EntityTypeShape EntityType="GAHEModel.telefono" Width="1.5" PointX="0.5" PointY="5.25" />
+        <AssociationConnector Association="GAHEModel.FK_telefono_persona_telefonos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

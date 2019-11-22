@@ -24,19 +24,21 @@ namespace sb_admin.web.Models
         [StringLength(50)]
         [Display(Name = "Apellido")]
         public string apellido;
-        [StringLength(8)]
+        [StringLength(12)]
         [Display(Name = "Celular")]
         public string celular;
 
         [Display(Name = "Tipo de Persona")]
         public string tipo_persona;
 
+        [Display(Name = "relacionada")]
+        public Nullable<int> usuarioId;
     }
 
-    public class TelefonoMetadata
+    public class telefonoMetadata
     {
-        [Display(Name = "Tipo de telefono")]
-        public string tipo_telefono;
+        [Display(Name = "Tipo de teléfono")]
+        public int tipo_telefono;
         [Display(Name = "Teléfono")]
         public string telefono1;
     }
@@ -48,5 +50,17 @@ namespace sb_admin.web.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}",ApplyFormatInEditMode =true)]
         public DateTime fecha_creacion;
+    }
+
+    public class eventoMetadata
+    {
+        [Display(Name = "Descripción de Evento")]
+        public string descripcion_evento;
+        [Display(Name = "Fecha Inicial" )]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime fecha_inicio;
+
+    
     }
 }

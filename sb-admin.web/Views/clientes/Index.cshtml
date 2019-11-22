@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<sb_admin.web.Models.persona>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listado</h2>
 
 <p>
-     @Html.ActionLink("Nuevo Caso", "Create", null, new { @class = "btn btn-sm btn-primary" })
+     @Html.ActionLink("Nuevo Cliente", "Create", null, new { @class = "btn btn-sm btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -24,12 +24,8 @@
         <th>
             @Html.DisplayNameFor(model => model.celular)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo_persona.tipo_persona1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.user1)
-        </th>
+       
+       
         <th></th>
     </tr>
 
@@ -47,12 +43,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.celular)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo_persona.tipo_persona1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.user1)
-        </td>
+       
+       
         <td>
             @Html.ActionLink(" Editar", "Edit", new { id=item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
             @Html.ActionLink(" Detalles", "Details", new { id=item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })

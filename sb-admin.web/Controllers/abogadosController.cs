@@ -40,8 +40,9 @@ namespace sb_admin.web.Controllers
         // GET: abogados/Create
         public ActionResult Create()
         {
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1");
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1");
+            
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P=>P.id==1), "id", "tipo_persona1");
+            ViewBag.usuarioId = new SelectList(db.User.Where(u=>u.Id==1), "Id", "user1");
             return View();
         }
 
@@ -59,8 +60,8 @@ namespace sb_admin.web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 1), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(u => u.Id == 1), "Id", "user1", persona.usuarioId);
             return View(persona);
         }
 
@@ -76,8 +77,8 @@ namespace sb_admin.web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tipo = new SelectList(db.tipo_persona, "id", "tipo_persona1", persona.tipo);
-            ViewBag.usuarioId = new SelectList(db.User, "Id", "user1", persona.usuarioId);
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id == 1), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(u => u.Id == 1), "Id", "user1", persona.usuarioId);
             return View(persona);
         }
 

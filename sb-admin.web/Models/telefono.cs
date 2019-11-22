@@ -31,7 +31,7 @@ public partial class telefono
 
     public string telefono1 { get; set; }
 
-    public string tipo_telefono { get; set; }
+    public Nullable<tipotelefono> tipo_telefono { get; set; }
 
 
 

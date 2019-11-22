@@ -169,7 +169,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="telefono" Type="varchar" MaxLength="50" />
-          <Property Name="tipo_telefono" Type="varchar" MaxLength="50" />
+          <Property Name="tipo_telefono" Type="int" />
         </EntityType>
         <EntityType Name="telefono_persona">
           <Key>
@@ -824,15 +824,6 @@
           <NavigationProperty Name="caso" Relationship="Self.FK_tarea_caso" FromRole="tarea" ToRole="caso" />
           <NavigationProperty Name="persona" Relationship="Self.FK_tarea_persona" FromRole="tarea" ToRole="persona" />
         </EntityType>
-        <EntityType Name="telefono">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tipo_telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="telefono_persona" Relationship="Self.FK_telefono_persona_telefonos" FromRole="telefono" ToRole="telefono_persona" />
-        </EntityType>
         <EntityType Name="telefono_persona">
           <Key>
             <PropertyRef Name="id" />
@@ -841,7 +832,7 @@
           <Property Name="personaId" Type="Int32" />
           <Property Name="telefonosId" Type="Int32" />
           <NavigationProperty Name="persona" Relationship="Self.FK_telefono_persona_persona" FromRole="telefono_persona" ToRole="persona" />
-          <NavigationProperty Name="telefono" Relationship="Self.FK_telefono_persona_telefonos" FromRole="telefono_persona" ToRole="telefono" />
+          <NavigationProperty Name="telefono" Relationship="GAHEModel.FK_telefono_persona_telefonos" FromRole="telefono_persona" ToRole="telefono" />
         </EntityType>
         <EntityType Name="tipo_evento">
           <Key>
@@ -1071,20 +1062,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_telefono_persona_telefonos">
-          <End Role="telefono" Type="Self.telefono" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="telefono_persona" Type="Self.telefono_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="telefono">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="telefono_persona">
-              <PropertyRef Name="telefonosId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GAHEContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="avance" EntityType="Self.avance" />
           <EntitySet Name="caso" EntityType="Self.caso" />
@@ -1097,7 +1074,6 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="servicio" EntityType="Self.servicio" />
           <EntitySet Name="tarea" EntityType="Self.tarea" />
-          <EntitySet Name="telefono" EntityType="Self.telefono" />
           <EntitySet Name="telefono_persona" EntityType="Self.telefono_persona" />
           <EntitySet Name="tipo_evento" EntityType="Self.tipo_evento" />
           <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" />
@@ -1162,10 +1138,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
-          <AssociationSet Name="FK_telefono_persona_telefonos" Association="Self.FK_telefono_persona_telefonos">
-            <End Role="telefono" EntitySet="telefono" />
-            <End Role="telefono_persona" EntitySet="telefono_persona" />
-          </AssociationSet>
           <EntitySet Name="juzgado" EntityType="GAHEModel.juzgado" />
           <AssociationSet Name="FK_juzgado_evento_juzgado" Association="GAHEModel.FK_juzgado_evento_juzgado">
             <End Role="juzgado" EntitySet="juzgado" />
@@ -1208,6 +1180,11 @@
           <AssociationSet Name="FK_expediente_estadoExpediente" Association="GAHEModel.FK_expediente_estadoExpediente">
             <End Role="estadoExpediente" EntitySet="estadoExpediente" />
             <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <EntitySet Name="telefono" EntityType="GAHEModel.telefono" />
+          <AssociationSet Name="FK_telefono_persona_telefonos" Association="GAHEModel.FK_telefono_persona_telefonos">
+            <End Role="telefono" EntitySet="telefono" />
+            <End Role="telefono_persona" EntitySet="telefono_persona" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="juzgado">
@@ -1394,6 +1371,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="telefono">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_telefono" Type="GAHEModel.tipotelefono" />
+          <NavigationProperty Name="telefono_persona" Relationship="GAHEModel.FK_telefono_persona_telefonos" FromRole="telefono" ToRole="telefono_persona" />
+        </EntityType>
+        <Association Name="FK_telefono_persona_telefonos">
+          <End Type="GAHEModel.telefono" Role="telefono" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GAHEModel.telefono_persona" Role="telefono_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="telefono">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="telefono_persona">
+              <PropertyRef Name="telefonosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="tipotelefono">
+          <Member Name="Oficina1" Value="1" />
+          <Member Name="Oficina2" Value="2" />
+          <Member Name="Casa" Value="3" />
+          <Member Name="CelularAlterno" Value="4" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1527,15 +1533,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="telefono">
-            <EntityTypeMapping TypeName="GAHEModel.telefono">
-              <MappingFragment StoreEntitySet="telefono">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="telefono1" ColumnName="telefono" />
-                <ScalarProperty Name="tipo_telefono" ColumnName="tipo_telefono" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="telefono_persona">
             <EntityTypeMapping TypeName="GAHEModel.telefono_persona">
               <MappingFragment StoreEntitySet="telefono_persona">
@@ -1638,6 +1635,15 @@
             <EntityTypeMapping TypeName="GAHEModel.estadoExpediente">
               <MappingFragment StoreEntitySet="estadoExpediente">
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="telefono">
+            <EntityTypeMapping TypeName="GAHEModel.telefono">
+              <MappingFragment StoreEntitySet="telefono">
+                <ScalarProperty Name="tipo_telefono" ColumnName="tipo_telefono" />
+                <ScalarProperty Name="telefono1" ColumnName="telefono" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

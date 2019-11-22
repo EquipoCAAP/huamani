@@ -14,10 +14,10 @@ namespace sb_admin.web.Models
         public string NombreCompleto { get { return nombre + " " + apellido; } }
     }
 
-    [MetadataType(typeof(TelefonoMetadata))]
-    public partial class Telefono { }
+    [MetadataType(typeof(telefonoMetadata))]
+    public partial class telefono { }
     [MetadataType(typeof(casoMetadata))]
     public partial class caso { }
-
-
+    [MetadataType(typeof(eventoMetadata))]
+    public partial class evento { }
 }
