@@ -566,6 +566,7 @@
     <Content Include="Views\telefonos\Edit.cshtml" />
     <Content Include="Views\telefonos\Index.cshtml" />
     <Content Include="Views\clientes\CreateTelefono.cshtml" />
+    <Content Include="Views\clientes\EditTelefono.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

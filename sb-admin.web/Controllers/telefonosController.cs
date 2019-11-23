@@ -74,8 +74,7 @@ namespace sb_admin.web.Controllers
         }
 
         // POST: telefonos/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,telefono1,tipo_telefono")] telefono telefono)

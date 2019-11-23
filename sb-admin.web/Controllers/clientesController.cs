@@ -52,7 +52,55 @@ namespace sb_admin.web.Controllers
             return View();
         }
 
+        // GET: telefonos/Edit/5
+        public async Task<ActionResult> EditTelefono(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var telefono_persona = await db.telefono_persona.FirstOrDefaultAsync(tp=>tp.telefonosId==id);
+            if (telefono_persona == null)
+            {
+                return HttpNotFound();
+            }
+            return View(telefono_persona);
+        }
 
+        public async Task<ActionResult> DeleteTelefono(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var telefono_persona = await db.telefono_persona.FirstOrDefaultAsync(tp => tp.telefonosId == id);
+            var telefono = await db.telefono.FirstOrDefaultAsync(t => t.id == id);
+            if (telefono_persona == null)
+            {
+                return HttpNotFound();
+            }
+            db.telefono.Remove(telefono);
+            db.telefono_persona.Remove(telefono_persona);
+            
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", telefono_persona.personaId));
+        }
+
+
+        // POST: telefonos/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditTelefono( telefono telefono,telefono_persona telefono_Persona)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(telefono).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}",telefono_Persona.personaId));
+            }
+            return View(telefono_Persona);
+        }
 
 
 

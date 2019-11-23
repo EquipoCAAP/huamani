@@ -80,9 +80,9 @@ else
                     @Html.DisplayFor(modelItem => item.telefono.tipo_telefono)
                 </td>
                 <td>
-                    @Html.ActionLink(" Editar", "EditTelefono", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
-                    @Html.ActionLink(" Detalle", "DetailsTelefono", new { id = item.id }, new { @class = "btn btn-primary btn-sm fa fa-eye" }) |
-                    @Html.ActionLink(" Borrar", "DeleteTelefono", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                    @Html.ActionLink(" Editar", "EditTelefono", new { id = item.telefonosId }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+                    @Html.ActionLink(" Detalle", "DetailsTelefono", new { id = item.telefonosId }, new { @class = "btn btn-primary btn-sm fa fa-eye" }) |
+                    @Html.ActionLink(" Borrar", "DeleteTelefono", new { id = item.telefonosId }, new { @class = "btn btn-danger btn-sm fa fa-trash-o", onclick="return confirm( '¿ Esta seguro de Borrar este Teléfono ?'); " })
                 </td>
             </tr>
         }
