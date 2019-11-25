@@ -75,15 +75,17 @@ namespace sb_admin.web.Controllers
             }
             var telefono_persona = await db.telefono_persona.FirstOrDefaultAsync(tp => tp.telefonosId == id);
             var telefono = await db.telefono.FirstOrDefaultAsync(t => t.id == id);
+            
             if (telefono_persona == null)
             {
                 return HttpNotFound();
             }
+            var personaId = telefono_persona.personaId;
             db.telefono.Remove(telefono);
             db.telefono_persona.Remove(telefono_persona);
             
             await db.SaveChangesAsync();
-            return RedirectToAction(string.Format("Details/{0}", telefono_persona.personaId));
+            return RedirectToAction(string.Format("Details/{0}", personaId));
         }
 
 

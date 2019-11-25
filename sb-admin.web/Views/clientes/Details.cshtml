@@ -50,7 +50,7 @@
 <p>
     @Html.ActionLink(" Editar Cliente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
     @Html.ActionLink(" Agregar Teléfono ", "CreateTelefono", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
-    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-pencil" })
+    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
 </p>
 <h4>Teléfonos</h4>
 @if (Model.telefono_persona.Count == 0)
