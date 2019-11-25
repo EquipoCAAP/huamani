@@ -1,25 +1,36 @@
 ﻿@model IEnumerable<sb_admin.web.Models.Navbar>
 
 <style>
-    .form-css 
-    {
-        display: block;
-        padding: 15px;
-        position: relative;
-    }
+
+        .form-css {
+            display: block;
+            padding: 15px;
+            position: relative;
+        }
+
+
+       /* a.link-icon {
+            position:relative;
+            height: 50px;
+            width: 50px;
+            background: @Url.Content("~/Content/imagesperson/rect2283.png")";
+        }*/
+
 </style>
 
- <!-- Navigation -->
+<!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+
         @Html.ActionLink("ESTUDIO JURÍDICO HUAMANI & SARMIENTO S.A.C.", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
     </div>
     <!-- Top Menu Items -->
@@ -31,7 +42,7 @@
                     <a href="#">
                         <div class="media">
                             <span class="pull-left">
-                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                <img class="media-object" src="~/Content/imagesperson/rect2283.png" alt="">
                             </span>
                             <div class="media-body">
                                 <h5 class="media-heading">
@@ -47,7 +58,7 @@
                     <a href="#">
                         <div class="media">
                             <span class="pull-left">
-                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                <img class="media-object" src="~/Content/imagesperson/rect2283.png" alt="">
                             </span>
                             <div class="media-body">
                                 <h5 class="media-heading">
@@ -63,7 +74,7 @@
                     <a href="#">
                         <div class="media">
                             <span class="pull-left">
-                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                <img class="media-object" src="~/Content/imagesperson/huamaniicono50x50.png" alt="">
                             </span>
                             <div class="media-body">
                                 <h5 class="media-heading">
@@ -86,21 +97,7 @@
                 <li>
                     <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                 </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                </li>
+
                 <li class="divider"></li>
                 <li>
                     <a href="#">View All</a>
@@ -109,10 +106,10 @@
         </li>
         @if (Request.IsAuthenticated)
         {
-             <li class="dropdown">
+            <li class="dropdown">
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-css" }))
                 {
-                    @Html.AntiForgeryToken()           
+                    @Html.AntiForgeryToken()
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -136,17 +133,56 @@
         {
             <li>@Html.ActionLink("Entrada", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         }
-      
+
     </ul>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Where(c => c.parentId == null && c.Navbar2 == null).Distinct())
             {
-                <li class="@item.activeli">
-                    <a href="@Url.Action(item.action, item.controller)"><i class="@item.imageClass"></i> @item.nameOption</a>
+                var activo = item.activeli == true ? "'active'" : "";
+                var enlace = @Url.Action(item.action, item.controller);
+                <li>
+                     
+                    </li>
+               
+               
+                if (@item.Navbar1.Count() > 0)
+                {
+                <li @activo>
+                    <link class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@enlace">
+                        <i class="@item.imageClass"></i> @item.nameOption
+                        <span class="label label-danger pull-right">
+                            @item.Navbar1.Count()
+                        </span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach (var sub in item.Navbar1)
+                        {
+                            <li class="nav-item dropdown @activo">
+                                <a href="@Url.Action(sub.action, sub.controller)">
+                                    <i class="@sub.imageClass dropdown-item" role="button"></i> @sub.nameOption
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </li>
+                }
+                else
+                {
+                    <li @activo>
+                        <a href="@enlace">
+                            <i class="@item.imageClass"></i>
+                            @item.nameOption
+                        </a>
+                    </li>
+                }
             }
-        </ul>
+
+
+
+            </ul>
     </div>
     <!-- /.navbar-collapse -->
 </nav>

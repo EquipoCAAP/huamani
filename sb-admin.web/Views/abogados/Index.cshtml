@@ -1,0 +1,56 @@
+﻿@model IEnumerable<sb_admin.web.Models.persona>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado Abogados</h2>
+
+<p>
+     @Html.ActionLink("Nuevo Abogado", "Create", null, new { @class = "btn btn-sm btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.celular)
+        </th>
+    
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td >
+            @Html.DisplayFor(modelItem => item.dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.celular)
+        </td>
+      
+       
+        <td>
+            @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " })  
+            @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " })  
+            @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " }) 
+        </td>
+    </tr>
+}
+
+</table>

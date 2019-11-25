@@ -1,0 +1,67 @@
+﻿@model sb_admin.web.Models.tarea
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tarea</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tarea1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tarea1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caso.referencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caso.referencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.dni)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Regresar a Listado", "Index")
+</p>

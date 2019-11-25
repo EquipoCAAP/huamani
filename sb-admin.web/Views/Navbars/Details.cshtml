@@ -1,0 +1,81 @@
+﻿@model sb_admin.web.Models.Navbar
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Navbar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.controller)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.controller)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.action)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.action)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imageClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imageClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activeli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activeli)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Navbar2.parentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Navbar2.parentId)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("Regresar a listado", "Index")
+</p>

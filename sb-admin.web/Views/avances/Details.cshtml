@@ -1,0 +1,27 @@
+﻿@model sb_admin.web.Models.avance
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>avance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_avance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_avance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning fa fa-pencil " }) |) |
+    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+</p>

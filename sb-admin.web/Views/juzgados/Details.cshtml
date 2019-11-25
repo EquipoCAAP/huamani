@@ -1,0 +1,83 @@
+﻿@model sb_admin.web.Models.juzgado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>juzgado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lugar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lugar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.piso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.piso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_juez)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_juez)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellido_juez)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido_juez)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_juzgado.tipo_j)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_juzgado.tipo_j)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("regresar a Listado", "Index")
+</p>

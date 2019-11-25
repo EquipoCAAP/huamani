@@ -1,0 +1,34 @@
+﻿@model IEnumerable<sb_admin.web.Models.avance>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Avances</h2>
+
+<p>
+     @Html.ActionLink("Nuevo Avance", "Create", null, new { @class = "btn btn-sm btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_avance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_avance)
+        </td>
+        <td>
+            @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) | |
+            @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) | |
+            @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " }) |
+        </td>
+    </tr>
+}
+
+</table>

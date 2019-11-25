@@ -1,0 +1,40 @@
+﻿@model IEnumerable<sb_admin.web.Models.parte_caso>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Parte-Caso</h2>
+
+<p>
+     @Html.ActionLink("Nuevo Parte-Caso", "Create", null, new { @class = "btn btn-sm btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caso.referencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.persona.dni)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.caso.referencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.persona.dni)
+        </td>
+        <td>
+            @Html.ActionLink(" Editar", "Edit", new { id=item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+            @Html.ActionLink(" Detalles", "Details", new { id=item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+            @Html.ActionLink(" Borrar", "Delete", new { id=item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+        </td>
+    </tr>
+}
+
+</table>

@@ -8,7 +8,8 @@ using System.Web.Mvc;
 
 namespace sb_admin.web.Controllers
 {
-    [AuthActionFilter]
+    // aquí va  el [AuthActionFilter]
+    
     public class HomeController : Controller
     {
         public ActionResult Index()

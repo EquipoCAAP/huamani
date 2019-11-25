@@ -40,9 +40,14 @@ namespace sb_admin.web.Filters
                     filterContext.Result = new HttpUnauthorizedResult();
 
                 base.OnActionExecuting(filterContext);
+
             }
-            catch
+            catch (Exception e)
             {
+               
+
+            
+                Console.Write(e);
                 filterContext.Result = new HttpUnauthorizedResult();
             }
 
@@ -55,15 +60,15 @@ namespace sb_admin.web.Filters
             
            var data = new Data();
            var items = data.navbarItems();
-           var rolesNav = data.roles();
-           var usersNav = data.users();
+           var rolesNav = data.Roles();
+           var usersNav = data.Users();
 
            var getAccess = (from nav in items
                             join rol in rolesNav on nav.id equals rol.MenuId
                             join user in usersNav on rol.userId equals user.Id
                             where user.user1 == userName && nav.controller == controllerName && nav.action == actionName
                             select user.Id).Single();
-
+            Console.WriteLine(getAccess);
            var context = new ActionExecutingContext();
 
            if (getAccess != 0)

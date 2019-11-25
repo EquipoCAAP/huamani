@@ -1,0 +1,35 @@
+﻿@model sb_admin.web.Models.telefono_persona
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>telefono_persona</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.dni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono.telefono1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono.telefono1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("Regresar al Listado", "Index")
+</p>

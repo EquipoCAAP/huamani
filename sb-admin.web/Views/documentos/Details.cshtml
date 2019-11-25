@@ -1,0 +1,83 @@
+﻿@model sb_admin.web.Models.documento
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>documento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechacreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechacreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.extension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.extension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tamano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tamano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.creado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.creado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expediente.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expediente.titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("Regresar a Listado", "Index")
+</p>

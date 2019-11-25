@@ -1,0 +1,93 @@
+﻿@model sb_admin.web.Models.persona
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Clientes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar Cliente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+    @Html.ActionLink(" Agregar Teléfono ", "CreateTelefono", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
+    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+</p>
+<h4>Teléfonos</h4>
+@if (Model.telefono_persona.Count == 0)
+{
+    <h5>No tiene teléfonos adicionales registrados</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono_persona.FirstOrDefault().telefono.telefono1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono_persona.FirstOrDefault().telefono.tipo_telefono)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.telefono_persona)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono.telefono1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono.tipo_telefono)
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "EditTelefono", new { id = item.telefonosId }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+                    @Html.ActionLink(" Detalle", "DetailsTelefono", new { id = item.telefonosId }, new { @class = "btn btn-primary btn-sm fa fa-eye" }) |
+                    @Html.ActionLink(" Borrar", "DeleteTelefono", new { id = item.telefonosId }, new { @class = "btn btn-danger btn-sm fa fa-trash-o", onclick="return confirm( '¿ Esta seguro de Borrar este Teléfono ?'); " })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+}

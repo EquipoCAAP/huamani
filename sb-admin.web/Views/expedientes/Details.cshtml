@@ -1,0 +1,99 @@
+﻿@model sb_admin.web.Models.expediente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>expediente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechacreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechacreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estadoid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estadoExpediente.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caso.referencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caso.referencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ubicacion.ubicacion1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ubicacion.ubicacion1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.claseExpediente.Clase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.claseExpediente.Clase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.dni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoExpediente.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoExpediente.tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+</p>

@@ -1,0 +1,27 @@
+﻿@model sb_admin.web.Models.claseExpediente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>claseExpediente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Clase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clase)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink("regresar a Lista", "Index", new { @class = "btn btn-warning btn-sm fa fa-home " })
+</p>
