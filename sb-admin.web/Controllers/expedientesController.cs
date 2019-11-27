@@ -21,6 +21,97 @@ namespace sb_admin.web.Controllers
             var expediente = db.expediente.Include(e =>e.estadoExpediente).Include(e => e.caso).Include(e => e.ubicacion).Include(e => e.claseExpediente).Include(e => e.persona).Include(e => e.tipoExpediente);
             return View(await expediente.ToListAsync());
         }
+        // GET: eventos/Edit/5
+        public async Task<ActionResult> EditEvento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            evento evento = await db.evento.FindAsync(id);
+            if (evento == null)
+            {
+                return HttpNotFound();
+            }
+         
+            ViewBag.servicioId = new SelectList(db.servicio, "id", "descripcion", evento.servicioId);
+            ViewBag.tipo_evento = new SelectList(db.tipo_evento, "id", "tipo_evento1", evento.tipo_evento);
+            return View(evento);
+        }
+
+        // POST: eventos/Edit/5
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditEvento(evento evento)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(evento).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", evento.expedienteId));
+            }
+          
+            ViewBag.servicioId = new SelectList(db.servicio, "id", "descripcion", evento.servicioId);
+            ViewBag.tipo_evento = new SelectList(db.tipo_evento, "id", "tipo_evento1", evento.tipo_evento);
+            return View(evento);
+        }
+        // GET: eventos/Create
+        public async Task<ActionResult> CreateEvento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            expediente expediente = await db.expediente.FindAsync(id);
+            if (expediente == null)
+            {
+                return HttpNotFound();
+            }
+
+            var evento = new evento { expedienteId= expediente.id };
+
+            ViewBag.servicioId = new SelectList(db.servicio, "id", "descripcion");
+            ViewBag.tipo_evento = new SelectList(db.tipo_evento, "id", "tipo_evento1");
+            return View(evento);
+        }
+
+        // POST: eventos/Create
+      
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateEvento(evento evento)
+        {
+            if (ModelState.IsValid)
+            {
+                db.evento.Add(evento);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}",evento.expedienteId));
+            }
+
+          
+            ViewBag.servicioId = new SelectList(db.servicio, "id", "descripcion", evento.servicioId);
+            ViewBag.tipo_evento = new SelectList(db.tipo_evento, "id", "tipo_evento1", evento.tipo_evento);
+            return View(evento);
+        }
+
+        // GET: eventos/Delete/5
+        public async Task<ActionResult> DeleteEvento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            evento evento = await db.evento.FindAsync(id);
+            if (evento == null)
+            {
+                return HttpNotFound();
+            }
+            var expedienteId = evento.expedienteId;
+            db.evento.Remove(evento);
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", expedienteId));
+        }
 
         // GET: expedientes/Details/5
         public async Task<ActionResult> Details(int? id)

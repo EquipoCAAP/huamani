@@ -20,4 +20,7 @@ namespace sb_admin.web.Models
     public partial class caso { }
     [MetadataType(typeof(eventoMetadata))]
     public partial class evento { }
+    [MetadataType(typeof(expedienteMetadata))]
+    public partial class expediente { }
+         
 }

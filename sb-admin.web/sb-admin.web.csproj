@@ -281,7 +281,7 @@
     <Compile Include="Models\parte_caso.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\validacionesModel\PartialClasses.cs" />
     <Compile Include="Models\persona.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
@@ -567,6 +567,8 @@
     <Content Include="Views\telefonos\Index.cshtml" />
     <Content Include="Views\clientes\CreateTelefono.cshtml" />
     <Content Include="Views\clientes\EditTelefono.cshtml" />
+    <Content Include="Views\expedientes\CreateEvento.cshtml" />
+    <Content Include="Views\expedientes\EditEvento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

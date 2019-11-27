@@ -60,7 +60,37 @@ namespace sb_admin.web.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime fecha_inicio;
+           
+    }
 
-    
+    public class expedienteMetadata
+    {
+        
+        public int id { get; set; }
+        [Display(Name = "Título Expediente") ]
+        public string titulo { get; set; }
+        [Display(Name = "Fecha de Creación" )]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> fechacreacion { get; set; }
+
+        [DataType(DataType.Time)]
+        [Display(Name = "Hora de Creación") ]
+        public Nullable<System.TimeSpan> hora { get; set; }
+
+        [Display(Name = "Descripción" )]
+        public string descripcion { get; set; }
+        [Display(Name = "Estado")]
+        public Nullable<int> estadoid { get; set; }
+        [Display(Name = "Tipo")]
+        public Nullable<int> tipoId { get; set; }
+        [Display(Name = "Clase")]
+        public Nullable<int> claseId { get; set; }
+        [Display(Name = "Responsable")]
+        public Nullable<int> responsableId { get; set; }
+        [Display(Name = "Ubicación")]
+        public Nullable<int> ubicacionId { get; set; }
+        [Display(Name = "Caso")]
+        public int casoId { get; set; }
     }
 }

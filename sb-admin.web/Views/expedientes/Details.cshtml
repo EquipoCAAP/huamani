@@ -94,6 +94,65 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+    @Html.ActionLink(" Editar Expediente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink(" Agregar Evento ", "CreateEvento", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
+    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
 </p>
+<h4>Eventos</h4>
+@if (Model.evento.Count == 0)
+{
+    <h5>No tiene eventos registrados</h5>
+
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().descripcion_evento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().fecha_inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().expediente.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().servicio.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().tipo_evento1.tipo_evento1)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.evento)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion_evento)
+                </td>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
+                    @item.fecha_inicio.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.expediente.titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.servicio.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo_evento1.tipo_evento1)
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "EditEvento", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                    @Html.ActionLink(" Detalles", "DetailsEvento", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                    @Html.ActionLink(" Borrar", "DeleteEvento", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o ",onclick="return confirm( '¿ Esta seguro de Borrar este Evento ?'); " })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
