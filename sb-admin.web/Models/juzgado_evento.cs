@@ -20,11 +20,9 @@ public partial class juzgado_evento
 
     public int id { get; set; }
 
-    public Nullable<int> juzgado_evento1 { get; set; }
+    public Nullable<int> eventoId { get; set; }
 
-    public int eventoId { get; set; }
-
-    public int juzgadoId { get; set; }
+    public Nullable<int> juzgadoId { get; set; }
 
 
 

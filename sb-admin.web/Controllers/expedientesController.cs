@@ -21,6 +21,45 @@ namespace sb_admin.web.Controllers
             var expediente = db.expediente.Include(e =>e.estadoExpediente).Include(e => e.caso).Include(e => e.ubicacion).Include(e => e.claseExpediente).Include(e => e.persona).Include(e => e.tipoExpediente);
             return View(await expediente.ToListAsync());
         }
+
+     
+        // GET: juzgado_evento/Create
+        public async Task<ActionResult> CreateJuzgadoEvento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            evento evento = await db.evento.FindAsync(id);
+            if (evento == null)
+            {
+                return HttpNotFound();
+            }
+            var juzgado_evento = db.juzgado_evento.Include(j => j.evento).Where(je => je.eventoId == id).Include(j => j.juzgado);
+            var juzgado_eventoselectionado = new juzgado_evento { eventoId = evento.id };
+           
+            ViewBag.juzgadoId = new SelectList(db.juzgado, "id", "nombre");
+            return View( juzgado_eventoselectionado);
+        }
+
+        // POST: juzgado_evento/Create
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateJuzgadoEvento( juzgado_evento juzgado_evento)
+        {
+            if (ModelState.IsValid)
+            {
+                db.juzgado_evento.Add(juzgado_evento);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.eventoId = new SelectList(db.evento, "id", "descripcion_evento", juzgado_evento.eventoId);
+            ViewBag.juzgadoId = new SelectList(db.juzgado, "id", "nombre", juzgado_evento.juzgadoId);
+            return View(juzgado_evento);
+        }
+
         // GET: eventos/Edit/5
         public async Task<ActionResult> EditEvento(int? id)
         {
@@ -69,8 +108,10 @@ namespace sb_admin.web.Controllers
                 return HttpNotFound();
             }
 
-            var evento = new evento { expedienteId= expediente.id };
 
+
+            var evento = new evento { expedienteId= expediente.id };
+            ViewBag.juzgadoId = new SelectList(db.juzgado, "id", "nombre");
             ViewBag.servicioId = new SelectList(db.servicio, "id", "descripcion");
             ViewBag.tipo_evento = new SelectList(db.tipo_evento, "id", "tipo_evento1");
             return View(evento);
@@ -114,6 +155,22 @@ namespace sb_admin.web.Controllers
         }
 
         // GET: expedientes/Details/5
+        public async Task<ActionResult> DetailsEvento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+             List<juzgado_evento> juzgados_eventos = await db.juzgado_evento.Include(j => j.evento).Where(je => je.eventoId == id).Include(j => j.juzgado).ToListAsync();
+            if (juzgados_eventos == null)
+            {
+                return HttpNotFound();
+            }
+            return View(juzgados_eventos);
+        }
+
+
+        // GET: expedientes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -141,8 +198,7 @@ namespace sb_admin.web.Controllers
         }
 
         // POST: expedientes/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,titulo,fechacreacion,hora,descripcion,estadoid,tipoId,claseId,responsableId,ubicacionId,casoId")] expediente expediente)

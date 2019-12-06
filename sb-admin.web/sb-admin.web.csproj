@@ -34,6 +34,24 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="servicorIIS" Order="1">
+          <Destination Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bPersist Security Info=True%3bUser ID=huamani%3bPassword=12345678" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bPersist Security Info=True%3bUser ID=huamani%3bPassword=12345678" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\servicorIIS_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="GAHEContext-local" Order="2">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\GAHEContext-local_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -240,6 +258,7 @@
     <Compile Include="Models\ComplexType1.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\documento.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
@@ -281,14 +300,20 @@
     <Compile Include="Models\parte_caso.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\servicio.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_evento.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_juzgado.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\validacionesModel\PartialClasses.cs" />
     <Compile Include="Models\persona.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
-      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicio.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tarea.cs">
@@ -304,12 +329,6 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipotelefono.cs">
-      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tipo_evento.cs">
-      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tipo_juzgado.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipo_persona.cs">
@@ -378,6 +397,8 @@
       <DependentUpon>ModeloEntidadGAHE.edmx</DependentUpon>
     </Content>
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\ModeloEntidadGAHE.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -447,11 +468,6 @@
     <Content Include="Views\juzgados\Details.cshtml" />
     <Content Include="Views\juzgados\Edit.cshtml" />
     <Content Include="Views\juzgados\Index.cshtml" />
-    <Content Include="Views\juzgado_evento\Create.cshtml" />
-    <Content Include="Views\juzgado_evento\Delete.cshtml" />
-    <Content Include="Views\juzgado_evento\Details.cshtml" />
-    <Content Include="Views\juzgado_evento\Edit.cshtml" />
-    <Content Include="Views\juzgado_evento\Index.cshtml" />
     <Content Include="Views\servicios\Create.cshtml" />
     <Content Include="Views\servicios\Delete.cshtml" />
     <Content Include="Views\servicios\Details.cshtml" />
@@ -569,6 +585,11 @@
     <Content Include="Views\clientes\EditTelefono.cshtml" />
     <Content Include="Views\expedientes\CreateEvento.cshtml" />
     <Content Include="Views\expedientes\EditEvento.cshtml" />
+    <Content Include="Views\expedientes\DetailsEvento.cshtml" />
+    <Content Include="Views\expedientes\DetailsJuzgado_evento.cshtml" />
+    <Content Include="Views\expedientes\DetailsJuzgado.cshtml" />
+    <Content Include="Views\juzgado_evento\Create.cshtml" />
+    <Content Include="Views\expedientes\CreateJuzgadoEvento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

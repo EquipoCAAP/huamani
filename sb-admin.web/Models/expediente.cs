@@ -59,10 +59,6 @@ public partial class expediente
 
     public virtual ICollection<documento> documento { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<evento> evento { get; set; }
-
     public virtual persona persona { get; set; }
 
     public virtual tipoExpediente tipoExpediente { get; set; }
@@ -72,6 +68,10 @@ public partial class expediente
     public virtual claseExpediente claseExpediente { get; set; }
 
     public virtual estadoExpediente estadoExpediente { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<evento> evento { get; set; }
 
 }
 

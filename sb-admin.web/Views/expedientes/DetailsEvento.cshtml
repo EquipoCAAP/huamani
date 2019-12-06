@@ -1,0 +1,130 @@
+﻿@model IEnumerable<sb_admin.web.Models.juzgado_evento>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Details</h2>
+
+<h2>Juzgados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Juzgado", "Create", null, new { @class = "btn btn-sm btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.lugar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.piso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.ciudad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.nombre_juez)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.apellido_juez)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.juzgado.tipo_juzgado.tipo_j)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.lugar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.piso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.nombre_juez)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.apellido_juez)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juzgado.tipo_juzgado.tipo_j)
+            </td>
+            <td>
+                @Html.ActionLink(" Editar", "Editjuzgado", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+                @Html.ActionLink(" Detalles", "Detailsjuzgado", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
+                @Html.ActionLink(" Borrar", "Deletejuzgado", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+            </td>
+        </tr>
+      
+      
+    }
+
+</table>
+<h2>Evento</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.descripcion_evento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.fecha_inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.expediente.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.servicio.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.tipo_evento1.tipo_evento1)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.evento.descripcion_evento)
+            </td>
+            <td>
+                @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
+                @item.evento.fecha_inicio.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.evento.expediente.titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.evento.servicio.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.evento.tipo_evento1.tipo_evento1)
+            </td>
+            <td>
+                @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+            </td>
+        </tr>
+    }
+
+</table>
