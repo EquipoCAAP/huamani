@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalle</h2>
 
 <div>
     <h4>expediente</h4>
@@ -96,9 +96,10 @@
 <p>
     @Html.ActionLink(" Editar Expediente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
     @Html.ActionLink(" Agregar Evento ", "CreateEvento", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
-    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+    @Html.ActionLink(" Regresar a caso", "Details","casos", new { id=Model.casoId}, new { @class = "btn btn-danger btn-sm fa fa-reply" })
+    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-reply-all" })
 </p>
-<h4>Eventos</h4>
+<h4 >Eventos</h4>
 @if (Model.evento.Count == 0)
 {
     <h5>No tiene eventos registrados</h5>

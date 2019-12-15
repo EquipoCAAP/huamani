@@ -144,7 +144,7 @@ namespace sb_admin.web.Controllers
             var tipoQuery = from tj in db.tipo_juzgado
                             orderby tj.tipo_j
                             select tj;
-            ViewBag.tipoId = new SelectList(tipoQuery, "id", "tipo_j");
+            ViewBag.tipoId = new SelectList(tipoQuery, "id", "tipo_j",selectedTipo);
         }
 
     }

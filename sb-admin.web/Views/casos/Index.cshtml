@@ -1,45 +1,38 @@
 ﻿@model sb_admin.web.Models.casoViewModel
 
 @{
-    ViewBag.Title = "Casos";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Casos</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Nuevo Caso", "Create", null, new { @class = "btn btn-sm btn-primary" })
 </p>
-
 <table class="table">
     <tr>
         <th>
-            referencia
+            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().referencia)
         </th>
         <th>
-            Fecha Creación
+            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().fecha_creacion)
         </th>
         <th>
-            Responsable
+            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().responsableId)
         </th>
         <th>
-            Persona realizada
+            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
         </th>
         <th>
-            Avance
+            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
         </th>
-        <th>partes del caso</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model.casos)
     {
-        string selectedRow = "";
-        if (item.id == ViewBag.casoId)
-        {
-            selectedRow = "selected";
-        }
-        <tr class="@selectedRow" valign="top">
+        <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.referencia)
             </td>
@@ -47,131 +40,26 @@
                 @Html.DisplayFor(modelItem => item.fecha_creacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.responsableId)
+                @{
+                    var persona = Model.personas.Where(c => c.id == item.responsableId).Select(c => new { c.NombreCompleto });
+                }
+                @persona.FirstOrDefault().NombreCompleto
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.aperturaPersonaId)
+                @{
+                    var creador = Model.personas.Where(c => c.id == item.aperturaPersonaId).Select(c => new { c.NombreCompleto });
+                }
+                @creador.FirstOrDefault().NombreCompleto
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.avance.tipo_avance)
             </td>
             <td>
-                @if (item.parte_caso != null)
-                {
-
-                    foreach (var per in item.parte_caso)
-                    {
-                        <div>
-                            <span class="text-info">  @per.persona.NombreCompleto</span>
-
-                            <span class="text-danger">  @per.persona.tipo_persona.tipo_persona1</span>
-                        </div>
-                    }
-
-                }
+                @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+                @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })|
+                @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
             </td>
+        </tr>
+    }
 
-
-            <td>
-                @Html.ActionLink(" Selección", "Index", new { id = item.id }, new { @class = "btn btn-default btn-sm fa fa-check  " })
-                @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " })
-                @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " })
-                @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
-            </td>
-        </tr><span class="fa"
-        <tr>
-        
-            <td colspan="7">
-               
-                    <h5>Expedientes</h5>
-
-                    <p>
-                         @Html.ActionLink("Nuevo Expediente", "Create", null, new { @class = "btn btn-sm btn-primary" })
-                    </p>
-
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().titulo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().fechacreacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().hora)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().descripcion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().estadoExpediente.estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().caso.referencia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().ubicacion.ubicacion1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().claseExpediente.Clase)
-                </th>
-                <th>
-                    Persona
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Expediente.FirstOrDefault().tipoExpediente.tipo)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item1 in item.expediente)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.titulo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.fechacreacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.hora)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.estadoExpediente.estado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.caso.referencia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.ubicacion.ubicacion1)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.claseExpediente.Clase)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item1.persona.NombreCompleto)
-                    </td>
-
-
-                    <td>
-                        @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-                        @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-                        @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
-                    </td>
-                </tr>
-            }
-
-    </td>
-    </tr>
-
-        }
-
-
-                
-                
-
-
-            
 </table>

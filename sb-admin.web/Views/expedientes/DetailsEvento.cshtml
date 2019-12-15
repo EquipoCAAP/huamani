@@ -1,130 +1,140 @@
-﻿@model IEnumerable<sb_admin.web.Models.juzgado_evento>
-
+﻿@model sb_admin.web.Models.evento
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>Details</h2>
 
-<h2>Juzgados</h2>
+<div>
+    <h4>evento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_evento)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expediente.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expediente.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servicio.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servicio.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_evento1.tipo_evento1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_evento1.tipo_evento1)
+        </dd>
+
+    </dl>
+</div>
 <p>
-    @Html.ActionLink("Nuevo Juzgado", "Create", null, new { @class = "btn btn-sm btn-primary" })
+    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink(" Regresar a lista", "DetailsEvento", new { id = Model.id }, new { @class = "btn btn-success btn-sm fa fa-reply" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.lugar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.piso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.ciudad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.nombre_juez)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.apellido_juez)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.juzgado.tipo_juzgado.tipo_j)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+@if (Model.juzgado_evento.Count == 0)
+{
+    <h5>No tiene Juzgado registrados</h5>
+    <p>
+        @Html.ActionLink("Nuevo Juzgado", "CreateJuzgado", new { id=Model.id}, new { @class = "btn btn-sm btn-primary" })
+    </p>
+}
+else
+{
+    <h2>Juzgado</h2>
+
+   
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.lugar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.piso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.ciudad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.nombre_juez)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.apellido_juez)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juzgado.tipo_juzgado.tipo_j)
-            </td>
-            <td>
-                @Html.ActionLink(" Editar", "Editjuzgado", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
-                @Html.ActionLink(" Detalles", "Detailsjuzgado", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
-                @Html.ActionLink(" Borrar", "Deletejuzgado", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.lugar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.piso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.ciudad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.nombre_juez)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.apellido_juez)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.juzgado_evento.FirstOrDefault().juzgado.tipo_juzgado.tipo_j)
+            </th>
+            <th></th>
         </tr>
-      
-      
-    }
 
-</table>
-<h2>Evento</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.evento.descripcion_evento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.evento.fecha_inicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.evento.expediente.titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.evento.servicio.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.evento.tipo_evento1.tipo_evento1)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model.juzgado_evento)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.lugar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.piso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.ciudad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.nombre_juez)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.apellido_juez)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.juzgado.tipo_juzgado.tipo_j)
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "Editjuzgado", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+                  
+                    @Html.ActionLink(" Borrar", "Deletejuzgado", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                </td>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.evento.descripcion_evento)
-            </td>
-            <td>
-                @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
-                @item.evento.fecha_inicio.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.evento.expediente.titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.evento.servicio.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.evento.tipo_evento1.tipo_evento1)
-            </td>
-            <td>
-                @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-                @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-                @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
-            </td>
-        </tr>
-    }
 
-</table>
+        }
+
+    </table>
+}

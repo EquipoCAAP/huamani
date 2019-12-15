@@ -161,13 +161,86 @@ namespace sb_admin.web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             List<juzgado_evento> juzgados_eventos = await db.juzgado_evento.Include(j => j.evento).Where(je => je.eventoId == id).Include(j => j.juzgado).ToListAsync();
-            if (juzgados_eventos == null)
+
+            evento evento = await db.evento.FindAsync(id);
+
+
+            if (evento == null)
             {
                 return HttpNotFound();
             }
-            return View(juzgados_eventos);
+            return View(evento);
+      }
+        // GET: juzgado/Create
+        public async Task<ActionResult> CreateJuzgado(string id, string idjuzgado)
+        {
+            if(id!=null && idjuzgado != null)
+            {
+                var juzgado_eventoSeleccionado = new juzgado_evento { eventoId = int.Parse(id), juzgadoId = int.Parse(idjuzgado) };
+
+                db.juzgado_evento.Add(juzgado_eventoSeleccionado);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("DetailsEvento/{0}", juzgado_eventoSeleccionado.eventoId));
+            }
+            ViewBag.idEvento = id;
+            var juzgado = db.juzgado.Include(j => j.tipo_juzgado);
+            return View(await juzgado.ToListAsync());
         }
+
+    
+        // GET: telefonos/Edit/5
+        public async Task<ActionResult> EditJuzgado(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var juzgado_evento = await db.juzgado_evento.FirstOrDefaultAsync(je => je.eventoId == id);
+            if (juzgado_evento == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(juzgado_evento);
+        }
+
+        public async Task<ActionResult> DeleteJuzgado(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var juzgado_evento = await db.juzgado_evento.FirstOrDefaultAsync(je => je.juzgadoId == id);
+            
+
+            if (juzgado_evento == null)
+            {
+                return HttpNotFound();
+            }
+            var eventoId = juzgado_evento.eventoId;
+            
+            db.juzgado_evento.Remove(juzgado_evento);
+
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("DetailsEvento/{0}", eventoId));
+        }
+       
+
+        // POST: juzgado/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditJuzgado(juzgado juzgado, juzgado_evento juzgado_evento)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(juzgado).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("DetailsJuzgado/{0}", juzgado_evento.eventoId));
+            }
+            return View(juzgado_evento);
+        }
+
 
 
         // GET: expedientes/Details/5

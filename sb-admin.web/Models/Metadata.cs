@@ -45,10 +45,17 @@ namespace sb_admin.web.Models
 
     public class casoMetadata
     {
+        [Display(Name = "Responsable")]
+        public int responsableId;
+        [Display(Name = "Avance")]
+        public int avanceId;
+        [Display(Name = "Creador")]
+        public int aperturaPersonaId;
         [Required]
         public string referencia;
+        [Display(Name = "Fecha de Creación")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}",ApplyFormatInEditMode =true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime fecha_creacion;
     }
 
@@ -58,7 +65,7 @@ namespace sb_admin.web.Models
         public string descripcion_evento;
         [Display(Name = "Fecha Inicial" )]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime fecha_inicio;
            
     }
@@ -71,7 +78,7 @@ namespace sb_admin.web.Models
         public string titulo { get; set; }
         [Display(Name = "Fecha de Creación" )]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> fechacreacion { get; set; }
 
         [DataType(DataType.Time)]

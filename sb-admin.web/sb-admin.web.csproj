@@ -36,22 +36,17 @@
     <WarningLevel>4</WarningLevel>
     <PublishDatabaseSettings>
       <Objects>
-        <ObjectGroup Name="servicorIIS" Order="1">
+        <ObjectGroup Name="GAHEContext" Order="2">
           <Destination Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bPersist Security Info=True%3bUser ID=huamani%3bPassword=12345678" />
           <Object Type="DbFullSql">
-            <PreSource Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bPersist Security Info=True%3bUser ID=huamani%3bPassword=12345678" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
-            <Source Path="obj\Debug\AutoScripts\servicorIIS_SchemaAndData.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
-        <ObjectGroup Name="GAHEContext-local" Order="2">
-          <Destination Path="" />
-          <Object Type="DbFullSql">
-            <PreSource Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
-            <Source Path="obj\Debug\AutoScripts\GAHEContext-local_SchemaAndData.sql" Transacted="True" />
+            <PreSource Path="Data Source=USUARIO-PC\SQLEXPRESS%3bInitial Catalog=GAHE%3bIntegrated Security=True%3bMultipleActiveResultSets=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\GAHEContext_SchemaAndData.sql" Transacted="True" />
           </Object>
         </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -213,7 +208,6 @@
     <Compile Include="Controllers\abogadosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\avancesController.cs" />
-    <Compile Include="Controllers\casos1Controller.cs" />
     <Compile Include="Controllers\casosController.cs" />
     <Compile Include="Controllers\claseExpedientesController.cs" />
     <Compile Include="Controllers\clientesController.cs" />
@@ -268,6 +262,7 @@
     <Compile Include="Models\evento.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventoViewModel.cs" />
     <Compile Include="Models\expediente.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
@@ -341,6 +336,11 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +399,10 @@
     <Content Include="ApplicationInsights.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\ModeloEntidadGAHE.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -513,11 +517,6 @@
     <Content Include="Views\Roles\Details.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\casos\Create.cshtml" />
-    <Content Include="Views\casos\Delete.cshtml" />
-    <Content Include="Views\casos\Details.cshtml" />
-    <Content Include="Views\casos\Edit.cshtml" />
-    <Content Include="Views\casos\Index.cshtml" />
     <Content Include="Views\expedientes\Create.cshtml" />
     <Content Include="Views\expedientes\Delete.cshtml" />
     <Content Include="Views\expedientes\Details.cshtml" />
@@ -566,11 +565,6 @@
     <Content Include="Views\clientes\Details.cshtml" />
     <Content Include="Views\clientes\Edit.cshtml" />
     <Content Include="Views\clientes\Index.cshtml" />
-    <Content Include="Views\casos1\Create.cshtml" />
-    <Content Include="Views\casos1\Delete.cshtml" />
-    <Content Include="Views\casos1\Details.cshtml" />
-    <Content Include="Views\casos1\Edit.cshtml" />
-    <Content Include="Views\casos1\Index.cshtml" />
     <Content Include="Views\tareas\Create.cshtml" />
     <Content Include="Views\tareas\Delete.cshtml" />
     <Content Include="Views\tareas\Details.cshtml" />
@@ -590,6 +584,16 @@
     <Content Include="Views\expedientes\DetailsJuzgado.cshtml" />
     <Content Include="Views\juzgado_evento\Create.cshtml" />
     <Content Include="Views\expedientes\CreateJuzgadoEvento.cshtml" />
+    <Content Include="Views\casos\Create.cshtml" />
+    <Content Include="Views\casos\Delete.cshtml" />
+    <Content Include="Views\casos\Details.cshtml" />
+    <Content Include="Views\casos\Edit.cshtml" />
+    <Content Include="Views\casos\Index.cshtml" />
+    <Content Include="Views\casos\CreateExpediente.cshtml" />
+    <Content Include="Views\casos\EditExpediente.cshtml" />
+    <Content Include="Views\casos\CreatePersonaAsync.cshtml" />
+    <Content Include="Views\casos\EditPersona.cshtml" />
+    <Content Include="Views\expedientes\CreateJuzgado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

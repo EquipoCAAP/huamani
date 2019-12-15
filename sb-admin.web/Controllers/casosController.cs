@@ -15,47 +15,8 @@ namespace sb_admin.web.Controllers
     {
         
         private GAHEContext db = new GAHEContext();
-
-        // GET: casos
-        public ActionResult Index(int? id, int? casoId)
-        {
-            var casoviewModel = new casoViewModel();
-            casoviewModel.casos = db.caso
-                .Include(c => c.avance)
-                .Include(c => c.parte_caso)
-                .Include(c => c.expediente)
-                .Include(c => c.tarea)
-                .Select(c=>c).ToList();
-
-            List<persona> personas = db.persona.ToList();
-            List<expediente> expedientes = db.expediente.ToList();
-
-            ViewBag.personas = personas;
-            ViewBag.expedientes = expedientes;
-
-            if (id != null)
-            {
-                ViewBag.casoId = id.Value;
-                casoviewModel.partes = casoviewModel.casos.Where(
-                    c => c.id == id.Value).Single().parte_caso.ToList();
-                casoviewModel.Expediente = casoviewModel.casos.Where(
-                    c => c.id == id.Value).Single().expediente.ToList();
-            }
-
-            if (casoId != null)
-            {
-                ViewBag.casoId = casoId.Value;
-                casoviewModel.partes = casoviewModel.partes.Where(
-                    x => x.casoId == casoId).ToList();
-            }
-
-            return View(casoviewModel);
-
-
-        }
-
-        // GET: casos/Details/5
-        public async Task<ActionResult> Details(int? id)
+        // GET: clientes/Create
+        public async Task<ActionResult> CreatePersonaAsync(int? id)
         {
             if (id == null)
             {
@@ -66,21 +27,268 @@ namespace sb_admin.web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(caso);
+            var parte = new parte_caso { casoId = caso.id };
+            
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id != 2), "id", "tipo_persona1");
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 1), "Id", "user1");
+            return View(parte);
+        }
+
+        // POST: clientes/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreatePersonaAsync( persona persona, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                db.persona.Add(persona);
+                await db.SaveChangesAsync();
+                int lastidpersona = persona.id;
+                var partes_caso = new parte_caso { personaId = lastidpersona, casoId = id };
+
+                db.parte_caso.Add(partes_caso);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", partes_caso.casoId));
+            }
+
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id != 2), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 1), "Id", "user1", persona.usuarioId);
+            return View(persona);
+        }
+
+        // GET: personas/Edit/5
+        public async Task<ActionResult> EditPersona(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var parte_caso = await db.parte_caso.FirstOrDefaultAsync(pc => pc.personaId == id);
+           
+            if (parte_caso == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id != 2), "id", "tipo_persona1", parte_caso.persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 1), "Id", "user1", parte_caso.persona.usuarioId);
+            return View(parte_caso);
+        }
+
+        // POST: personas/Edit/5
+      
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPersona(persona persona, parte_caso parte_caso)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(persona).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", parte_caso.casoId)); 
+            }
+            ViewBag.tipo = new SelectList(db.tipo_persona.Where(P => P.id != 2), "id", "tipo_persona1", persona.tipo);
+            ViewBag.usuarioId = new SelectList(db.User.Where(P => P.Id == 1), "Id", "user1", persona.usuarioId);
+            return View(parte_caso);
+        }
+
+        // GET: personas/Delete/5
+        public async Task<ActionResult> DeletePersona(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //  int casoId = Convert.ToInt32(HttpContext.Request.QueryString["casoId"]);
+            parte_caso parte_caso = await db.parte_caso.FindAsync(id);
+            if (parte_caso == null)
+            {
+                return HttpNotFound();
+            }
+            int? caso = parte_caso.casoId;
+            db.parte_caso.Remove(parte_caso);
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", caso));
+        }
+        public async Task<ActionResult> DeleteTelefono(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var telefono_persona = await db.telefono_persona.FirstOrDefaultAsync(tp => tp.telefonosId == id);
+            var telefono = await db.telefono.FirstOrDefaultAsync(t => t.id == id);
+
+            if (telefono_persona == null)
+            {
+                return HttpNotFound();
+            }
+            var personaId = telefono_persona.personaId;
+            db.telefono.Remove(telefono);
+            db.telefono_persona.Remove(telefono_persona);
+
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", personaId));
+        }
+
+        // GET: expedientes/Details/5
+        public async Task<ActionResult> DetailsExpediente(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            expediente expediente = await db.expediente.FindAsync(id);
+            if (expediente == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction(string.Format("Details/{0}", expediente.id),"Expedientes"); ;
+        }
+
+        // GET: expedientes/Edit/5
+        public async Task<ActionResult> EditExpediente(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            expediente expediente = await db.expediente.FindAsync(id);
+            if (expediente == null)
+            {
+                return HttpNotFound();
+            }
+            
+            ViewBag.ubicacionId = new SelectList(db.ubicacion, "id", "ubicacion1", expediente.ubicacionId);
+            ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
+            ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
+            ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
+            return View(expediente);
+        }
+
+        // POST: expedientes/Edit/5
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditExpediente(expediente expediente)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(expediente).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", expediente.casoId));
+            }
+           
+            ViewBag.ubicacionId = new SelectList(db.ubicacion, "id", "ubicacion1", expediente.ubicacionId);
+            ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
+            ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
+            ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
+            return View(expediente);
+        }
+        // GET: Expedientes/Create
+        public async Task<ActionResult> CreateExpediente(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            caso caso = await db.caso.FindAsync(id);
+            if (caso == null)
+            {
+                return HttpNotFound();
+            }
+                        
+            var expediente = new expediente { casoId = caso.id };
+            ViewBag.casoId = new SelectList(db.caso, "id", "referencia");
+            ViewBag.ubicacionId = new SelectList(db.ubicacion, "id", "ubicacion1");
+            ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase");
+            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre");
+            ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo");
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado");
+            return View(expediente);
+        }
+
+      
+        // POST: expedientes/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateExpediente( expediente expediente)
+        {
+            if (ModelState.IsValid)
+            {
+                db.expediente.Add(expediente);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", expediente.casoId));
+            }
+
+            ViewBag.casoId = new SelectList(db.caso, "id", "referencia", expediente.casoId);
+            ViewBag.ubicacionId = new SelectList(db.ubicacion, "id", "ubicacion1", expediente.ubicacionId);
+            ViewBag.claseId = new SelectList(db.claseExpediente, "Id", "Clase", expediente.claseId);
+            ViewBag.responsableId = new SelectList(db.persona, "id", "dni", expediente.responsableId);
+            ViewBag.tipoId = new SelectList(db.tipoExpediente, "id", "tipo", expediente.tipoId);
+            ViewBag.estadoId = new SelectList(db.estadoExpediente, "id", "estado", expediente.estadoid);
+            return View(expediente);
+        }
+
+
+        // GET: casos
+        public async Task<ActionResult> Index()
+        {
+            casoViewModel casovm = new casoViewModel();
+
+            casovm.casos = await db.caso.Include(c => c.avance)
+                .Include(c => c.parte_caso)
+                .Include(c => c.expediente)
+                .Include(c => c.tarea)
+                .Select(c => c).ToListAsync();
+            casovm.personas = await db.persona.Include(p => p.parte_caso).ToListAsync();
+            casovm.Expedientes = await db.expediente.ToListAsync();
+
+            return View(casovm);
+        }
+
+        // GET: casos/Details/5
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            casoViewModel casovm = new casoViewModel();
+
+            casovm.casos = await db.caso.Include(c => c.avance)
+                .Include(c => c.parte_caso)
+                .Include(c => c.expediente)
+                .Include(c => c.tarea).Where(c=>c.id==id).ToListAsync();
+
+            List<persona> personas = await db.persona.Where(pc=>pc.parte_caso.Any(c=>c.casoId==id)).ToListAsync();
+            casovm.personas = personas;
+            List<expediente> expedientes = await db.expediente.Where(c=>c.casoId==id).ToListAsync();
+            casovm.Expedientes = expedientes;
+
+           
+            if (casovm.casos == null)
+            {
+                return HttpNotFound();
+            }
+            return View(casovm);
         }
 
         // GET: casos/Create
         public ActionResult Create()
         {
-            
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance");
-            ViewBag.responsableId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
-            ViewBag.aperturaPersonaId = new SelectList(db.persona.Where(p => p.tipo_persona.id == 1), "id", "nombre");
+            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre");
+            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre");
             return View();
         }
 
         // POST: casos/Create
-     
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
@@ -93,9 +301,8 @@ namespace sb_admin.web.Controllers
             }
 
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
-            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre",caso.responsableId);
-            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
-            
+            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre", caso.responsableId);
+            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre", caso.aperturaPersonaId);
             return View(caso);
         }
 
@@ -113,12 +320,13 @@ namespace sb_admin.web.Controllers
             }
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
             ViewBag.responsableId = new SelectList(db.persona, "id", "nombre", caso.responsableId);
-            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre",caso.aperturaPersonaId);
+            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre", caso.aperturaPersonaId);
             return View(caso);
         }
 
         // POST: casos/Edit/5
-       
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,referencia,fecha_creacion,responsableId,avanceId,aperturaPersonaId")] caso caso)
@@ -130,8 +338,8 @@ namespace sb_admin.web.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.avanceId = new SelectList(db.avance, "id", "tipo_avance", caso.avanceId);
-            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre",caso.responsableId);
-            ViewBag.aperturaId = new SelectList(db.persona, "id","nombre", caso.aperturaPersonaId);
+            ViewBag.responsableId = new SelectList(db.persona, "id", "nombre", caso.responsableId);
+            ViewBag.aperturaPersonaId = new SelectList(db.persona, "id", "nombre", caso.aperturaPersonaId);
             return View(caso);
         }
 

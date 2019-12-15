@@ -14,7 +14,8 @@ namespace sb_admin.web.Models
         public IEnumerable<caso> casos { get; set; }
       public IEnumerable<persona> personas { get; set; }
         public IEnumerable<expediente> Expedientes { get; set; }
-       
+        public IEnumerable<tarea> Tareas { get; set; }
+
     }
 
 }

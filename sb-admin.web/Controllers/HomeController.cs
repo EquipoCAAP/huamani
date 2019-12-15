@@ -27,6 +27,7 @@ namespace sb_admin.web.Controllers
                 .Select(c => c).ToList();
             dashboard.personas = db.persona.Include(p => p.parte_caso);
             dashboard.Expedientes = db.expediente.ToList();
+            dashboard.Tareas = db.tarea.ToList();
             return View(dashboard);
         }
 
