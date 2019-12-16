@@ -72,7 +72,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-shopping-cart fa-5x"></i>
+                                <i class="fa fa-clock-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">@Model.eventos_count</div>
@@ -139,7 +139,7 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Referencia</th>
+                                        <th>Ref.</th>
                                         <th>Fecha</th>
                                         <th>Responsable</th>
 
@@ -149,12 +149,12 @@
 
                                     @foreach (var item in Model.casos.OrderByDescending(c => c.fecha_creacion).Take(6))
                                     {
-                                        <tr>
+                                        <tr style="text-wrap:normal;font-size:smaller">
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.referencia)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha_creacion)
+                                                <span class="label label-info"> @Html.DisplayFor(modelItem => item.fecha_creacion)</span>
                                             </td>
                                             <td>
                                                 @{
@@ -202,12 +202,12 @@
 
                                     @foreach (var item in Model.Expedientes.OrderByDescending(c => c.fechacreacion).Take(6))
                                     {
-                                    <tr>
+                                    <tr style="text-wrap:normal;font-size:smaller">
                                         <td>
                                             @Html.DisplayFor(modelItem => item.titulo)
                                         </td>
                                         <td>
-                                            <span class="badge"> @Html.DisplayFor(modelItem => item.fechacreacion)</span>
+                                            <span class="label label-info"> @Html.DisplayFor(modelItem => item.fechacreacion)</span>
 </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)

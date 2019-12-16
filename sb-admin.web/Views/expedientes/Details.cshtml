@@ -115,9 +115,7 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.evento.FirstOrDefault().fecha_inicio)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.evento.FirstOrDefault().expediente.titulo)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.evento.FirstOrDefault().servicio.descripcion)
             </th>
@@ -137,9 +135,7 @@ else
                     @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
                     @item.fecha_inicio.ToString("dd/MM/yyyy")
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.expediente.titulo)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.servicio.descripcion)
                 </td>

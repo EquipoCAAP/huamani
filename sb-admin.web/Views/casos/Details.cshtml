@@ -54,15 +54,15 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(" Editar", "Edit", new { id = Model.casos.FirstOrDefault().id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-home" })
+ 
+    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success fa fa-home" })
     @Html.ActionLink(" Agregar expediente ", "CreateExpediente", new { id = Model.casos.FirstOrDefault().id }, new
 {
-    @class = "btn btn-primary btn-lg fa fa-plus"
+    @class = "btn btn-primary fa fa-plus"
 })
     @Html.ActionLink(" Agregar Personas Partes ", "CreatePersonaAsync", new { id = Model.casos.FirstOrDefault().id }, new
 {
-  @class = "btn btn-danger btn-lg fa fa-plus"
+  @class = "btn btn-danger fa fa-plus"
 })
 
 </p>
@@ -93,9 +93,7 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().estadoExpediente.estado)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().caso.referencia)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().ubicacion.ubicacion1)
             </th>
@@ -113,42 +111,42 @@ else
 
         @foreach (var item in Model.Expedientes)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.titulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechacreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.hora)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.caso.referencia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechacreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
+        </td>
 
+        <td>
+            @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
+        </td>
 
-                <td>
-                    @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
-                    @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
-                    @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
-                </td>
-            </tr>
+        <td>
+            @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+            @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
+            @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+        </td>
+    </tr>
         }
 
     </table>
@@ -178,9 +176,7 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.personas.FirstOrDefault().tipo_persona.tipo_persona1)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.personas.FirstOrDefault().User.user1)
-            </th>
+           
             <th></th>
         </tr>
 
@@ -202,9 +198,7 @@ else
                 <td>
                     @Html.DisplayFor(modelItem => item.tipo_persona.tipo_persona1)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.user1)
-                </td>
+               
                 <td>
                     @Html.ActionLink(" Editar", "EditPersona", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
                     @Html.ActionLink(" Detalles", "DetailsPersona", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |

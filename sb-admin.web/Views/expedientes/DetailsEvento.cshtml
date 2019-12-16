@@ -55,7 +55,7 @@
 </div>
 <p>
     @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-    @Html.ActionLink(" Regresar a lista", "DetailsEvento", new { id = Model.id }, new { @class = "btn btn-success btn-sm fa fa-reply" })
+    @Html.ActionLink(" Regresar a lista", "Details", new { id = Model.expedienteId }, new { @class = "btn btn-success btn-sm fa fa-reply" })
 </p>
 
 @if (Model.juzgado_evento.Count == 0)
