@@ -40,12 +40,13 @@ namespace sb_admin.web.Models
         public int id { get; set; }
         [Display(Name = "Telefono")]
         public string telefono1 { get; set; }
-        [Display(Name = "Tipo Telefono")]
+        [Display(Name = "Tipo Teléfono")]
         public Nullable<tipotelefono> tipo_telefono { get; set; }
     }
     public class casoMetadata
     {
-        [Display(Name = "Responsable")]
+        [Required]
+        [Display(Name = "Cliente")]
         public int responsableId;
         [Display(Name = "Avance")]
         public int avanceId;
@@ -90,7 +91,6 @@ namespace sb_admin.web.Models
         public Nullable<System.DateTime> fechacreacion { get; set; }
 
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm tt}")]
         [Display(Name = "Hora de Creación") ]
         public Nullable<System.TimeSpan> hora { get; set; }
 
@@ -144,22 +144,7 @@ namespace sb_admin.web.Models
         public string descripcion { get; set; }
     }
 
-    public class tareasMetadata {
-        public int id { get; set; }
-        [Display(Name = "Tarea")]
-        public string tarea1 { get; set; }
-        [Display(Name = "Descripción")]
-        public string descripcion { get; set; }
-        [Display(Name = "Estado")]
-        public string estado { get; set; }
-        [Display(Name = "Prioridad")]
-        public string prioridad { get; set; }
-        [Display(Name = "Caso")]
-        public Nullable<int> casoId { get; set; }
-        [Display(Name = "Responsable")]
-        public Nullable<int> responsableId { get; set; }
-
-    }
+    
     public class tipo_eventoMetadata {
         public int id { get; set; }
         [Display(Name = "Tipo de Evento")]
@@ -185,7 +170,7 @@ namespace sb_admin.web.Models
     public class parte_casoMetadata {
         [Display(Name = "Caso")]
         public Nullable<int> casoId { get; set; }
-        [Display(Name = "Persona")]
+        [Display(Name = "Persona Asignada")]
         public Nullable<int> personaId { get; set; }
     }
     public class tipo_personaMetadata
@@ -194,6 +179,30 @@ namespace sb_admin.web.Models
         public int id { get; set; }
         [Display(Name = "Tipo de Persona")]
         public string tipo_persona1 { get; set; }
+    }
+
+    public class estadoExpedienteMetadata {
+
+        public int id { get; set; }
+        [Display(Name = "Estado Expediente")]
+        public string estado { get; set; }
+    }
+
+    public class tareaMetadata
+    {
+        public int id { get; set; }
+        [Display(Name = "Tarea")]
+        public string tarea1 { get; set; }
+        [Display(Name = "Descripción")]
+        public string descripcion { get; set; }
+        [Display(Name = "Estado")]
+        public Nullable<EstadoTarea> estadoId { get; set; }
+        [Display(Name = "Prioridad")]
+        public Nullable<PrioridadTarea> prioridadId { get; set; }
+        [Display(Name = "Caso")]
+        public Nullable<int> casoId { get; set; }
+        [Display(Name = "Responsable")]
+        public Nullable<int> responsableId { get; set; }
     }
 
 }

@@ -46,8 +46,6 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<Roles> Roles { get; set; }
 
-    public virtual DbSet<tarea> tarea { get; set; }
-
     public virtual DbSet<telefono_persona> telefono_persona { get; set; }
 
     public virtual DbSet<tipo_persona> tipo_persona { get; set; }
@@ -77,6 +75,8 @@ public partial class GAHEContext : DbContext
     public virtual DbSet<tipo_evento> tipo_evento { get; set; }
 
     public virtual DbSet<tipo_juzgado> tipo_juzgado { get; set; }
+
+    public virtual DbSet<tarea> tarea { get; set; }
 
 }
 

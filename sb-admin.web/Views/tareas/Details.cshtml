@@ -28,19 +28,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.estadoId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.estado)
+            @Html.DisplayFor(model => model.estadoId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.prioridad)
+            @Html.DisplayNameFor(model => model.prioridadId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.prioridad)
+            @Html.DisplayFor(model => model.prioridadId)
         </dd>
 
         <dt>
@@ -63,5 +63,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink(" Regresar a Listado", "Index",null,new { @class="btn btn-success btn-sm fa fa-backward"})
+    @Html.ActionLink("Back to List", "Index")
 </p>

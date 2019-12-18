@@ -50,7 +50,7 @@ namespace sb_admin.web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,tarea1,descripcion,estado,prioridad,casoId,responsableId")] tarea tarea)
+        public async Task<ActionResult> Create([Bind(Include = "id,tarea1,descripcion,estadoId,prioridadId,casoId,responsableId")] tarea tarea)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace sb_admin.web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,tarea1,descripcion,estado,prioridad,casoId,responsableId")] tarea tarea)
+        public async Task<ActionResult> Edit([Bind(Include = "id,tarea1,descripcion,estadoId,prioridadId,casoId,responsableId")] tarea tarea)
         {
             if (ModelState.IsValid)
             {

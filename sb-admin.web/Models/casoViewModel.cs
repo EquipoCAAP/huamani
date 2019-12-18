@@ -12,7 +12,7 @@ namespace sb_admin.web.Models
         public IEnumerable<parte_caso> partes { get; set; }
         public IEnumerable<expediente> Expedientes { get; set; }
         public IEnumerable<persona> personas { get; set; }
-        
+        public IEnumerable<tarea> tareas { get; set; }
         public int expedientes_count { get; set; }
         public int casos_count { get; set; }
         public persona personaApertura { get; set; }

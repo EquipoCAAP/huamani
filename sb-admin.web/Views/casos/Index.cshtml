@@ -27,39 +27,51 @@
         <th>
             @Html.DisplayNameFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
         </th>
+        <th>
+            Cant.Exp.
+        </th>
+        <th>
+            Cant.Tareas
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model.casos)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.referencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_creacion)
-            </td>
-            <td>
-                @{
-                    var persona = Model.personas.Where(c => c.id == item.responsableId).Select(c => new { c.NombreCompleto });
-                }
-                @persona.FirstOrDefault().NombreCompleto
-            </td>
-            <td>
-                @{
-                    var creador = Model.personas.Where(c => c.id == item.aperturaPersonaId).Select(c => new { c.NombreCompleto });
-                }
-                @creador.FirstOrDefault().NombreCompleto
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.avance.tipo_avance)
-            </td>
-            <td>
-                @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
-                @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })|
-                @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.referencia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha_creacion)
+    </td>
+    <td>
+        @{
+            var persona = Model.personas.Where(c => c.id == item.responsableId).Select(c => new { c.NombreCompleto });
+        }
+        @persona.First().NombreCompleto
+    </td>
+    <td>
+        @{
+            var creador = Model.personas.Where(c => c.id == item.aperturaPersonaId).Select(c => new { c.NombreCompleto });
+        }
+        @creador.FirstOrDefault().NombreCompleto
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.avance.tipo_avance)
+    </td>
+    <td>
+        <span class="badge">@item.expediente.Count</span>
+    </td>
+    <td>
+        <span class="badge">@item.tarea.Count</span>
+    </td>
+    <td>
+        @Html.ActionLink(" Editar", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" }) |
+        @Html.ActionLink(" Detalles", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })|
+        @Html.ActionLink(" Borrar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+    </td>
+</tr>
     }
 
 </table>

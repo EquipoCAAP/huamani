@@ -13,30 +13,16 @@ namespace sb_admin.web.Models
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class tarea
+
+public enum Prioridad : int
 {
 
-    public int id { get; set; }
+    Baja = 1,
 
-    public string tarea1 { get; set; }
+    Media = 2,
 
-    public string descripcion { get; set; }
-
-    public Nullable<EstadoTarea> estadoId { get; set; }
-
-    public Nullable<PrioridadTarea> prioridadId { get; set; }
-
-    public Nullable<int> casoId { get; set; }
-
-    public Nullable<int> responsableId { get; set; }
-
-
-
-    public virtual caso caso { get; set; }
-
-    public virtual persona persona { get; set; }
+    Alta = 3,
 
 }
 

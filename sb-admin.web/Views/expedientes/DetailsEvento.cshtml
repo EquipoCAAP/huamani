@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>evento</h4>
+    <h4>Evento del Expediente: <span class="label-info"> @Html.DisplayFor(model => model.expediente.titulo)</span> </h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,13 +27,7 @@
             @Html.DisplayFor(model => model.fecha_inicio)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.expediente.titulo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.expediente.titulo)
-        </dd>
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.servicio.descripcion)
@@ -54,13 +48,13 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(" Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+    @Html.ActionLink(" Cambiar", "ChangeJuzgado", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-circle " }) |
     @Html.ActionLink(" Regresar a lista", "Details", new { id = Model.expedienteId }, new { @class = "btn btn-success btn-sm fa fa-reply" })
 </p>
 
 @if (Model.juzgado_evento.Count == 0)
 {
-    <h5>No tiene Juzgado registrados</h5>
+    <h5 >No tiene Juzgado registrados</h5>
     <p>
         @Html.ActionLink("Nuevo Juzgado", "CreateJuzgado", new { id=Model.id}, new { @class = "btn btn-sm btn-primary" })
     </p>

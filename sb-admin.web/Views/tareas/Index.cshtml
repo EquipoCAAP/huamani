@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tareas</h2>
+<h2>Index</h2>
 
 <p>
-     @Html.ActionLink("Nuevo Tarea", "Create", null, new { @class = "btn btn-sm btn-primary" })
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -19,10 +19,10 @@
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.estadoId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.prioridad)
+            @Html.DisplayNameFor(model => model.prioridadId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.caso.referencia)
@@ -42,10 +42,10 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+            @Html.DisplayFor(modelItem => item.estadoId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.prioridad)
+            @Html.DisplayFor(modelItem => item.prioridadId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.caso.referencia)
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.persona.dni)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id },new { @class = "btn btn-warning btn-sm fa fa-pencil" })
-            @Html.ActionLink("Details", "Details", new { id=item.id },new { @class = "btn btn-info btn-sm fa fa-eye" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.id },new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

@@ -24,11 +24,11 @@ public partial class persona
 
         this.parte_caso = new HashSet<parte_caso>();
 
-        this.tarea = new HashSet<tarea>();
-
         this.telefono_persona = new HashSet<telefono_persona>();
 
         this.expediente = new HashSet<expediente>();
+
+        this.tarea = new HashSet<tarea>();
 
     }
 
@@ -59,15 +59,15 @@ public partial class persona
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<tarea> tarea { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<telefono_persona> telefono_persona { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<expediente> expediente { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<tarea> tarea { get; set; }
 
 }
 

@@ -39,8 +39,7 @@ namespace sb_admin.web.Models
     [MetadataType(typeof(tipo_juzgadoMetadata))]
     public partial class tipo_juzgado { }
 
-    [MetadataType(typeof(tareasMetadata))]
-    public partial class tareas { }
+  
 
     [MetadataType(typeof(ubicacionMetadata))]
     public partial class ubicacion { }
@@ -52,4 +51,10 @@ namespace sb_admin.web.Models
     public partial class parte_caso { }
     [MetadataType(typeof(tipo_personaMetadata))]
     public partial class tipo_persona { }
+    [MetadataType(typeof(estadoExpedienteMetadata))]
+    public partial class estadoExpediente { }
+
+    [MetadataType(typeof(tareaMetadata))]
+    public partial class tarea { }
+
 }

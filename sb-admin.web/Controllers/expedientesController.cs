@@ -183,8 +183,22 @@ namespace sb_admin.web.Controllers
             var juzgado = db.juzgado.Include(j => j.tipo_juzgado);
             return View(await juzgado.ToListAsync());
         }
+        // GET: juzgado/Change
+        public async Task<ActionResult> ChangeJuzgado(string id, string idjuzgado)
+        {
+            if (id != null && idjuzgado != null)
+            {
+                var juzgado_eventoSeleccionado = new juzgado_evento { eventoId = int.Parse(id), juzgadoId = int.Parse(idjuzgado) };
 
-    
+                db.juzgado_evento.Add(juzgado_eventoSeleccionado);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("DetailsEvento/{0}", juzgado_eventoSeleccionado.eventoId));
+            }
+            ViewBag.idEvento = id;
+            var juzgado = db.juzgado.Include(j => j.tipo_juzgado);
+            return View(await juzgado.ToListAsync());
+        }
+
         // GET: telefonos/Edit/5
         public async Task<ActionResult> EditJuzgado(int? id)
         {

@@ -147,7 +147,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.casos.OrderByDescending(c => c.fecha_creacion).Take(6))
+                                    @foreach (var item in Model.casos.OrderByDescending(c => c.fecha_creacion))
                                     {
                                         <tr style="text-wrap:normal;font-size:smaller">
                                             <td>
@@ -160,7 +160,7 @@
                                                 @{
                                                     var persona = Model.personas.Where(c => c.id == item.responsableId).Select(c => new { c.NombreCompleto });
                                                 }
-                                                @persona.FirstOrDefault().NombreCompleto
+                                                @persona.First().NombreCompleto
                                             </td>
                                         </tr>
                                     }
@@ -288,7 +288,7 @@
                                         </th>
                                        
                                         <th>
-                                            @Html.DisplayNameFor(model => model.Tareas.FirstOrDefault().estado)
+                                            @Html.DisplayNameFor(model => model.Tareas.FirstOrDefault().estadoId)
                                         </th>
                                        
                                        
@@ -297,7 +297,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.Tareas.OrderByDescending(t=>t.prioridad).Take(6))
+                                    @foreach (var item in Model.Tareas.OrderByDescending(t=>t.prioridadId).Take(6))
                                     {
                                     <tr style="text-wrap:normal;font-size:smaller">
                                         <td>
@@ -305,7 +305,7 @@
                                         </td>
                                        
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.estado)
+                                            @Html.DisplayFor(modelItem => item.estadoId)
                                         </td>
                                        
                                        

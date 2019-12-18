@@ -8,16 +8,12 @@
 <h2>Detalles</h2>
 
 <div>
-    <h4>Casos</h4>
+    <h4>
+        Casos  @Html.DisplayNameFor(model => model.casos.FirstOrDefault().referencia)
+        <span class="label-info h3">  @Html.DisplayFor(model => model.casos.FirstOrDefault().referencia)</span>
+    </h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().referencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.casos.FirstOrDefault().referencia)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.casos.FirstOrDefault().fecha_creacion)
@@ -35,14 +31,12 @@
             @Html.DisplayFor(model => model.casos.FirstOrDefault().responsableId)
         </dd>
         @*
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
+            </dt>
         *@
+
+
         <dt>
             @Html.DisplayNameFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
         </dt>
@@ -54,7 +48,7 @@
     </dl>
 </div>
 <p>
- 
+
     @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success fa fa-home" })
     @Html.ActionLink(" Agregar expediente ", "CreateExpediente", new { id = Model.casos.FirstOrDefault().id }, new
 {
@@ -64,7 +58,10 @@
 {
   @class = "btn btn-danger fa fa-plus"
 })
-
+    @Html.ActionLink(" Agregar Tarea del Caso ", "CreateTareaAsync", new { id = Model.casos.FirstOrDefault().id }, new
+{
+@class = "btn btn-warning fa fa-plus"
+})
 </p>
 <h4>Expedientes</h4>
 @if (Model.Expedientes.Count() == 0)
@@ -87,66 +84,79 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().hora)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().descripcion)
-            </th>
+            @*
+                <th>
+                    @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().descripcion)
+                </th>
+            *@
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().estadoExpediente.estado)
             </th>
-           
+
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().ubicacion.ubicacion1)
             </th>
+            @*
+                <th>
+                    @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().claseExpediente.Clase)
+                </th>
+            *@
             <th>
-                @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().claseExpediente.Clase)
-            </th>
-            <th>
-                Persona
+                Encargada del Caso
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().tipoExpediente.tipo)
+            </th>
+            <th>
+                Cant. eventos
             </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model.Expedientes)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechacreacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
-        </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechacreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hora)
+                </td>
+                @*
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
-        </td>
-
-        <td>
-            @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
-            @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
-            @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
-        </td>
-    </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
+                </td>
+                @*
+                    <td>
+                        @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
+                    </td>
+                *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
+                </td>
+                <td>
+                    <span class="badge">@item.evento.Count</span>
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+                    @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
+                    @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                </td>
+            </tr>
         }
 
     </table>
@@ -176,7 +186,7 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.personas.FirstOrDefault().tipo_persona.tipo_persona1)
             </th>
-           
+
             <th></th>
         </tr>
 
@@ -198,12 +208,75 @@ else
                 <td>
                     @Html.DisplayFor(modelItem => item.tipo_persona.tipo_persona1)
                 </td>
-               
+
                 <td>
                     @Html.ActionLink(" Editar", "EditPersona", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
                     @Html.ActionLink(" Detalles", "DetailsPersona", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
 
                     @Html.ActionLink(" Borrar", "DeletePersona", new { id = item.parte_caso.Single().id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+
+<h4>Tareas</h4>
+@if (Model.tareas.Count() == 0)
+{
+    <h5>No tiene Tareas</h5>
+
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().tarea1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().estadoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().prioridadId)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().persona.dni)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.tareas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tarea1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estadoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prioridadId)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.persona.dni)
+                </td>
+                <td>
+                    @Html.ActionLink(" Editar", "EditTarea", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+
+                    @Html.ActionLink(" Detalles", "DetailsTarea", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                    @Html.ActionLink(" Borrar", "DeleteTarea", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                 
                 </td>
             </tr>
         }

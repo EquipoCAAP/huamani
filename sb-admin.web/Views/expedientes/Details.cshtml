@@ -8,16 +8,10 @@
 <h2>Detalle</h2>
 
 <div>
-    <h4>expediente</h4>
+    <h4>@Html.DisplayNameFor(model => model.titulo):  <span class="label-info "> @Html.DisplayFor(model => model.titulo)</span></h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.titulo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.titulo)
-        </dd>
+       
 
         <dt>
             @Html.DisplayNameFor(model => model.fechacreacion)

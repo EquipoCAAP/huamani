@@ -7,7 +7,6 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -35,18 +34,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.estadoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.estadoId, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.estadoId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.prioridad, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.prioridadId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.prioridad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prioridad, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.prioridadId, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.prioridadId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -68,16 +67,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Grabar" class="btn btn-primary btn-sm fa fa-backward" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(" Regresar a Listado", "Index",null,new { @class="btn btn-success btn-sm fa fa-backward"})
+    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

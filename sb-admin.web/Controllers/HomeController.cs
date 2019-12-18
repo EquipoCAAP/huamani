@@ -25,7 +25,7 @@ namespace sb_admin.web.Controllers
                 .Include(c => c.expediente)
                 .Include(c => c.tarea)
                 .Select(c => c).ToList();
-            dashboard.personas = db.persona.Include(p => p.parte_caso);
+            dashboard.personas = db.persona.ToList();
             dashboard.Expedientes = db.expediente.ToList();
             dashboard.Tareas = db.tarea.ToList();
             return View(dashboard);

@@ -157,8 +157,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tarea" Type="varchar" MaxLength="50" />
           <Property Name="descripcion" Type="text" />
-          <Property Name="estado" Type="varchar" MaxLength="50" />
-          <Property Name="prioridad" Type="varchar" MaxLength="50" />
+          <Property Name="estadoId" Type="int" />
+          <Property Name="prioridadId" Type="int" />
           <Property Name="casoId" Type="int" />
           <Property Name="responsableId" Type="int" />
         </EntityType>
@@ -695,7 +695,7 @@
           <NavigationProperty Name="avance" Relationship="Self.FK_caso_avance" FromRole="caso" ToRole="avance" />
           <NavigationProperty Name="expediente" Relationship="Self.FK_expediente_caso" FromRole="caso" ToRole="expediente" />
           <NavigationProperty Name="parte_caso" Relationship="Self.FK_parte_caso_caso" FromRole="caso" ToRole="parte_caso" />
-          <NavigationProperty Name="tarea" Relationship="Self.FK_tarea_caso" FromRole="caso" ToRole="tarea" />
+          <NavigationProperty Name="tarea" Relationship="GAHEModel.FK_tarea_caso" FromRole="caso" ToRole="tarea" />
         </EntityType>
         <EntityType Name="documento">
           <Key>
@@ -760,9 +760,9 @@
           <NavigationProperty Name="parte_caso" Relationship="Self.FK_parte_caso_persona" FromRole="persona" ToRole="parte_caso" />
           <NavigationProperty Name="tipo_persona" Relationship="Self.FK_persona_tipo_persona" FromRole="persona" ToRole="tipo_persona" />
           <NavigationProperty Name="User" Relationship="Self.FK_persona_Users" FromRole="persona" ToRole="User" />
-          <NavigationProperty Name="tarea" Relationship="Self.FK_tarea_persona" FromRole="persona" ToRole="tarea" />
           <NavigationProperty Name="telefono_persona" Relationship="Self.FK_telefono_persona_persona" FromRole="persona" ToRole="telefono_persona" />
           <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_expediente_persona" FromRole="persona" ToRole="expediente" />
+          <NavigationProperty Name="tarea" Relationship="GAHEModel.FK_tarea_persona" FromRole="persona" ToRole="tarea" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -774,20 +774,6 @@
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="User" Relationship="Self.FK_Roles_Users" FromRole="Roles" ToRole="User" />
           <NavigationProperty Name="Navbar" Relationship="GAHEModel.FK_Roles_Navbar" FromRole="Roles" ToRole="Navbar" />
-        </EntityType>
-        <EntityType Name="tarea">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tarea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="prioridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="casoId" Type="Int32" />
-          <Property Name="responsableId" Type="Int32" />
-          <NavigationProperty Name="caso" Relationship="Self.FK_tarea_caso" FromRole="tarea" ToRole="caso" />
-          <NavigationProperty Name="persona" Relationship="Self.FK_tarea_persona" FromRole="tarea" ToRole="persona" />
         </EntityType>
         <EntityType Name="telefono_persona">
           <Key>
@@ -859,20 +845,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tarea_caso">
-          <End Role="caso" Type="Self.caso" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="caso">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tarea">
-              <PropertyRef Name="casoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_documento_expediente">
           <End Role="expediente" Type="Self.expediente" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -925,20 +897,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tarea_persona">
-          <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tarea">
-              <PropertyRef Name="responsableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_telefono_persona_persona">
           <End Type="GAHEModel.persona" Multiplicity="0..1" Role="persona">
             <OnDelete Action="Cascade" />
@@ -975,7 +933,6 @@
           <EntitySet Name="parte_caso" EntityType="Self.parte_caso" />
           <EntitySet Name="persona" EntityType="GAHEModel.persona" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <EntitySet Name="tarea" EntityType="Self.tarea" />
           <EntitySet Name="telefono_persona" EntityType="Self.telefono_persona" />
           <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -990,10 +947,6 @@
           <AssociationSet Name="FK_parte_caso_caso" Association="Self.FK_parte_caso_caso">
             <End Role="caso" EntitySet="caso" />
             <End Role="parte_caso" EntitySet="parte_caso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tarea_caso" Association="Self.FK_tarea_caso">
-            <End Role="caso" EntitySet="caso" />
-            <End Role="tarea" EntitySet="tarea" />
           </AssociationSet>
           <AssociationSet Name="FK_documento_expediente" Association="Self.FK_documento_expediente">
             <End Role="expediente" EntitySet="expediente" />
@@ -1010,10 +963,6 @@
           <AssociationSet Name="FK_persona_Users" Association="Self.FK_persona_Users">
             <End Role="User" EntitySet="User" />
             <End Role="persona" EntitySet="persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tarea_persona" Association="Self.FK_tarea_persona">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="tarea" EntitySet="tarea" />
           </AssociationSet>
           <AssociationSet Name="FK_telefono_persona_persona" Association="Self.FK_telefono_persona_persona">
             <End EntitySet="persona" Role="persona" />
@@ -1090,6 +1039,15 @@
           <AssociationSet Name="FK_juzgado_tipo_juzgado" Association="GAHEModel.FK_juzgado_tipo_juzgado">
             <End Role="tipo_juzgado" EntitySet="tipo_juzgado" />
             <End Role="juzgado" EntitySet="juzgado" />
+          </AssociationSet>
+          <EntitySet Name="tarea" EntityType="GAHEModel.tarea" />
+          <AssociationSet Name="FK_tarea_caso" Association="GAHEModel.FK_tarea_caso">
+            <End Role="caso" EntitySet="caso" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarea_persona" Association="GAHEModel.FK_tarea_persona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="tarea" EntitySet="tarea" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ComplexType1">
@@ -1398,6 +1356,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="Prioridad">
+          <Member Name="Baja" Value="1" />
+          <Member Name="Media" Value="2" />
+          <Member Name="Alta" Value="3" />
+        </EnumType>
+        <EnumType Name="Estado">
+          <Member Name="Iniciada" Value="1" />
+          <Member Name="Progreso" Value="2" />
+          <Member Name="Culminada" Value="3" />
+        </EnumType>
+        <EntityType Name="tarea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tarea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estadoId" Type="GAHEModel.EstadoTarea" />
+          <Property Name="prioridadId" Type="GAHEModel.PrioridadTarea" />
+          <Property Name="casoId" Type="Int32" />
+          <Property Name="responsableId" Type="Int32" />
+          <NavigationProperty Name="caso" Relationship="GAHEModel.FK_tarea_caso" FromRole="tarea" ToRole="caso" />
+          <NavigationProperty Name="persona" Relationship="GAHEModel.FK_tarea_persona" FromRole="tarea" ToRole="persona" />
+        </EntityType>
+        <Association Name="FK_tarea_caso">
+          <End Type="GAHEModel.caso" Role="caso" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GAHEModel.tarea" Role="tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="casoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarea_persona">
+          <End Type="GAHEModel.persona" Role="persona" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GAHEModel.tarea" Role="tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="responsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="EstadoTarea">
+          <Member Name="Iniciado" Value="1" />
+          <Member Name="Porhacer" Value="2" />
+          <Member Name="Terminada" Value="3" />
+        </EnumType>
+        <EnumType Name="PrioridadTarea">
+          <Member Name="Baja" Value="1" />
+          <Member Name="Mediia" Value="2" />
+          <Member Name="Alta" Value="3" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1485,19 +1505,6 @@
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="MenuId" ColumnName="MenuId" />
                 <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tarea">
-            <EntityTypeMapping TypeName="GAHEModel.tarea">
-              <MappingFragment StoreEntitySet="tarea">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tarea1" ColumnName="tarea" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-                <ScalarProperty Name="casoId" ColumnName="casoId" />
-                <ScalarProperty Name="responsableId" ColumnName="responsableId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1641,6 +1648,19 @@
             <EntityTypeMapping TypeName="GAHEModel.tipo_juzgado">
               <MappingFragment StoreEntitySet="tipo_juzgado">
                 <ScalarProperty Name="tipo_j" ColumnName="tipo_j" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tarea">
+            <EntityTypeMapping TypeName="GAHEModel.tarea">
+              <MappingFragment StoreEntitySet="tarea">
+                <ScalarProperty Name="responsableId" ColumnName="responsableId" />
+                <ScalarProperty Name="casoId" ColumnName="casoId" />
+                <ScalarProperty Name="prioridadId" ColumnName="prioridadId" />
+                <ScalarProperty Name="estadoId" ColumnName="estadoId" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tarea1" ColumnName="tarea" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

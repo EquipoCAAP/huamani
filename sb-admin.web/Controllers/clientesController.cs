@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using sb_admin.web.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace sb_admin.web.Controllers
 {
@@ -210,11 +211,11 @@ namespace sb_admin.web.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             persona persona = await db.persona.FindAsync(id);
+
             db.persona.Remove(persona);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

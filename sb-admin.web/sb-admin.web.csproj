@@ -256,7 +256,13 @@
     <Compile Include="Models\documento.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Estado.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\estadoExpediente.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoTarea.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\evento.cs">
@@ -295,7 +301,16 @@
     <Compile Include="Models\parte_caso.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Prioridad.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrioridadTarea.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\servicio.cs">
+      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tarea.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipo_evento.cs">
@@ -309,9 +324,6 @@
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
-      <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tarea.cs">
       <DependentUpon>ModeloEntidadGAHE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\telefono.cs">
@@ -565,11 +577,6 @@
     <Content Include="Views\clientes\Details.cshtml" />
     <Content Include="Views\clientes\Edit.cshtml" />
     <Content Include="Views\clientes\Index.cshtml" />
-    <Content Include="Views\tareas\Create.cshtml" />
-    <Content Include="Views\tareas\Delete.cshtml" />
-    <Content Include="Views\tareas\Details.cshtml" />
-    <Content Include="Views\tareas\Edit.cshtml" />
-    <Content Include="Views\tareas\Index.cshtml" />
     <Content Include="Views\telefonos\Create.cshtml" />
     <Content Include="Views\telefonos\Delete.cshtml" />
     <Content Include="Views\telefonos\Details.cshtml" />
@@ -594,6 +601,13 @@
     <Content Include="Views\casos\CreatePersonaAsync.cshtml" />
     <Content Include="Views\casos\EditPersona.cshtml" />
     <Content Include="Views\expedientes\CreateJuzgado.cshtml" />
+    <Content Include="Views\casos\CreateTareaAsync.cshtml" />
+    <Content Include="Views\tareas\Create.cshtml" />
+    <Content Include="Views\tareas\Delete.cshtml" />
+    <Content Include="Views\tareas\Details.cshtml" />
+    <Content Include="Views\tareas\Edit.cshtml" />
+    <Content Include="Views\tareas\Index.cshtml" />
+    <Content Include="Views\casos\EditTarea.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
