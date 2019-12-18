@@ -367,7 +367,10 @@ namespace sb_admin.web.Controllers
             casovm.personas = personas;
             List<expediente> expedientes = await db.expediente.Where(c=>c.casoId==id).ToListAsync();
             casovm.Expedientes = expedientes;
-           
+            var idcliente = casovm.casos.First().responsableId;
+            casovm.personaResponsable = db.persona.First(p => p.id == idcliente);
+            var idencargado = casovm.casos.First().aperturaPersonaId;
+            casovm.personaApertura = db.persona.First(p => p.id == idencargado);
             casovm.tareas = await db.tarea.Include(t => t.caso).Include(t => t.persona).Where(c => c.casoId == id).ToListAsync();
 
             if (casovm.casos == null)

@@ -19,6 +19,16 @@ namespace sb_admin.web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
+             "~/Scripts/DataTables/js/jquery.dataTables.js",
+             "~/Scripts/DataTables/js/dataTables.bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/dataTables").Include(
+                      "~/Content/DataTables/css/jquery.dataTables.css",
+                      "~/Content/DataTables/css/jquery.dataTables.min.css"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));

@@ -234,3 +234,7 @@ ul.alert-dropdown {
     clear: both;
     padding: 10px 20px;
 }
+.nav-tabs > li.active > a {
+    background-color: silver !important;
+    
+}
