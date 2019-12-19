@@ -4,96 +4,101 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Html.DisplayNameFor(model => model.titulo): @Html.DisplayFor(model => model.titulo)</h3>
+    </div>
+    <div class="panel-body">
+        Detalle
+        <div>
 
-<h2>Detalle</h2>
+            <hr />
+            <dl class="dl-horizontal">
 
-<div>
-    <h4>@Html.DisplayNameFor(model => model.titulo):  <span class="label-info "> @Html.DisplayFor(model => model.titulo)</span></h4>
-    <hr />
-    <dl class="dl-horizontal">
-       
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechacreacion)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.fechacreacion)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechacreacion)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.fechacreacion)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.hora)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.hora)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.hora)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.hora)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.descripcion)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.estadoid)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.estadoid)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.estadoExpediente.estado)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.estadoExpediente.estado)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.caso.referencia)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.caso.referencia)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.caso.referencia)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.caso.referencia)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ubicacion.ubicacion1)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ubicacion.ubicacion1)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ubicacion.ubicacion1)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ubicacion.ubicacion1)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.claseExpediente.Clase)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.claseExpediente.Clase)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.claseExpediente.Clase)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.claseExpediente.Clase)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.persona.dni)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.persona.dni)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.persona.dni)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.persona.dni)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipoExpediente.tipo)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tipoExpediente.tipo)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipoExpediente.tipo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.tipoExpediente.tipo)
+                </dd>
 
-    </dl>
+            </dl>
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink(" Editar Expediente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
     @Html.ActionLink(" Agregar Evento ", "CreateEvento", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
-    @Html.ActionLink(" Regresar a caso", "Details","casos", new { id=Model.casoId}, new { @class = "btn btn-danger btn-sm fa fa-reply" })
+    @Html.ActionLink(" Regresar a caso", "Details", "casos", new { id = Model.casoId }, new { @class = "btn btn-danger btn-sm fa fa-reply" })
     @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-reply-all" })
 </p>
-<h4 >Eventos</h4>
+<h4>Eventos</h4>
 @if (Model.evento.Count == 0)
 {
     <h5>No tiene eventos registrados</h5>
@@ -109,7 +114,7 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.evento.FirstOrDefault().fecha_inicio)
             </th>
-           
+
             <th>
                 @Html.DisplayNameFor(model => model.evento.FirstOrDefault().servicio.descripcion)
             </th>
@@ -129,7 +134,7 @@ else
                     @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
                     @item.fecha_inicio.ToString("dd/MM/yyyy")
                 </td>
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.servicio.descripcion)
                 </td>
@@ -137,9 +142,9 @@ else
                     @Html.DisplayFor(modelItem => item.tipo_evento1.tipo_evento1)
                 </td>
                 <td>
-                    @Html.ActionLink(" Editar", "EditEvento", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-                    @Html.ActionLink(" Detalles", "DetailsEvento", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-                    @Html.ActionLink(" Borrar", "DeleteEvento", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o ",onclick="return confirm( '¿ Esta seguro de Borrar este Evento ?'); " })
+                    @Html.ActionLink(" ", "EditEvento", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                    @Html.ActionLink(" ", "DetailsEvento", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                    @Html.ActionLink(" ", "DeleteEvento", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o ", onclick = "return confirm( '¿ Esta seguro de Borrar este Evento ?'); " })
                 </td>
             </tr>
         }

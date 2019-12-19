@@ -358,6 +358,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dataTables.bootstrap.css" />
     <Content Include="Content\font-awesome-4.1.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
@@ -447,6 +448,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\dataTables.foundation.js" />
+    <Content Include="Scripts\dataTables.foundation.min.js" />
+    <Content Include="Scripts\dataTables.jqueryui.js" />
+    <Content Include="Scripts\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\dataTables.semanticui.js" />
+    <Content Include="Scripts\dataTables.semanticui.min.js" />
     <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap.css" />
     <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap.min.css" />
     <Content Include="Scripts\plugins\DataTables\css\dataTables.bootstrap4.css" />
@@ -482,6 +493,8 @@
     <Content Include="Scripts\plugins\flot\jquery.flot.pie.js" />
     <Content Include="Scripts\plugins\flot\jquery.flot.resize.js" />
     <Content Include="Scripts\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\plugins\morris\morris-data.js" />
     <Content Include="Scripts\plugins\morris\morris.js" />
     <Content Include="Scripts\plugins\morris\morris.min.js" />

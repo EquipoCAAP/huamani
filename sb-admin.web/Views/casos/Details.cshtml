@@ -4,301 +4,303 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Caso @Html.DisplayNameFor(model => model.casos.FirstOrDefault().referencia): @Html.DisplayFor(model => model.casos.FirstOrDefault().referencia)</h3>
+        </div>
+        <div class="panel-body">
+            Detalle
+            <div>
 
-<h2>Detalles</h2>
+                    <hr />
+                    <dl class="dl-horizontal">
 
-<div>
-    <h4>
-        Casos  @Html.DisplayNameFor(model => model.casos.FirstOrDefault().referencia)
-        <span class="label-info h3">  @Html.DisplayFor(model => model.casos.FirstOrDefault().referencia)</span>
-    </h4>
-    <hr />
-    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().fecha_creacion)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().fecha_creacion)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.casos.FirstOrDefault().fecha_creacion)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.casos.FirstOrDefault().fecha_creacion)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().responsableId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().responsableId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.personaResponsable.NombreCompleto) |
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.personaResponsable.NombreCompleto) |
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().aperturaPersonaId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.personaApertura.NombreCompleto) |
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
-        </dd>
-
-    </dl>
-</div>
-<p>
-
-    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success fa fa-home" })
-    @Html.ActionLink(" Agregar expediente ", "CreateExpediente", new { id = Model.casos.FirstOrDefault().id }, new
-{
-    @class = "btn btn-primary fa fa-plus"
-})
-    @Html.ActionLink(" Agregar Personas Partes ", "CreatePersonaAsync", new { id = Model.casos.FirstOrDefault().id }, new
-{
-  @class = "btn btn-danger fa fa-plus"
-})
-    @Html.ActionLink(" Agregar Tarea del Caso ", "CreateTareaAsync", new { id = Model.casos.FirstOrDefault().id }, new
-{
-@class = "btn btn-warning fa fa-plus"
-})
-</p>
-
-<ul class="nav nav-tabs">
-    <li class="active " ><a data-toggle="tab" href="#expedientes" class="fa fa-file"> Expedientes</a></li>
-    <li><a data-toggle="tab" href="#partes" class="fa fa-users"> Partes</a></li>
-    <li><a data-toggle="tab" href="#tareas" class="fa fa-truck"> Tareas</a></li>
-</ul>
-
-<div class="tab-content">
-    <div id="expedientes" class="tab-pane fade in active">
-        <h3>Expedientes</h3>
-        @if (Model.Expedientes.Count() == 0)
-        {
-            <h5>No tiene Expedientes registrados</h5>
-
-        }
-        else
-        {
+                        <dd>
+                            @Html.DisplayFor(model => model.personaApertura.NombreCompleto) |
+                        </dd>
 
 
-            <table class="table table-striped">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().titulo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().fechacreacion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().hora)
-                    </th>
-                    @*
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().descripcion)
-                    </th>
-                    *@
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().estadoExpediente.estado)
-                    </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().ubicacion.ubicacion1)
-                    </th>
-                    @*
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().claseExpediente.Clase)
-                    </th>
-                    *@
-                    <th>
-                        Encargada del Caso
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().tipoExpediente.tipo)
-                    </th>
-                    <th>
-                        Cant. eventos
-                    </th>
-                    <th></th>
-                </tr>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
+                        </dt>
 
-                @foreach (var item in Model.Expedientes)
+                        <dd>
+                            @Html.DisplayFor(model => model.casos.FirstOrDefault().avance.tipo_avance)
+                        </dd>
+
+                    </dl>
+                </div>
+                </div>
+            </div>
+                <p>
+
+                    @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success fa fa-home" })
+                    @Html.ActionLink(" Agregar expediente ", "CreateExpediente", new { id = Model.casos.FirstOrDefault().id }, new
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.titulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fechacreacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hora)
-                        </td>
-                        @*
-                        <td>
-                            @Html.DisplayFor(modelItem => item.descripcion)
-                        </td>
-                        *@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
-                        </td>
-                        @*
-                        <td>
-                            @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
-                        </td>
-                        *@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
-                        </td>
-                        <td>
-                            <span class="badge">@item.evento.Count</span>
-                        </td>
-                        <td>
-                            @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
-                            @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
-                            @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-        }
-    </div>
-    <div id="partes" class="tab-pane fade">
-        <h3>Partes del Caso</h3>
-
-        @if (Model.personas.Count() == 0)
-        {
-            <h5>No tiene Personas Partes del caso</h5>
-
-        }
-        else
-        {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().dni)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().apellido)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().celular)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().tipo_persona.tipo_persona1)
-                    </th>
-
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.personas)
+                    @class = "btn btn-primary fa fa-plus"
+                })
+                    @Html.ActionLink(" Agregar Personas Partes ", "CreatePersonaAsync", new { id = Model.casos.FirstOrDefault().id }, new
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.dni)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.apellido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.celular)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tipo_persona.tipo_persona1)
-                        </td>
-
-                        <td>
-                            @Html.ActionLink(" Editar", "EditPersona", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-                            @Html.ActionLink(" Detalles", "DetailsPersona", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-
-                            @Html.ActionLink(" Borrar", "DeletePersona", new { id = item.parte_caso.Single().id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-        }
-    </div>
-    <div id="tareas" class="tab-pane fade">
-        <h3>Tareas</h3>
-        @if (Model.tareas.Count() == 0)
-        {
-            <h5>No tiene Tareas</h5>
-
-        }
-        else
-        {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().tarea1)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().descripcion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().estadoId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().prioridadId)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().persona.dni)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.tareas)
+                  @class = "btn btn-danger fa fa-plus"
+                })
+                    @Html.ActionLink(" Agregar Tarea del Caso ", "CreateTareaAsync", new { id = Model.casos.FirstOrDefault().id }, new
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tarea1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estadoId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prioridadId)
-                        </td>
+                @class = "btn btn-warning fa fa-plus"
+                })
+                </p>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.persona.dni)
-                        </td>
-                        <td>
-                            @Html.ActionLink(" Editar", "EditTarea", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                <ul class="nav nav-tabs">
+                    <li class="active "><a data-toggle="tab" href="#expedientes" class="fa fa-file"> Expedientes</a></li>
+                    <li><a data-toggle="tab" href="#partes" class="fa fa-users"> Partes</a></li>
+                    <li><a data-toggle="tab" href="#tareas" class="fa fa-truck"> Tareas</a></li>
+                </ul>
 
-                            @Html.ActionLink(" Detalles", "DetailsTarea", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-                            @Html.ActionLink(" Borrar", "DeleteTarea", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                <div class="tab-content">
+                    <div id="expedientes" class="tab-pane fade in active">
+                        <h3>Expedientes</h3>
+                        @if (Model.Expedientes.Count() == 0)
+                        {
+                            <h5>No tiene Expedientes registrados</h5>
 
-                        </td>
-                    </tr>
-                }
+                        }
+                        else
+                        {
 
-            </table>
-        }
-    </div>
-</div>
+
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().titulo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().fechacreacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().hora)
+                                    </th>
+                                    @*
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().descripcion)
+                                    </th>
+                                    *@
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().estadoExpediente.estado)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().ubicacion.ubicacion1)
+                                    </th>
+                                    @*
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().claseExpediente.Clase)
+                                    </th>
+                                    *@
+                                    <th>
+                                        Encargada del Caso
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Expedientes.FirstOrDefault().tipoExpediente.tipo)
+                                    </th>
+                                    <th>
+                                        Cant. eventos
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.Expedientes)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.titulo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fechacreacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hora)
+                                        </td>
+                                        @*
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.descripcion)
+                                        </td>
+                                        *@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
+                                        </td>
+                                        @*
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.claseExpediente.Clase)
+                                        </td>
+                                        *@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
+                                        </td>
+                                        <td>
+                                            <span class="badge">@item.evento.Count</span>
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" Editar", "EditExpediente", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+                                            @Html.ActionLink(" Detalles", "DetailsExpediente", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye" })
+                                            @Html.ActionLink(" Borrar", "DeleteExpediente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+                    <div id="partes" class="tab-pane fade">
+                        <h3>Partes del Caso</h3>
+
+                        @if (Model.personas.Count() == 0)
+                        {
+                            <h5>No tiene Personas Partes del caso</h5>
+
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().dni)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().apellido)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().celular)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personas.FirstOrDefault().tipo_persona.tipo_persona1)
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.personas)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.dni)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.apellido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.celular)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tipo_persona.tipo_persona1)
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink(" Editar", "EditPersona", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                                            @Html.ActionLink(" Detalles", "DetailsPersona", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+
+                                            @Html.ActionLink(" Borrar", "DeletePersona", new { id = item.parte_caso.Single().id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+                    <div id="tareas" class="tab-pane fade">
+                        <h3>Tareas</h3>
+                        @if (Model.tareas.Count() == 0)
+                        {
+                            <h5>No tiene Tareas</h5>
+
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().tarea1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().descripcion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().estadoId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().prioridadId)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tareas.FirstOrDefault().persona.dni)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.tareas)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tarea1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.estadoId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.prioridadId)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.persona.dni)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" Editar", "EditTarea", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+
+                                            @Html.ActionLink(" Detalles", "DetailsTarea", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                                            @Html.ActionLink(" Borrar", "DeleteTarea", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+                </div>
 
 
 

@@ -4,56 +4,101 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Styles.Render("~/Content/dataTables")
 <h2>Eventos</h2>
 
 <p>
-     @Html.ActionLink("Nuevo Evento", "Create", null, new { @class = "btn btn-sm btn-primary" })
+    @Html.ActionLink(" Nuevo Evento", "Create", null, new { @class = "btn btn-sm btn-primary fa fa-plus" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion_evento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha_inicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.expediente.titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.servicio.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo_evento1.tipo_evento1)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion_evento)
-        </td>
-        <td>
-            @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
-            @item.fecha_inicio.ToString("dd/MM/yyyy")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.expediente.titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.servicio.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo_evento1.tipo_evento1)
-        </td>
-        <td>
-            @Html.ActionLink(" Editar", "Edit", new { id=item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
-            @Html.ActionLink(" Detalles", "Details", new { id=item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
-            @Html.ActionLink(" Borrar", "Delete", new { id=item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
-        </td>
-    </tr>
-}
-
+<table id="eventos" class="table table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion_evento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.expediente.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.servicio.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo_evento1.tipo_evento1)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion_evento)
+                </td>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.fecha_inicio)*@
+                    @item.fecha_inicio.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.expediente.titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.servicio.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo_evento1.tipo_evento1)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) 
+                    @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "btn btn-success btn-sm fa fa-eye " }) 
+                    @Html.ActionLink(" ", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section scripts {
+
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#eventos').DataTable({
+
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                }
+            });
+        });
+
+    </script>
+}

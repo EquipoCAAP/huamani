@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">@Model.eventos_count</div>
-                                <div>Nuevos Eventos!</div>
+                                <div>Eventos</div>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-book fa-fw"></i> Casos</h3>
                     </div>
@@ -147,11 +147,11 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.casos.OrderByDescending(c => c.fecha_creacion))
+                                    @foreach (var item in Model.casos.OrderByDescending(c => c.fecha_creacion).Take(6))
                                     {
                                         <tr style="text-wrap:normal;font-size:smaller">
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.referencia)
+                                                @Html.ActionLink(item.referencia, "Details", "casos", new { Id = item.id }, null /* html attributes */)
                                             </td>
                                             <td>
                                                 <span class="label label-info"> @Html.DisplayFor(modelItem => item.fecha_creacion)</span>
@@ -174,7 +174,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="panel panel-default">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-file-archive-o fa-fw"></i> Expedientes</h3>
                     </div>
@@ -204,7 +204,8 @@
                                     {
                                     <tr style="text-wrap:normal;font-size:smaller">
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.titulo)
+                                            @Html.ActionLink(item.titulo, "Details", "expedientes", new { Id = item.id }, null /* html attributes */)
+                                            
                                         </td>
                                         <td>
                                             <span class="label label-info"> @Html.DisplayFor(modelItem => item.fechacreacion)</span>
@@ -274,7 +275,7 @@
         </div>*@
 
             <div class="col-lg-2">
-                <div class="panel panel-default">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Tareas</h3>
                     </div>

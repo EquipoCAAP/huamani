@@ -4,61 +4,108 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
+@Styles.Render("~/Content/dataTables")
+<h2>Tareas</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+
+    @Html.ActionLink(" Nueva Tarea", "Create", null, new { @class = "btn btn-sm btn-primary fa fa-plus" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tarea1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estadoId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prioridadId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.caso.referencia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.persona.dni)
-        </th>
-        <th></th>
-    </tr>
+<table id="tareas" class="table table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tarea1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estadoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prioridadId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.caso.referencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.persona.dni)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tarea1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estadoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prioridadId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.caso.referencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.persona.dni)
+                </td>
+                <td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tarea1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prioridadId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.caso.referencia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.persona.dni)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
+                    @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
+                    @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "btn btn-success btn-sm fa fa-eye" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section scripts {
+
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#tareas').DataTable({
+
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                }
+            });
+        });
+
+    </script>
+}

@@ -18,15 +18,14 @@ namespace sb_admin.web
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+            
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+             "~/Scripts/jquery.dataTables.js",
+             "~/Scripts/jquery.dataTables.min.js",
+             "~/Scripts/dataTables.bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
-             "~/Scripts/DataTables/js/jquery.dataTables.js",
-             "~/Scripts/DataTables/js/dataTables.bootstrap.js"));
-
-            bundles.Add(new StyleBundle("~/Content/dataTables").Include(
-                      "~/Content/DataTables/css/jquery.dataTables.css",
-                      "~/Content/DataTables/css/jquery.dataTables.min.css"));
+           
 
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
@@ -37,6 +36,8 @@ namespace sb_admin.web
                       "~/Content/bootstrap.css",
                       "~/Content/sb-admin.css"));
 
+            bundles.Add(new StyleBundle("~/Content/dataTables").Include(
+                     "~/Content/dataTables.bootstrap.css"));
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
