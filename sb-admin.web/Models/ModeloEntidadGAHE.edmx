@@ -37,7 +37,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="fechacreacion" Type="date" Nullable="false" />
-          <Property Name="mime" Type="nchar" MaxLength="10" />
+          <Property Name="mime" Type="nchar" MaxLength="20" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="extension" Type="varchar" MaxLength="50" />
           <Property Name="tamano" Type="int" />
@@ -697,21 +697,6 @@
           <NavigationProperty Name="parte_caso" Relationship="Self.FK_parte_caso_caso" FromRole="caso" ToRole="parte_caso" />
           <NavigationProperty Name="tarea" Relationship="GAHEModel.FK_tarea_caso" FromRole="caso" ToRole="tarea" />
         </EntityType>
-        <EntityType Name="documento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="fechacreacion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="mime" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tamano" Type="Int32" />
-          <Property Name="creado" Type="Int32" />
-          <Property Name="expedienteIid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="expediente" Relationship="Self.FK_documento_expediente" FromRole="documento" ToRole="expediente" />
-        </EntityType>
         <EntityType Name="expediente">
           <Key>
             <PropertyRef Name="id" />
@@ -728,13 +713,13 @@
           <Property Name="ubicacionId" Type="Int32" />
           <Property Name="casoId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="caso" Relationship="Self.FK_expediente_caso" FromRole="expediente" ToRole="caso" />
-          <NavigationProperty Name="documento" Relationship="Self.FK_documento_expediente" FromRole="expediente" ToRole="documento" />
           <NavigationProperty Name="persona" Relationship="GAHEModel.FK_expediente_persona" FromRole="expediente" ToRole="persona" />
           <NavigationProperty Name="tipoExpediente" Relationship="GAHEModel.FK_expediente_tipoExpediente" FromRole="expediente" ToRole="tipoExpediente" />
           <NavigationProperty Name="ubicacion" Relationship="GAHEModel.FK_expediente_ubicacion" FromRole="expediente" ToRole="ubicacion" />
           <NavigationProperty Name="claseExpediente" Relationship="GAHEModel.FK_expediente_claseExpediente" FromRole="expediente" ToRole="claseExpediente" />
           <NavigationProperty Name="estadoExpediente" Relationship="GAHEModel.FK_expediente_estadoExpediente" FromRole="expediente" ToRole="estadoExpediente" />
           <NavigationProperty Name="evento" Relationship="GAHEModel.FK_evento_expediente" FromRole="expediente" ToRole="evento" />
+          <NavigationProperty Name="documento" Relationship="GAHEModel.FK_documento_expediente" FromRole="expediente" ToRole="documento" />
         </EntityType>
         <EntityType Name="parte_caso">
           <Key>
@@ -845,20 +830,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_documento_expediente">
-          <End Role="expediente" Type="Self.expediente" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="documento" Type="Self.documento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="expediente">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="documento">
-              <PropertyRef Name="expedienteIid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_parte_caso_persona">
           <End Role="persona" Type="GAHEModel.persona" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -928,7 +899,6 @@
         <EntityContainer Name="GAHEContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="avance" EntityType="Self.avance" />
           <EntitySet Name="caso" EntityType="Self.caso" />
-          <EntitySet Name="documento" EntityType="Self.documento" />
           <EntitySet Name="expediente" EntityType="Self.expediente" />
           <EntitySet Name="parte_caso" EntityType="Self.parte_caso" />
           <EntitySet Name="persona" EntityType="GAHEModel.persona" />
@@ -947,10 +917,6 @@
           <AssociationSet Name="FK_parte_caso_caso" Association="Self.FK_parte_caso_caso">
             <End Role="caso" EntitySet="caso" />
             <End Role="parte_caso" EntitySet="parte_caso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_documento_expediente" Association="Self.FK_documento_expediente">
-            <End Role="expediente" EntitySet="expediente" />
-            <End Role="documento" EntitySet="documento" />
           </AssociationSet>
           <AssociationSet Name="FK_parte_caso_persona" Association="Self.FK_parte_caso_persona">
             <End Role="persona" EntitySet="persona" />
@@ -1048,6 +1014,11 @@
           <AssociationSet Name="FK_tarea_persona" Association="GAHEModel.FK_tarea_persona">
             <End Role="persona" EntitySet="persona" />
             <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <EntitySet Name="documento" EntityType="GAHEModel.documento" />
+          <AssociationSet Name="FK_documento_expediente" Association="GAHEModel.FK_documento_expediente">
+            <End Role="expediente" EntitySet="expediente" />
+            <End Role="documento" EntitySet="documento" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ComplexType1">
@@ -1418,6 +1389,35 @@
           <Member Name="Mediia" Value="2" />
           <Member Name="Alta" Value="3" />
         </EnumType>
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="fechacreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="mime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tamano" Type="Int32" />
+          <Property Name="creado" Type="Int32" />
+          <Property Name="expedienteIid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="expediente" Relationship="GAHEModel.FK_documento_expediente" FromRole="documento" ToRole="expediente" />
+        </EntityType>
+        <Association Name="FK_documento_expediente">
+          <End Type="GAHEModel.expediente" Role="expediente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GAHEModel.documento" Role="documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="documento">
+              <PropertyRef Name="expedienteIid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1441,21 +1441,6 @@
                 <ScalarProperty Name="responsableId" ColumnName="responsableId" />
                 <ScalarProperty Name="avanceId" ColumnName="avanceId" />
                 <ScalarProperty Name="aperturaPersonaId" ColumnName="aperturaPersonaId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="documento">
-            <EntityTypeMapping TypeName="GAHEModel.documento">
-              <MappingFragment StoreEntitySet="documento">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="fechacreacion" ColumnName="fechacreacion" />
-                <ScalarProperty Name="mime" ColumnName="mime" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="extension" ColumnName="extension" />
-                <ScalarProperty Name="tamano" ColumnName="tamano" />
-                <ScalarProperty Name="creado" ColumnName="creado" />
-                <ScalarProperty Name="expedienteIid" ColumnName="expedienteIid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1661,6 +1646,21 @@
                 <ScalarProperty Name="estadoId" ColumnName="estadoId" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="tarea1" ColumnName="tarea" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documento">
+            <EntityTypeMapping TypeName="GAHEModel.documento">
+              <MappingFragment StoreEntitySet="documento">
+                <ScalarProperty Name="expedienteIid" ColumnName="expedienteIid" />
+                <ScalarProperty Name="creado" ColumnName="creado" />
+                <ScalarProperty Name="tamano" ColumnName="tamano" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="mime" ColumnName="mime" />
+                <ScalarProperty Name="fechacreacion" ColumnName="fechacreacion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

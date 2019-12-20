@@ -3,9 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
+using System.IO;
 
 namespace sb_admin.web.Models
 {
+    [MetadataType(typeof(documentoMetadata))]
+    public partial class documento {
+        public documento()
+        {
+            
+            this.fechacreacion = DateTime.Now;
+        }
+
+        // PROPIEDADES PRIVADAS
+        public string PathRelativo
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["PathArchivos"] +
+                    this.nombre+"_"+this.expedienteIid.ToString()+
+                                            "." +
+                                            this.extension;
+            }
+        }
+
+        public string PathCompleto
+        {
+            get
+            {
+                var _PathAplicacion = HttpContext.Current.Request.PhysicalApplicationPath;
+                return Path.Combine(_PathAplicacion, this.PathRelativo);
+            }
+        }
+
+        // MÉTODOS PÚBLICOS
+        public void SubirArchivo(byte[] archivo)
+        {
+            File.WriteAllBytes(this.PathCompleto, archivo);
+        }
+
+        public byte[] DescargarArchivo()
+        {
+            return File.ReadAllBytes(this.PathCompleto);
+        }
+
+        public void EliminarArchivo()
+        {
+            File.Delete(this.PathCompleto);
+        }
+
+    }
     [MetadataType(typeof(avanceMetadata))]
     public partial class avance { }
 
@@ -56,5 +104,5 @@ namespace sb_admin.web.Models
 
     [MetadataType(typeof(tareaMetadata))]
     public partial class tarea { }
-
+    
 }

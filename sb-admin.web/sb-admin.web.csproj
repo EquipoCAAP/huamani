@@ -658,6 +658,7 @@
     <Content Include="Views\tareas\Edit.cshtml" />
     <Content Include="Views\tareas\Index.cshtml" />
     <Content Include="Views\casos\EditTarea.cshtml" />
+    <Content Include="Views\expedientes\CreateDocumento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -667,6 +668,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

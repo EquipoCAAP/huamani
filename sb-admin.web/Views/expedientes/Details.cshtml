@@ -6,7 +6,7 @@
 }
 <div class="panel panel-success">
     <div class="panel-heading">
-        <h3 class="panel-title">@Html.DisplayNameFor(model => model.titulo): @Html.DisplayFor(model => model.titulo)</h3>
+        <h2 class="panel-title">@Html.DisplayNameFor(model => model.titulo): @Html.DisplayFor(model => model.titulo)</h2>
     </div>
     <div class="panel-body">
         Detalle
@@ -95,6 +95,7 @@
 <p>
     @Html.ActionLink(" Editar Expediente", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
     @Html.ActionLink(" Agregar Evento ", "CreateEvento", new { id = Model.id }, new { @class = "btn btn-primary btn-sm fa fa-plus" }) |
+    @Html.ActionLink(" Agregar Documento ", "CreateDocumento", new { id = Model.id }, new { @class = "btn btn-warning btn-sm fa fa-file" }) |
     @Html.ActionLink(" Regresar a caso", "Details", "casos", new { id = Model.casoId }, new { @class = "btn btn-danger btn-sm fa fa-reply" })
     @Html.ActionLink(" Regresar a lista", "Index", null, new { @class = "btn btn-success btn-sm fa fa-reply-all" })
 </p>
@@ -152,4 +153,82 @@ else
     </table>
 
 }
+
+<h4>Documentos</h4>
+@if (Model.documento.Count == 0)
+{
+    <h5>No tiene Documentos registrados</h5>
+
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().fechacreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().mime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().extension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().tamano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().creado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.documento.FirstOrDefault().expediente.titulo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.documento)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechacreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.extension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tamano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.creado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.expediente.titulo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditDocumento", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
+                    @Html.ActionLink(" Detalles", "DetailsDocumento", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
+                    @Html.ActionLink(" Borrar", "EliminarArchivo", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+}
+
 

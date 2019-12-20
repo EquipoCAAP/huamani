@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace sb_admin.web.Models
 {
+    public class documentoMetadata
+    {
+        
+        public int id { get; set; }
+
+        public string descripcion { get; set; }
+
+        public System.DateTime fechacreacion { get; set; }
+
+        public string mime { get; set; }
+       
+        public string nombre { get; set; }
+       
+        public string extension { get; set; }
+
+        public Nullable<int> tamano { get; set; }
+
+        public Nullable<int> creado { get; set; }
+
+        public int expedienteIid { get; set; }
+    }
+   
     public class avanceMetadata
     {
         [Display(Name ="Tipo de avance")]

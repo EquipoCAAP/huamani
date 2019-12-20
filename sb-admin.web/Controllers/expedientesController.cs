@@ -1,9 +1,12 @@
 ﻿using sb_admin.web.Models;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace sb_admin.web.Controllers
@@ -18,10 +21,149 @@ namespace sb_admin.web.Controllers
             var expediente = db.expediente.Include(e =>e.estadoExpediente).Include(e => e.caso).Include(e => e.ubicacion).Include(e => e.claseExpediente).Include(e => e.persona).Include(e => e.tipoExpediente);
             return View(await expediente.ToListAsync());
         }
+        // GET: documento/Create
+        public async Task<ActionResult> CreateDocumento(int? id)
+        {
+            
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            expediente expediente = await db.expediente.FindAsync(id);
+            if (expediente == null)
+            {
+                return HttpNotFound();
+            }
 
-     
-        // GET: juzgado_evento/Create
-        public async Task<ActionResult> CreateJuzgadoEvento(int? id)
+            var documentos = db.documento.Where(d=>d.expedienteIid==id).OrderBy(d => d.fechacreacion).ToList();
+            ViewBag.expedienteId = id;           
+            return View(documentos);
+        }
+
+        [HttpPost]
+        public ActionResult SubirArchivo(HttpPostedFileBase file,int id)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                // Extraemos el contenido en Bytes del archivo subido.
+                var _contenido = new byte[file.ContentLength];
+                file.InputStream.Read(_contenido, 0, file.ContentLength);
+
+                // Separamos el Nombre del archivo de la Extensión.
+                int indiceDelUltimoPunto = file.FileName.LastIndexOf('.');
+                string _nombre = file.FileName.Substring(0, indiceDelUltimoPunto);
+                string _extension = file.FileName.Substring(indiceDelUltimoPunto + 1,
+                                    file.FileName.Length - indiceDelUltimoPunto - 1);
+                int _tamano = file.ContentLength;
+                string _mime = file.ContentType;
+                
+                // Instanciamos la clase Archivo y asignammos los valores.
+                documento _archivo = new documento()
+                {
+                    expedienteIid = id,
+                    nombre= _nombre,
+                    extension=_extension,
+                    tamano=_tamano,
+                    mime=_mime,
+                    creado=1,
+                    
+                    descripcion="archivo"
+                    //Descargas = 0
+                };
+
+                try
+                {
+                    // Subimos el archivo al Servidor.
+                    _archivo.SubirArchivo(_contenido);
+                    // Guardamos en la base de datos la instancia del archivo
+                    db.documento.Add(_archivo);
+                        db.SaveChanges();
+                    
+                }
+                catch (Exception ex)
+                {
+                    // Aquí el código para manejar la Excepción.
+                }
+            }
+
+            // Redirigimos a la Acción 'Index' para mostrar
+            // Los archivos subidos al Servidor.
+            return RedirectToAction(string.Format("Details/{0}", id));
+        }
+
+        [HttpGet]
+        public ActionResult DescargarArchivo(int id)
+        {
+            documento _archivo;
+            FileContentResult _fileContent;
+
+           
+                _archivo = db.documento.FirstOrDefault(x => x.id == id);
+            
+
+            if (_archivo == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                try
+                {
+                    // Descargamos el archivo del Servidor.
+                    _fileContent = new FileContentResult(_archivo.DescargarArchivo(),
+                                                         "application/octet-stream");
+                    _fileContent.FileDownloadName = _archivo.nombre + "_" + _archivo.expedienteIid  +
+                                           "." + _archivo.extension;
+
+                   
+
+
+                    // Actualizamos el nº de descargas en la base de datos.
+
+                    //  _archivo.Descargas++;
+                    db.documento.Attach(_archivo);
+                        db.Entry(_archivo).State = EntityState.Modified;
+                        db.SaveChanges();
+                    
+
+                    return _fileContent;
+                }
+                catch (Exception ex)
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EliminarArchivo(int id)
+        {
+            documento _archivo;
+            _archivo = db.documento.FirstOrDefault(x => x.id == id);
+            
+            if (_archivo != null)
+            {
+                _archivo = db.documento.FirstOrDefault(x => x.id == id);
+                    db.documento.Remove(_archivo);
+                    if (db.SaveChanges() > 0)
+                    {
+                        // Eliminamos el archivo del Servidor.
+                        _archivo.EliminarArchivo();
+                    }
+                
+            // Redirigimos a la Acción 'Index' para mostrar
+            // Los archivos subidos al Servidor.
+            return RedirectToAction(string.Format("Details/{0}", id));
+        }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+    
+
+    // GET: juzgado_evento/Create
+    public async Task<ActionResult> CreateJuzgadoEvento(int? id)
         {
             if (id == null)
             {

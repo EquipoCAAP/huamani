@@ -36,8 +36,6 @@ public partial class GAHEContext : DbContext
 
     public virtual DbSet<caso> caso { get; set; }
 
-    public virtual DbSet<documento> documento { get; set; }
-
     public virtual DbSet<expediente> expediente { get; set; }
 
     public virtual DbSet<parte_caso> parte_caso { get; set; }
@@ -77,6 +75,8 @@ public partial class GAHEContext : DbContext
     public virtual DbSet<tipo_juzgado> tipo_juzgado { get; set; }
 
     public virtual DbSet<tarea> tarea { get; set; }
+
+    public virtual DbSet<documento> documento { get; set; }
 
 }
 

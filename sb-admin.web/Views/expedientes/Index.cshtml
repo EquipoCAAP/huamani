@@ -19,8 +19,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.fechacreacion)
             </th>
-           
-            
+
+
             <th>
                 @Html.DisplayNameFor(model => model.estadoExpediente.estado)
             </th>
@@ -30,12 +30,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.ubicacion.ubicacion1)
             </th>
-           
+
             <th>
-                Persona
+                Cliente
+            </th>
+            
+            <th>
+              eventos
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipoExpediente.tipo)
+                docu
             </th>
             <th></th>
         </tr>
@@ -50,7 +54,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.fechacreacion)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.estadoExpediente.estado)
             </td>
@@ -60,14 +64,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ubicacion.ubicacion1)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.persona.NombreCompleto)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.tipoExpediente.tipo)
+                <span class="badge">@item.evento.Count</span>
             </td>
-
+            <td>
+                <span class="badge">@item.documento.Count</span>
+            </td>
             <td>
                 @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil" })
                 @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "btn btn-success btn-sm fa fa-eye" })

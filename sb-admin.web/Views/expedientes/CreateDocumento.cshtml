@@ -1,0 +1,52 @@
+﻿@model IEnumerable<sb_admin.web.Models.documento>
+
+@{
+    ViewBag.Title = "CreateDocumento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateDocumento</h2>
+<br />
+
+<div class="container">
+    @using (Html.BeginForm("SubirArchivo", "expedientes", new { id=ViewBag.expedienteId},
+                FormMethod.Post,
+                new { enctype = "multipart/form-data", method = "post" }))
+    {
+       
+       
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="file" name="file" />
+            </div>
+            <div class="col-md-6 left">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-open"></span>
+                    &nbsp;Subir archivo
+                </button>
+            </div>
+        </div>
+    }
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+            {
+                <span>@item.fechacreacion.ToShortDateString() - </span>
+                <a href="@Url.Action("DescargarArchivo", "expedientes", new { id = item.id })">
+                    <span class="glyphicon glyphicon-save"></span>
+                    <span>@item.nombre.@item.extension</span>
+                </a>
+                @* <span> - Descargas: @item.Descargas - </span> *@
+                <a href="@Url.Action("EliminarArchivo", "expedientes",
+                         new { id = item.id })" class="text-danger">
+                    <span class="glyphicon glyphicon-remove text-danger small"></span>
+                    Eliminar archivo
+                </a>
+                <br />
+            }
+        </div>
+    </div>
+</div>
+
+
