@@ -1,7 +1,7 @@
 ﻿@model sb_admin.web.Models.casoViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <div class="panel panel-info">
@@ -290,7 +290,6 @@
                                         <td>
                                             @Html.ActionLink(" Editar", "EditTarea", new { id = item.id }, new { @class = "btn btn-warning btn-sm fa fa-pencil " }) |
 
-                                            @Html.ActionLink(" Detalles", "DetailsTarea", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-eye " }) |
                                             @Html.ActionLink(" Borrar", "DeleteTarea", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash-o " })
 
                                         </td>

@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.estadoid,"estadoId" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.estadoid,htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("estadoId", null, "Seleccione El estado de Expediente", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.estadoid, "", new { @class = "text-danger" })
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tipoId, "tipoId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tipoId,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("tipoId", null,"Seleccione El tipo de Expediente" , htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.tipoId, "", new { @class = "text-danger" })
@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.claseId, "claseId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.claseId,htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("claseId", null,"Seleccione clase", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.claseId, "", new { @class = "text-danger" })
@@ -73,7 +73,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.responsableId, "responsableId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.responsableId,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
                @Html.DropDownList("responsableId", null, "seleccione responsable" ,htmlAttributes: new { @class = "form-control" })
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ubicacionId, "ubicacionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ubicacionId,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ubicacionId", null, "Seleccione Ubicación ",htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ubicacionId, "", new { @class = "text-danger" })
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.casoId, "casoId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.casoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("casoId", null,"Seleccione el caso del expediente",  htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.casoId, "", new { @class = "text-danger" })
