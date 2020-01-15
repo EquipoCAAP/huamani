@@ -57,7 +57,7 @@
                     @{
                         var creador = Model.personas.Where(c => c.id == item.aperturaPersonaId).Select(c => new { c.NombreCompleto });
                     }
-                    @creador.FirstOrDefault().NombreCompleto
+                    @creador.First().NombreCompleto
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.avance.tipo_avance)
